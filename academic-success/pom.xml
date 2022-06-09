@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.youth-homelessness-project</groupId>
     <artifactId>academic-success</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>academic-success</name>
     <description>academic-success</description>
     <properties>
@@ -41,7 +41,6 @@
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity5</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>

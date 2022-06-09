@@ -1,0 +1,29 @@
+package com.youthhomelessnessproject.academicsuccess.controllers;
+
+import com.youthhomelessnessproject.academicsuccess.models.*;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class ContextController {
+
+    public static Student student;
+    public static Admin admin;
+    public static SurveyAdmin surveyAdmin;
+    public static Session session;
+    public static Survey survey;
+    public static List<Question> questions;
+    // TODO do we need resources or resource tags here?
+
+    public static Student getStudent() { return student; }
+    public static void setStudent(Student  student) { ContextController.student = student; }
+    public static Admin getAdmin() { return admin; }
+    public static void setAdmin(Admin admin) { ContextController.admin = admin; }
+    public static SurveyAdmin getSurveyAdmin() { return surveyAdmin; }
+    public static void setSurveyAdmin(SurveyAdmin surveyAdmin) { ContextController.surveyAdmin = surveyAdmin; }
+    public static Session getSession() { return session; }
+    public static void setSession(Session session) { ContextController.session = session; }
+    public static Survey getSurvey() { return survey; }
+    public static void setSurvey(Survey admin) { ContextController.survey = survey; }
+}
