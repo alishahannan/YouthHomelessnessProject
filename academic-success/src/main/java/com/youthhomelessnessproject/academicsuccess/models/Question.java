@@ -17,7 +17,7 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
-    private Long questionId;
+    private Long id;
 
     @Column(name = "question_title", nullable = false)
     private String title;
@@ -33,7 +33,7 @@ public class Question {
     private double score = 0;
 
     @OneToMany(targetEntity = ResourceTag.class, mappedBy = "question",
-            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ResourceTag> tags;
 
 }

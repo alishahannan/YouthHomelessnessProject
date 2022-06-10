@@ -24,7 +24,10 @@ public class Resource {
     @NotBlank(message = "Please enter a name")
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "resource")
+    @NotBlank(message = "Please enter a brief description")
+    private String description;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Address address;
 
     @OneToMany(targetEntity = ResourceTag.class, mappedBy = "resource",

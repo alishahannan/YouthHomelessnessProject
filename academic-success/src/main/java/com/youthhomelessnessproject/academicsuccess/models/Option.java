@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 
 @Entity
@@ -26,5 +25,10 @@ public class Option {
     private Question question;
 
     private double value;
+
+    public Option(String optionTitle, double value) {
+        this.optionTitle = optionTitle;
+        this.value = value;
+    }
 
 }

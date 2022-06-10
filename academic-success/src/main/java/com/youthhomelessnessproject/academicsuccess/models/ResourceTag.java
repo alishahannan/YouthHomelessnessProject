@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 @Table(name = "tbl_resource_tags")
 public class ResourceTag {
 
-    enum Tag {
+    public static enum Tag {
         FOOD,
         HOUSING,
         DEPENDENT
@@ -36,5 +36,9 @@ public class ResourceTag {
     @ManyToOne()
     @JoinColumn(name = "resource_id")
     private Resource resource;
+
+    public ResourceTag(Tag tag) {
+        this.tag = tag;
+    }
 
 }

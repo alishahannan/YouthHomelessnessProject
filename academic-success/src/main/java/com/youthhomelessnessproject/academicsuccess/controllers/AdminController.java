@@ -17,7 +17,7 @@ import java.util.List;
 public class AdminController {
 
     // Runtime injection of StudentService, AdminService and SurveyAdminService dependencies
-    private final StudentService studentService;
+    private StudentService studentService;
     private final AdminService adminService;
     private final SurveyAdminService surveyAdminService;
 

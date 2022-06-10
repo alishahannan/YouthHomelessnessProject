@@ -1,6 +1,7 @@
 package com.youthhomelessnessproject.academicsuccess.services;
 
 import com.youthhomelessnessproject.academicsuccess.models.Question;
+import com.youthhomelessnessproject.academicsuccess.models.ResourceTag;
 import com.youthhomelessnessproject.academicsuccess.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +20,8 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<Question> getAllQuestionsByTag(String tag) {
-        return questionRepository.findQuestionsByTag(tag);
+    public List<Question> getAllQuestionsByTags(ResourceTag tag) {
+        return questionRepository.findQuestionsByTags(tag);
     }
 
     @Override
@@ -35,6 +36,6 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public void deleteQuestionById(Long id) {
-        questionRepository.deleteById(id);
+        questionRepository.deleteQuestionById(id);
     }
 }
