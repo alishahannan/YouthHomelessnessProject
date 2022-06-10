@@ -1,32 +1,34 @@
 package com.youthhomelessnessproject.academicsuccess.controllers;
 
 import com.youthhomelessnessproject.academicsuccess.models.Admin;
+import com.youthhomelessnessproject.academicsuccess.models.Employee;
 import com.youthhomelessnessproject.academicsuccess.models.Student;
 import com.youthhomelessnessproject.academicsuccess.models.SurveyAdmin;
 import com.youthhomelessnessproject.academicsuccess.repositories.AdminRepository;
+import com.youthhomelessnessproject.academicsuccess.repositories.EmployeeRepository;
 import com.youthhomelessnessproject.academicsuccess.repositories.StudentRepository;
-import com.youthhomelessnessproject.academicsuccess.services.AdminService;
-import com.youthhomelessnessproject.academicsuccess.services.StudentService;
-import com.youthhomelessnessproject.academicsuccess.services.SurveyAdminService;
+import com.youthhomelessnessproject.academicsuccess.repositories.SurveyAdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/login")
 public class LoginController {
 
-    // Runtime injection of StudentRepository, AdminRepository and SurveyAdminService dependencies
-    private final StudentRepository studentRepository;
-    private final AdminRepository adminRepository;
-    private final SurveyAdminService surveyAdminService;
+    @Autowired
+    private StudentRepository studentRepository;
 
     @Autowired
-    public LoginController(StudentRepository studentRepository, AdminRepository adminRepository, SurveyAdminService surveyAdminService) {
-        this.studentRepository = studentRepository;
-        this.adminRepository = adminRepository;
-        this.surveyAdminService = surveyAdminService;
-    }
+    private AdminRepository adminRepository;
+
+    @Autowired
+    private SurveyAdminRepository surveyAdminRepository;
+
+    @Autowired
+    private EmployeeRepository employeeRepository;
+
 
     @GetMapping("/admin")
     public String showAdminLoginForm(Model model) {
@@ -35,13 +37,14 @@ public class LoginController {
         return "admin-login";
     }
 
+
+    // TODO verify that survey-admin property works in survey-admin-login.html
+    // TODO for that matter, verify all teacher -> survey-admin stuff works!
     @GetMapping("/survey-admin")
     public String showSurveyAdminLoginForm(Model model) {
         SurveyAdmin surveyAdmin = new SurveyAdmin();
         model.addAttribute("survey-admin", surveyAdmin);
         return "survey-admin-login";
-        // TODO verify that survey-admin property works in survey-admin-login.html
-        // TODO for that matter, verify all teacher -> survey-admin stuff works!
     }
 
     @GetMapping("/student")
@@ -49,6 +52,13 @@ public class LoginController {
         Student student = new Student();
         model.addAttribute("student", student);
         return "student-login";
+    }
+
+    @GetMapping("/employee")
+    public String showEmployeeLoginForm(Model model) {
+        Employee employee = new Employee();
+        model.addAttribute("employee", employee);
+        return "employee-login";
     }
 
     @PostMapping("/student")
@@ -78,16 +88,30 @@ public class LoginController {
     }
 
     @PostMapping("/survey-admin")
-    public String loginSurveyAdmin(@ModelAttribute("teacher") SurveyAdmin surveyAdmin) {
-        SurveyAdmin savedSurveyAdmin = surveyAdminService.getSurveyAdminByUsername(surveyAdmin.getUsername());
+    public String loginSurveyAdmin(@ModelAttribute("survey-admin") SurveyAdmin surveyAdmin) {
+        SurveyAdmin savedSurveyAdmin = surveyAdminRepository.findSurveyAdminByUsername(surveyAdmin.getUsername());
         if(savedSurveyAdmin != null) {
             ContextController.setSurveyAdmin(savedSurveyAdmin);
             if(savedSurveyAdmin.getPassword().equalsIgnoreCase(surveyAdmin.getPassword())) {
                 return "redirect:/survey-admin/dashboard";
             }
         }
-        System.out.println("Teacher Login failed");
-        return "redirect:/login/teacher?error";
+        System.out.println("Survey Admin Login failed");
+        return "redirect:/login/survey-admin?error";
+    }
+
+    @PostMapping("/employee")
+    public String loginEmployee(@ModelAttribute("employee") Employee employee) {
+        Employee savedEmployee = employeeRepository.findEmployeeByUsername(employee.getUsername());
+        if(savedEmployee != null) {
+            ContextController.setEmployee(savedEmployee);
+            if(savedEmployee.getPassword().equalsIgnoreCase(employee.getPassword())) {
+                return "redirect:/employee/dashboard";
+            }
+        }
+        System.out.println("Employee Login failed");
+        return "redirect:/login/employee?error";
+
     }
 
 

@@ -41,6 +41,9 @@ public class Session {
     @Column(name="current_student_id")
     private Long studentId;
 
+    // Used in SurveyController
+    private String studentName;
+
     @Column(name = "food_score")
     private double foodScore = 0;
 

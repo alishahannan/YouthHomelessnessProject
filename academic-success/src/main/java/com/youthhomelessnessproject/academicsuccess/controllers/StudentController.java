@@ -3,16 +3,16 @@ package com.youthhomelessnessproject.academicsuccess.controllers;
 import com.youthhomelessnessproject.academicsuccess.models.Student;
 import com.youthhomelessnessproject.academicsuccess.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class StudentController {
 
     // Runtime injection of StudentService dependency
-    private final StudentService studentService;
+    private StudentService studentService;
 
-    @Autowired
     public StudentController(StudentService studentService) {
         super();
         this.studentService = studentService;

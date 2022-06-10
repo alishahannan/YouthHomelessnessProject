@@ -178,7 +178,7 @@
                     <h1 class="h4 text-gray-900 mb-4">Update the Resource</h1>
 
 
-                    <form th:action="@{/employee/resource/{id}(id=${resourcesDTO.resourceId})}" th:object="${resourcesDTO}" method="POST">
+                    <form th:action="@{/employee/resource/{id}(id=${resourcesDto.resourceId})}" th:object="${resourcesDto}" method="POST">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Subject</label>
 

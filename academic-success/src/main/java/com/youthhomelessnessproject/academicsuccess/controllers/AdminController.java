@@ -10,27 +10,27 @@ import com.youthhomelessnessproject.academicsuccess.services.EmployeeService;
 import com.youthhomelessnessproject.academicsuccess.services.StudentService;
 import com.youthhomelessnessproject.academicsuccess.services.SurveyAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class AdminController {
 
-    // Runtime injection of StudentService, AdminService and SurveyAdminService dependencies
-    private final StudentService studentService;
-    private final AdminService adminService;
-    private final SurveyAdminService surveyAdminService;
-    private final EmployeeService employeeService;
+    @Autowired
+    private StudentService studentService;
 
     @Autowired
-    public AdminController(StudentService studentService, AdminService adminService, SurveyAdminService surveyAdminService, EmployeeService employeeService) {
-        this.studentService = studentService;
-        this.adminService = adminService;
-        this.surveyAdminService = surveyAdminService;
-        this.employeeService = employeeService;
-    }
+    private AdminService adminService;
+
+    @Autowired
+    private SurveyAdminService surveyAdminService;
+
+    @Autowired
+    private EmployeeService employeeService;
+
 
     @GetMapping("/admin/dashboard")
     public String showAdminDashboard(Model model) {

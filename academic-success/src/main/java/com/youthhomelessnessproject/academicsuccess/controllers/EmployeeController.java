@@ -8,20 +8,20 @@ import com.youthhomelessnessproject.academicsuccess.services.EmployeeService;
 import com.youthhomelessnessproject.academicsuccess.services.ResourceService;
 import com.youthhomelessnessproject.academicsuccess.services.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 public class EmployeeController {
 
     // TODO figure out if ResourceTagRepo is necessary because
     //  we want to use the same handful of tags for every resource & question
 
-    // Runtime injection of EmployeeService, SessionService, and ResourceService dependencies
-    private final EmployeeService employeeService;
+    private EmployeeService employeeService;
 
     @Autowired
     private SessionService sessionService;
@@ -32,32 +32,13 @@ public class EmployeeController {
     @Autowired
     private AddressRepository addressRepository;
 
-    @Autowired
-    private ResourceTagRepository resourceTagRepository;
+//    @Autowired
+//    private ResourceTagRepository resourceTagRepository;
 
-    @Autowired
     public EmployeeController(EmployeeService employeeService) {
+        super();
         this.employeeService = employeeService;
     }
-
-//    private final EmployeeService employeeService;
-//    private final SessionService sessionService;
-//    private final ResourceService resourceService;
-//    private final AddressRepository addressRepository;
-//    private final ResourceTagRepository resourceTagRepository;
-
-//    @Autowired
-//    public EmployeeController(EmployeeService employeeService,
-//                              SessionService sessionService,
-//                              ResourceService resourceService,
-//                              AddressRepository addressRepository,
-//                              ResourceTagRepository resourceTagRepository) {
-//        this.employeeService = employeeService;
-//        this.sessionService = sessionService;
-//        this.resourceService = resourceService;
-//        this.addressRepository = addressRepository;
-//        this.resourceTagRepository = resourceTagRepository;
-//    }
 
     @GetMapping("/employee/dashboard")
     public String showEmployeeDashboard(Model model) {

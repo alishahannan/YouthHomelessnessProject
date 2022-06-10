@@ -8,33 +8,33 @@ import com.youthhomelessnessproject.academicsuccess.services.SessionService;
 import com.youthhomelessnessproject.academicsuccess.services.StudentService;
 import com.youthhomelessnessproject.academicsuccess.services.SurveyAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+@Controller
 public class SurveyAdminController {
 
-    // Runtime injection of SurveyAdminService, StudentService, StudentService,
-    // SessionService, QuestionService, and OptionRepository dependencies
-    private final SurveyAdminService surveyAdminService;
-    private final StudentService studentService;
-    private final SessionService sessionService;
-    private final QuestionService questionService;
-    private final OptionRepository optionRepository;
+    private SurveyAdminService surveyAdminService;
 
     @Autowired
-    public SurveyAdminController(SurveyAdminService surveyAdminService, StudentService studentService,
-                                 SessionService sessionService, QuestionService questionService,
-                                 OptionRepository optionRepository) {
+    private StudentService studentService;
+
+    @Autowired
+    private SessionService sessionService;
+
+    @Autowired
+    private QuestionService questionService;
+
+    @Autowired
+    private OptionRepository optionRepository;
+
+    public SurveyAdminController(SurveyAdminService surveyAdminService) {
         super();
         this.surveyAdminService = surveyAdminService;
-        this.studentService = studentService;
-        this.sessionService = sessionService;
-        this.questionService = questionService;
-        this.optionRepository = optionRepository;
     }
 
     @GetMapping("/survey-admin/dashboard")

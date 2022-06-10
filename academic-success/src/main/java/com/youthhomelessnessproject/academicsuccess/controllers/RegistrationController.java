@@ -10,27 +10,26 @@ import com.youthhomelessnessproject.academicsuccess.services.EmployeeService;
 import com.youthhomelessnessproject.academicsuccess.services.StudentService;
 import com.youthhomelessnessproject.academicsuccess.services.SurveyAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class RegistrationController {
 
-    // Runtime injection of StudentService, EmployeeService,
-    // AdminService and SurveyAdminService dependencies
-    private final StudentService studentService;
-    private final EmployeeService employeeService;
-    private final AdminService adminService;
-    private final SurveyAdminService surveyAdminService;
+    @Autowired
+    private StudentService studentService;
 
     @Autowired
-    public RegistrationController(StudentService studentService, EmployeeService employeeService, AdminService adminService, SurveyAdminService surveyAdminService) {
-        this.studentService = studentService;
-        this.employeeService = employeeService;
-        this.adminService = adminService;
-        this.surveyAdminService = surveyAdminService;
-    }
+    private EmployeeService employeeService;
+
+    @Autowired
+    private AdminService adminService;
+
+    @Autowired
+    private SurveyAdminService surveyAdminService;
+
 
     @PostMapping("/register")
     public String registerNewUser(@ModelAttribute UserDTO userDto) {

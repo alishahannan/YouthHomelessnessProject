@@ -30,7 +30,7 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public Optional<Session> findSessionById(Long id) {
-        return sessionRepository.findById(id);
+    public Session findSessionById(Long id) {
+        return sessionRepository.findSessionById(id);
     }
 }

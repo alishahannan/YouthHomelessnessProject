@@ -204,23 +204,25 @@
                                 <thead>
                                 <tr>
                                     <th>Student Name</th>
-                                    <th>Quiz Subject</th>
                                     <th>Start Time</th>
                                     <th>End Time</th>
-                                    <th>Score</th>
+                                    <th>Food Insecurity</th>
+                                    <th>Housing Insecurity</th>
+                                    <th>Dependent Insecurity</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="sess : ${allSessions}">
 
 <!--                                    <td th:text="${sess.studentName}"></td>-->
-                                    <td th:text="sess.studentNameHldr"></td>
-                                    <td th:text="${sess.quiz.subject}"></td>
+                                    <td th:text="${sess.studentName}"></td>
+<!--                                    <td th:text="${sess.quiz.subject}"></td>-->
                                     <td th:text="${sess.start_time}"></td>
                                     <td th:text="${sess.end_time}"></td>
-                                    <td th:text="${sess.score}"></td>
+                                    <td th:text="${sess.foodScore}"></td>
+                                    <td th:text="${sess.housingScore}"></td>
+                                    <td th:text="${sess.dependentScore}"></td>
                                 </tr>
-
                                 </tbody>
                             </table>
                         </div>

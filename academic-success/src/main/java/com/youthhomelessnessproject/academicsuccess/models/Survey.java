@@ -26,4 +26,10 @@ public class Survey {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "survey")
     private Session session;
 
+    public Survey(List<Question> questions, Session session) {
+        super();
+        this.questions = questions;
+        this.session = session;
+    }
+
 }

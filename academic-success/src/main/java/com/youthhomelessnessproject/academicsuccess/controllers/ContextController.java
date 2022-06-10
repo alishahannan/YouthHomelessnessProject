@@ -1,11 +1,12 @@
 package com.youthhomelessnessproject.academicsuccess.controllers;
 
 import com.youthhomelessnessproject.academicsuccess.models.*;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class ContextController {
 
     public static Student student;

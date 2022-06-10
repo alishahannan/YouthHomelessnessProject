@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface SessionService {
     List<Session> getAllSessions();
     Session saveSession(Session session);
-    Optional<Session> findSessionById(Long id);
+    Session findSessionById(Long id);
 }
