@@ -75,21 +75,21 @@ public class EmployeeController {
     // TODO Thymeleaf templates fore these endpoints!
     @GetMapping("/employee/resource")
     public String showAddResourceForm(Model model) {
-        ResourcesDTO resourcesDTO = new ResourcesDTO();
-        model.addAttribute("resourcesDTO", resourcesDTO);
+        ResourcesDTO resourcesDto = new ResourcesDTO();
+        model.addAttribute("resourcesDto", resourcesDto);
         model.addAttribute("employee",
                 employeeService.getEmployeeById(ContextController.getEmployee().getId()));
         return "employee-add-resource";
     }
 
     @PostMapping("employee/resource/add")
-    public String addResource(@ModelAttribute ResourcesDTO resourcesDTO, Model model) {
+    public String addResource(@ModelAttribute ResourcesDTO resourcesDto, Model model) {
         Resource resource = new Resource();
         List<ResourceTag> resourceTags = new ArrayList<>();
-        resourceTags.addAll(resourcesDTO.getTags());
-        resource.setName(resourcesDTO.getName());
-        resource.setDescription(resourcesDTO.getDescription());
-        resource.setAddress(resourcesDTO.getAddress());
+        resourceTags.addAll(resourcesDto.getTags());
+        resource.setName(resourcesDto.getName());
+        resource.setDescription(resourcesDto.getDescription());
+        resource.setAddress(resourcesDto.getAddress());
 
         for(ResourceTag tag : resourceTags) {
             tag.setResource(resource);
@@ -104,24 +104,24 @@ public class EmployeeController {
     @GetMapping("/employee/resource/{id}")
     public String showModifyResourceForm(@PathVariable Long id, Model model) {
         Resource existingResource = resourceService.findResourceById(id);
-        ResourcesDTO resourcesDTO = new ResourcesDTO();
-        resourcesDTO.setName(existingResource.getName());
-        resourcesDTO.setDescription(existingResource.getDescription());
-        resourcesDTO.setAddress(existingResource.getAddress());
-        resourcesDTO.setTags(existingResource.getTags());
-        model.addAttribute("resourcesDTO", resourcesDTO);
+        ResourcesDTO resourcesDto = new ResourcesDTO();
+        resourcesDto.setName(existingResource.getName());
+        resourcesDto.setDescription(existingResource.getDescription());
+        resourcesDto.setAddress(existingResource.getAddress());
+        resourcesDto.setTags(existingResource.getTags());
+        model.addAttribute("resourcesDto", resourcesDto);
 
         return "employee-resources-edit";
     }
 
     @PostMapping("/employee/resource/{id}")
-    public String updateResourceDetails(@PathVariable Long id, @ModelAttribute ResourcesDTO resourcesDTO, Model model) {
+    public String updateResourceDetails(@PathVariable Long id, @ModelAttribute ResourcesDTO resourcesDto, Model model) {
         Resource existingResource = resourceService.findResourceById(id);
 //        List<ResourceTag> tags = existingResource.getTags();
-        existingResource.setName(resourcesDTO.getName());
-        existingResource.setDescription(resourcesDTO.getDescription());
-        existingResource.setAddress(resourcesDTO.getAddress());
-        existingResource.setTags(resourcesDTO.getTags());
+        existingResource.setName(resourcesDto.getName());
+        existingResource.setDescription(resourcesDto.getDescription());
+        existingResource.setAddress(resourcesDto.getAddress());
+        existingResource.setTags(resourcesDto.getTags());
         resourceService.saveResource(existingResource);
 
         return "redirect:/employee/resources/list";

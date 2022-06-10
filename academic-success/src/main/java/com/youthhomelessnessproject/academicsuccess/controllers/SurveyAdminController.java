@@ -52,20 +52,20 @@ public class SurveyAdminController {
 
     @GetMapping("/survey-admin/question")
     public String showAddQuestionForm(Model model) {
-        QuestionsDTO questionsDTO = new QuestionsDTO();
-        model.addAttribute("questionsDTO", questionsDTO);
+        QuestionsDTO questionsDto = new QuestionsDTO();
+        model.addAttribute("questionsDTO", questionsDto);
         model.addAttribute("survey-admin", surveyAdminService.getSurveyAdminById(ContextController.getSurveyAdmin().getId()));
         return "survey-admin-add-question";
     }
 
     // TODO check correctness of this method
     @PostMapping("/survey-admin/question/add")
-    public String addQuestion(@ModelAttribute QuestionsDTO questionsDTO, Model model) {
+    public String addQuestion(@ModelAttribute QuestionsDTO questionsDto, Model model) {
         Question question = new Question();
         List<Option> options = new ArrayList<>();
-        options.addAll(questionsDTO.getQuestionOptions());
-        question.setTitle(questionsDTO.getQuestionTitle());
-        question.setTags(questionsDTO.getQuestionResourceTags());
+        options.addAll(questionsDto.getQuestionOptions());
+        question.setTitle(questionsDto.getQuestionTitle());
+        question.setTags(questionsDto.getQuestionResourceTags());
 
         for(Option option: options) {
            option.setQuestion(question);
@@ -78,32 +78,32 @@ public class SurveyAdminController {
     @GetMapping("/survey-admin/question/{id}")
     public String showModifyQuestionForm(@PathVariable Long id, Model model) {
         Question existingQuestion = questionService.findQuestionById(id);
-        QuestionsDTO questionsDTO = new QuestionsDTO();
-        questionsDTO.setQuestionTitle(existingQuestion.getTitle());
+        QuestionsDTO questionsDto = new QuestionsDTO();
+        questionsDto.setQuestionTitle(existingQuestion.getTitle());
         // TODO check if this works!
         //        List<Option> options = existingQuestion.getOptions();
-        questionsDTO.setQuestionOptions(existingQuestion.getOptions());
-        questionsDTO.setQuestionResourceTags(existingQuestion.getTags());
-        questionsDTO.setQuestionId(existingQuestion.getId());
-        model.addAttribute("questionsDTO", questionsDTO);
+        questionsDto.setQuestionOptions(existingQuestion.getOptions());
+        questionsDto.setQuestionResourceTags(existingQuestion.getTags());
+        questionsDto.setQuestionId(existingQuestion.getId());
+        model.addAttribute("questionsDto", questionsDto);
         return "survey-admin-questions-edit";
     }
 
     // TODO FIX this method!!!
     @PostMapping("/survey-admin/question/{id}")
-    public String updateQuestionDetails(@PathVariable Long id, @ModelAttribute QuestionsDTO questionsDTO, Model model) {
+    public String updateQuestionDetails(@PathVariable Long id, @ModelAttribute QuestionsDTO questionsDto, Model model) {
         // Retrieve question from DB and collect options and resource tags
         Question existingQuestion = questionService.findQuestionById(id);
         List<Option> existingOptions = existingQuestion.getOptions();
-        existingQuestion.setTitle(questionsDTO.getQuestionTitle());
-        existingQuestion.setTags(questionsDTO.getQuestionResourceTags());
+        existingQuestion.setTitle(questionsDto.getQuestionTitle());
+        existingQuestion.setTags(questionsDto.getQuestionResourceTags());
 
         // TODO this won't work when trying to add MORE options..
         //  Same for tags. Maybe enter optionTitle and values as CSV?
         //  Figure this out!!!
         for(int i = 0; i < existingOptions.size(); i++) {
-            existingOptions.get(i).setOptionTitle(questionsDTO.getQuestionOptionByIndex(i).getOptionTitle());
-            existingOptions.get(i).setValue(questionsDTO.getQuestionOptionByIndex(i).getValue());
+            existingOptions.get(i).setOptionTitle(questionsDto.getQuestionOptionByIndex(i).getOptionTitle());
+            existingOptions.get(i).setValue(questionsDto.getQuestionOptionByIndex(i).getValue());
         }
         existingQuestion.setOptions(existingOptions);
         questionService.saveQuestion(existingQuestion);

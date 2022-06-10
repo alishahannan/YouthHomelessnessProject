@@ -33,32 +33,32 @@ public class RegistrationController {
     }
 
     @PostMapping("/register")
-    public String registerNewUser(@ModelAttribute UserDTO userDTO) {
-        if (userDTO.getRole().equalsIgnoreCase("student")) {
+    public String registerNewUser(@ModelAttribute UserDTO userDto) {
+        if (userDto.getRole().equalsIgnoreCase("student")) {
             Student student = new Student();
-            student.setUsername(userDTO.getUsername());
-            student.setPassword(userDTO.getPassword());
+            student.setUsername(userDto.getUsername());
+            student.setPassword(userDto.getPassword());
             studentService.saveStudent(student);
-        } else if (userDTO.getRole().equalsIgnoreCase("employee")) {
+        } else if (userDto.getRole().equalsIgnoreCase("employee")) {
             Employee employee = new Employee();
-            employee.setFirstName(userDTO.getFirstName());
-            employee.setLastName(userDTO.getLastName());
-            employee.setUsername(userDTO.getUsername());
-            employee.setPassword(userDTO.getPassword());
+            employee.setFirstName(userDto.getFirstName());
+            employee.setLastName(userDto.getLastName());
+            employee.setUsername(userDto.getUsername());
+            employee.setPassword(userDto.getPassword());
             employeeService.saveEmployee(employee);
-        } else if (userDTO.getRole().equalsIgnoreCase("admin")) {
+        } else if (userDto.getRole().equalsIgnoreCase("admin")) {
             Admin admin = new Admin();
-            admin.setFirstName(userDTO.getFirstName());
-            admin.setLastName(userDTO.getLastName());
-            admin.setUsername(userDTO.getUsername());
-            admin.setPassword(userDTO.getPassword());
+            admin.setFirstName(userDto.getFirstName());
+            admin.setLastName(userDto.getLastName());
+            admin.setUsername(userDto.getUsername());
+            admin.setPassword(userDto.getPassword());
             adminService.saveAdmin(admin);
-        } else if (userDTO.getRole().equalsIgnoreCase("survey-admin")) {
+        } else if (userDto.getRole().equalsIgnoreCase("survey-admin")) {
             SurveyAdmin surveyAdmin = new SurveyAdmin();
-            surveyAdmin.setFirstName(userDTO.getFirstName());
-            surveyAdmin.setLastName(userDTO.getLastName());
-            surveyAdmin.setUsername(userDTO.getUsername());
-            surveyAdmin.setPassword(userDTO.getPassword());
+            surveyAdmin.setFirstName(userDto.getFirstName());
+            surveyAdmin.setLastName(userDto.getLastName());
+            surveyAdmin.setUsername(userDto.getUsername());
+            surveyAdmin.setPassword(userDto.getPassword());
             surveyAdminService.saveSurveyAdmin(surveyAdmin);
         }
         return "redirect:/admin/dashboard";

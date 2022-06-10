@@ -2,9 +2,11 @@ package com.youthhomelessnessproject.academicsuccess.controllers;
 
 import com.youthhomelessnessproject.academicsuccess.dto.UserDTO;
 import com.youthhomelessnessproject.academicsuccess.models.Admin;
+import com.youthhomelessnessproject.academicsuccess.models.Employee;
 import com.youthhomelessnessproject.academicsuccess.models.Student;
 import com.youthhomelessnessproject.academicsuccess.models.SurveyAdmin;
 import com.youthhomelessnessproject.academicsuccess.services.AdminService;
+import com.youthhomelessnessproject.academicsuccess.services.EmployeeService;
 import com.youthhomelessnessproject.academicsuccess.services.StudentService;
 import com.youthhomelessnessproject.academicsuccess.services.SurveyAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,26 +19,31 @@ import java.util.List;
 public class AdminController {
 
     // Runtime injection of StudentService, AdminService and SurveyAdminService dependencies
-    private StudentService studentService;
+    private final StudentService studentService;
     private final AdminService adminService;
     private final SurveyAdminService surveyAdminService;
+    private final EmployeeService employeeService;
 
     @Autowired
-    public AdminController(StudentService studentService, AdminService adminService, SurveyAdminService surveyAdminService) {
+    public AdminController(StudentService studentService, AdminService adminService, SurveyAdminService surveyAdminService, EmployeeService employeeService) {
         this.studentService = studentService;
         this.adminService = adminService;
         this.surveyAdminService = surveyAdminService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/admin/dashboard")
     public String showAdminDashboard(Model model) {
         List<Student> students = studentService.getAllStudents();
         List<Admin> admins = adminService.getAllAdmins();
-        List<SurveyAdmin> teachers = surveyAdminService.getAllSurveyAdmins();
+        List<SurveyAdmin> surveyAdmins = surveyAdminService.getAllSurveyAdmins();
+        List<Employee> employees = employeeService.getAllEmployees();
         model.addAttribute("admin", ContextController.getAdmin());
         model.addAttribute("students", students);
         model.addAttribute("admins", admins);
-        model.addAttribute("teachers", teachers);
+        model.addAttribute("survey-admins", surveyAdmins);
+        model.addAttribute("employees", employees);
+
         return "admin-dashboard";
     }
 
