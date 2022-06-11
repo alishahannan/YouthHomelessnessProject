@@ -16,6 +16,11 @@ public class ResourceServiceImpl implements ResourceService {
     private ResourceRepository resourceRepository;
 
     @Override
+    public List<Resource> getAllResources() {
+        return resourceRepository.findAll();
+    }
+
+    @Override
     public List<Resource> getAllResourcesByTag(ResourceTag tag) {
         return resourceRepository.findResourcesByTags(tag);
     }

@@ -58,7 +58,7 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Teacher Actions
+            Employee Actions
         </div>
 
 
@@ -203,25 +203,24 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Student Name</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Food Insecurity</th>
-                                    <th>Housing Insecurity</th>
-                                    <th>Dependent Insecurity</th>
+                                    <th>Name</th>
+                                    <th>Street Address</th>
+                                    <th>Description</th>
+                                    <th>Tag(s)</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="sess : ${allSessions}">
+                                <tr th:each="resource : ${allResources}">
 
 <!--                                    <td th:text="${sess.studentName}"></td>-->
-                                    <td th:text="${sess.studentName}"></td>
+                                    <td th:text="${resource.name}"></td>
 <!--                                    <td th:text="${sess.quiz.subject}"></td>-->
-                                    <td th:text="${sess.start_time}"></td>
-                                    <td th:text="${sess.end_time}"></td>
-                                    <td th:text="${sess.foodScore}"></td>
-                                    <td th:text="${sess.housingScore}"></td>
-                                    <td th:text="${sess.dependentScore}"></td>
+<!--                                    TODO create column for address details-->
+                                    <td th:text="${resource.address.street}"></td>
+                                    <td th:text="${resource.description}"></td>
+<!--                                    TODO iterate over all tags in list if this doesn't work-->
+                                    <td th:text="${resource.tags}"></td>
+
                                 </tr>
                                 </tbody>
                             </table>

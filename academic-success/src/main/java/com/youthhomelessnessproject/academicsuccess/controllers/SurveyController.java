@@ -116,7 +116,7 @@ public class SurveyController {
 //        model.addAttribute("total", "Out of " + questions.size());
         model.addAttribute("student", ContextController.getStudent());
 
-        return "quiz-results";
+        return "survey-results";
 
     }
 

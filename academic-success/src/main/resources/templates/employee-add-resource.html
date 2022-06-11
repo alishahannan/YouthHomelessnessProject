@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Survey Admin Add Question</title>
+    <title>Employee Add Resource</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -42,7 +42,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="/survey-admin/dashboard">
+            <a class="nav-link" href="/employee/dashboard">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -54,23 +54,23 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Teacher Actions
+            Employee Actions
         </div>
 
 
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/survey-admin/question}"
+               th:href="@{/employee/resource}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Add Questions</span></a>
+                <span>Add Resources</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/survey-admin/questions/list}"
+               th:href="@{/employee/resources/list}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Questions List</span></a>
+                <span>Resources List</span></a>
         </li>
 
 
@@ -145,7 +145,7 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"
 
-                                      th:text="${survey-admin.firstName}"
+                                      th:text="${employee.firstName}"
                                 ></span>
                             <img class="img-profile rounded-circle"
                                  src="/static/js/img/undraw_profile.svg">
@@ -176,7 +176,7 @@
                     <h1 class="h4 text-gray-900 mb-4">Add a New Question</h1>
 
 
-                    <form th:action="@{/survey-admin/question/add}" th:object="${questionsDto}" method="POST">
+                    <form th:action="@{/employee/resource/add}" th:object="${resourcesDto}" method="POST">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Resource Tag</label>
 
@@ -185,7 +185,7 @@
                                 <option value="FOOD">Food</option>
                                 <option value="HOUSING">Housing</option>
                                 <option value="DEPENDENT">Dependent</option>
-<!--                                <option value="english">English</option >-->
+                                <!--                                <option value="english">English</option >-->
                             </select>
                         </div>
                         <div class="form-group">

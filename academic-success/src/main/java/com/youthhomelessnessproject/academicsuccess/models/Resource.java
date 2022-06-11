@@ -21,6 +21,9 @@ public class Resource {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Please enter a numeric degree for this resource")
+    private double degree;
+
     @NotBlank(message = "Please enter a name")
     private String name;
 
@@ -29,6 +32,10 @@ public class Resource {
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Address address;
+
+//    private Boolean foodResource;
+//    private Boolean housingResource;
+//    private Boolean dependentResource;
 
     @OneToMany(targetEntity = ResourceTag.class, mappedBy = "resource",
             fetch = FetchType.EAGER, cascade = CascadeType.ALL)

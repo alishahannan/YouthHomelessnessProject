@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface ResourceService {
 
+    List<Resource> getAllResources();
+
     List<Resource> getAllResourcesByTag(ResourceTag tag);
 
     Resource saveResource(Resource resource);
