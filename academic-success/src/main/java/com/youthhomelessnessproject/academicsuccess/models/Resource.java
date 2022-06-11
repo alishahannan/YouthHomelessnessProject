@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
@@ -21,8 +23,8 @@ public class Resource {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "Please enter a numeric degree for this resource")
-    private double degree;
+//    @NotEmpty(message = "Please enter a numeric degree for this resource")
+    private Double degree = 0.0;
 
     @NotBlank(message = "Please enter a name")
     private String name;
@@ -30,15 +32,17 @@ public class Resource {
     @NotBlank(message = "Please enter a brief description")
     private String description;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Address address;
 
-//    private Boolean foodResource;
-//    private Boolean housingResource;
-//    private Boolean dependentResource;
+    // TODO make sure at least ONE is selected when creating a new Resource
+    @Column(name = "food_resource")
+    private Boolean foodResource;
 
-    @OneToMany(targetEntity = ResourceTag.class, mappedBy = "resource",
-            fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<ResourceTag> tags;
+    @Column(name = "housing_resource")
+    private Boolean housingResource;
+
+    @Column(name = "dependent_resource")
+    private Boolean dependentResource;
 
 }

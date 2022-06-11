@@ -1,13 +1,16 @@
 package com.youthhomelessnessproject.academicsuccess.services;
 
 import com.youthhomelessnessproject.academicsuccess.models.Question;
-import com.youthhomelessnessproject.academicsuccess.models.ResourceTag;
 
 import java.util.List;
 
 public interface QuestionService {
 
-    List<Question> getAllQuestionsByTags(ResourceTag tag);
+    List<Question> getAllFoodQuestions();
+
+    List<Question> getAllHousingQuestions();
+
+    List<Question> getAllDependentQuestions();
 
     List<Question> getAllQuestions();
 

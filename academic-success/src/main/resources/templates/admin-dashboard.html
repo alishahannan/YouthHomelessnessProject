@@ -209,7 +209,7 @@
                                     <td >N/A</td>
                                     <td th:text="${student.role}"></td>
                                     <td>
-                                        <a th:href="@{/student/edit/{id}(id=${student.id})}" class="btn btn-primary">Update</a>
+<!--                                        <a th:href="@{/student/edit/{id}(id=${student.id})}" class="btn btn-primary">Update</a>-->
                                         <a th:href="@{/student/delete/{id}(id=${student.id})}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
@@ -222,7 +222,7 @@
                                         <a th:href="@{/admin/delete/{id}(id=${admin.id})}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
-                                <tr th:each="employee: ${employee}">
+                                <tr th:each="employee: ${employees}">
                                     <td th:text="${employee.username}"></td>
                                     <td th:text="${employee.firstName}"></td>
                                     <td th:text="${employee.role}"></td>
@@ -231,7 +231,7 @@
                                         <a th:href="@{/employee/delete/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
-                                <tr th:each="survey-admin: ${surveyAdmin}">
+                                <tr th:each="surveyAdmin: ${surveyAdmins}">
                                     <td th:text="${surveyAdmin.username}"></td>
                                     <td th:text="${surveyAdmin.firstName}"></td>
                                     <td th:text="${surveyAdmin.role}"></td>
@@ -240,8 +240,6 @@
                                         <a th:href="@{/survey-admin/delete/{id}(id=${surveyAdmin.id})}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
-
-
                                 </tbody>
                             </table>
                         </div>

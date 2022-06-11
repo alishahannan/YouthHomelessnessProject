@@ -32,8 +32,8 @@ public class Question {
 
     private double score = 0;
 
-    @OneToMany(targetEntity = ResourceTag.class, mappedBy = "question",
-            fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<ResourceTag> tags;
+    private Boolean foodResource;
+    private Boolean housingResource;
+    private Boolean dependentResource;
 
 }

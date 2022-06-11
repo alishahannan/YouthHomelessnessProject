@@ -1,7 +1,6 @@
 package com.youthhomelessnessproject.academicsuccess.dto;
 
 import com.youthhomelessnessproject.academicsuccess.models.Option;
-import com.youthhomelessnessproject.academicsuccess.models.ResourceTag;
 
 import java.util.List;
 
@@ -9,18 +8,25 @@ public class QuestionsDTO {
 
     private String questionTitle;
     private List<Option> options;
-    private List<ResourceTag> tags;
+    private Boolean foodResource;
+    private Boolean housingResource;
+    private Boolean dependentResource;
     private Long questionId;
 
     public QuestionsDTO() {
 
     }
 
-    public QuestionsDTO(String questionTitle, List<Option> options, List<ResourceTag> tags) {
+    public QuestionsDTO(String questionTitle, List<Option> options,
+                        Boolean foodResource,
+                        Boolean housingResource,
+                        Boolean dependentResource) {
         super();
         this.questionTitle = questionTitle;
         this.options = options;
-        this.tags = tags;
+        this.foodResource = foodResource;
+        this.housingResource = housingResource;
+        this.dependentResource = dependentResource;
     }
 
     public String getQuestionTitle() { return questionTitle; }
@@ -33,9 +39,40 @@ public class QuestionsDTO {
         options.get(index).setOptionTitle(optionTitle);
         options.get(index).setValue(value);
     };
-    public List<ResourceTag> getQuestionResourceTags() { return tags; }
-    public void setQuestionResourceTags(List<ResourceTag> tags) { this.tags = tags; }
+
     public Long getQuestionId() { return questionId; }
     public void setQuestionId(Long questionId) {this.questionId = questionId;}
 
+
+    public List<Option> getOptions() {
+        return options;
+    }
+
+    public void setOptions(List<Option> options) {
+        this.options = options;
+    }
+
+    public Boolean getFoodResource() {
+        return foodResource;
+    }
+
+    public void setFoodResource(Boolean foodResource) {
+        this.foodResource = foodResource;
+    }
+
+    public Boolean getHousingResource() {
+        return housingResource;
+    }
+
+    public void setHousingResource(Boolean housingResource) {
+        this.housingResource = housingResource;
+    }
+
+    public Boolean getDependentResource() {
+        return dependentResource;
+    }
+
+    public void setDependentResource(Boolean dependentResource) {
+        this.dependentResource = dependentResource;
+    }
 }

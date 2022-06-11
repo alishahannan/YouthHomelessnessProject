@@ -65,7 +65,9 @@ public class SurveyAdminController {
         List<Option> options = new ArrayList<>();
         options.addAll(questionsDto.getQuestionOptions());
         question.setTitle(questionsDto.getQuestionTitle());
-        question.setTags(questionsDto.getQuestionResourceTags());
+        question.setFoodResource(questionsDto.getFoodResource());
+        question.setHousingResource(questionsDto.getHousingResource());
+        question.setDependentResource(questionsDto.getDependentResource());
 
         for(Option option: options) {
            option.setQuestion(question);
@@ -83,7 +85,9 @@ public class SurveyAdminController {
         // TODO check if this works!
         //        List<Option> options = existingQuestion.getOptions();
         questionsDto.setQuestionOptions(existingQuestion.getOptions());
-        questionsDto.setQuestionResourceTags(existingQuestion.getTags());
+        questionsDto.setFoodResource(existingQuestion.getFoodResource());
+        questionsDto.setHousingResource(existingQuestion.getHousingResource());
+        questionsDto.setDependentResource(existingQuestion.getDependentResource());
         questionsDto.setQuestionId(existingQuestion.getId());
         model.addAttribute("questionsDto", questionsDto);
         return "survey-admin-questions-edit";
@@ -96,7 +100,9 @@ public class SurveyAdminController {
         Question existingQuestion = questionService.findQuestionById(id);
         List<Option> existingOptions = existingQuestion.getOptions();
         existingQuestion.setTitle(questionsDto.getQuestionTitle());
-        existingQuestion.setTags(questionsDto.getQuestionResourceTags());
+        existingQuestion.setFoodResource(questionsDto.getFoodResource());
+        existingQuestion.setHousingResource(questionsDto.getHousingResource());
+        existingQuestion.setDependentResource(questionsDto.getDependentResource());
 
         // TODO this won't work when trying to add MORE options..
         //  Same for tags. Maybe enter optionTitle and values as CSV?
@@ -112,9 +118,9 @@ public class SurveyAdminController {
 
     @GetMapping("/survey-admin/questions/list")
     public String showAllQuestionsPage(Model model) {
-        List<Question> foodQuestions = questionService.getAllQuestionsByTags(new ResourceTag(ResourceTag.Tag.FOOD));
-        List<Question> housingQuestions = questionService.getAllQuestionsByTags(new ResourceTag(ResourceTag.Tag.HOUSING));
-        List<Question> dependentQuestions = questionService.getAllQuestionsByTags(new ResourceTag(ResourceTag.Tag.DEPENDENT));
+        List<Question> foodQuestions = questionService.getAllFoodQuestions();
+        List<Question> housingQuestions = questionService.getAllHousingQuestions();
+        List<Question> dependentQuestions = questionService.getAllDependentQuestions();
         model.addAttribute("foodQuestions", foodQuestions);
         model.addAttribute("housingQuestions", housingQuestions);
         model.addAttribute("dependentQuestions", dependentQuestions);
@@ -129,13 +135,7 @@ public class SurveyAdminController {
         for(Option option : options) {
             optionRepository.delete(option);
         }
-        // TODO resource tags should be static & reusable
-        //  this way, we use the same tags for each resource/question/quiz
-        //  They should not be deleted
-//        List<ResourceTag> tags = question.getTags();
-//        for(ResourceTag tag : tags) {
-//            resourceTagRepository.delete(tag);
-//        }
+
         questionService.deleteQuestionById(id);
         return "redirect:/survey-admin/questions/list";
     }

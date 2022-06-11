@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--<html lang="en">-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
 
@@ -206,7 +207,9 @@
                                     <th>Name</th>
                                     <th>Street Address</th>
                                     <th>Description</th>
-                                    <th>Tag(s)</th>
+                                    <th>Food Resource</th>
+                                    <th>Housing Resource</th>
+                                    <th>Dependent Resource</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -219,7 +222,9 @@
                                     <td th:text="${resource.address.street}"></td>
                                     <td th:text="${resource.description}"></td>
 <!--                                    TODO iterate over all tags in list if this doesn't work-->
-                                    <td th:text="${resource.tags}"></td>
+                                    <td th:text="${resource.foodResource}"></td>
+                                    <td th:text="${resource.housingResource}"></td>
+                                    <td th:text="${resource.dependentResource}"></td>
 
                                 </tr>
                                 </tbody>

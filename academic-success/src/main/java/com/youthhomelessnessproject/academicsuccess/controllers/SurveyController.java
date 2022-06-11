@@ -75,27 +75,23 @@ public class SurveyController {
         // Calculate food, housing and dependent scores from survey responses
         for(int i = 0; i< questions.size(); i++) {
 
-            for(int j = 0; j < 3; j++) {
+            if(questions.get(i).getFoodResource()) {
 
-                if(questions.get(i).getTags().get(j).equals(ResourceTag.Tag.FOOD)) {
+                double responseValue = submittedAnswers[i].getValue();
 
-                    double responseValue = submittedAnswers[i].getValue();
+                foodScore += responseValue;
 
-                    foodScore += responseValue;
+            } else if (questions.get(i).getHousingResource()) {
 
-                } else if (questions.get(i).getTags().get(j).equals(ResourceTag.Tag.HOUSING)) {
+                double responseValue = submittedAnswers[i].getValue();
 
-                    double responseValue = submittedAnswers[i].getValue();
+                housingScore += responseValue;
 
-                    housingScore += responseValue;
+            } else if (questions.get(i).getDependentResource()) {
 
-                } else if (questions.get(i).getTags().get(j).equals(ResourceTag.Tag.DEPENDENT)) {
+                double responseValue = submittedAnswers[i].getValue();
 
-                    double responseValue = submittedAnswers[i].getValue();
-
-                    dependentScore += responseValue;
-
-                }
+                dependentScore += responseValue;
 
             }
 

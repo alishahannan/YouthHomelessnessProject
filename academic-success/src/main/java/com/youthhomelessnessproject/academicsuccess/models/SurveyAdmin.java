@@ -15,7 +15,7 @@ import javax.validation.constraints.Size;
 
 // javax.persistence
 @Entity
-@Table(name = "tbl_teachers")
+@Table(name = "tbl_survey_admins")
 public class SurveyAdmin {
 
     @Id // javax.persistence

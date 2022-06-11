@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<!--<html lang="en">-->
 
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Teacher - Questions List</title>
+    <title>Employee - Resources List</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -47,7 +48,7 @@
         <li class="nav-item">
             <a class="nav-link"
 
-               th:href="@{/survey-admin/dashboard}">
+               th:href="@{/employee/dashboard}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -66,17 +67,17 @@
         <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/survey-admin/question}"
+               th:href="@{/employee/resource}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Add Questions</span></a>
+                <span>Add Resources</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/survey-admin/questions/list}"
+               th:href="@{/employee/resources/list}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Questions List</span></a>
+                <span>Resources List</span></a>
         </li>
 
 
@@ -191,89 +192,109 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Teacher Dashboard</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Employee Dashboard</h1>
 
                 </div>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Student Table</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Food Resources</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Question Title</th>
-                                    <th>Question Subject</th>
-                                    <th>
-                                        Modify
-                                    </th>
-
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Modify</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="questionS : ${scienceQuestions}">
+                                <tr th:each="resourceF : ${foodResources}">
 
-                                    <td th:text="${questionS.title}"></td>
-                                    <td th:text="${questionS.subject}"></td>
+                                    <td th:text="${resourceF.name}"></td>
+                                    <td th:text="${resourceF.description}"></td>
                                     <td>
-                                        <a th:href="@{/teacher/question/{id}(id=${questionS.questionId})}"
-                                           class="btn btn-primary" >Update</a>
-                                        <a th:href="@{/teacher/question/delete/{id}(id=${questionS.questionId})}"
+<!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceF.id})}"-->
+<!--                                           class="btn btn-primary" >Update</a>-->
+                                        <a th:href="@{/employee/resource/delete/{id}(id=${resourceF.id})}"
                                            class="btn btn-danger"
                                         >Delete</a>
                                     </td>
                                 </tr>
-                                <tr th:each="questionM : ${mathsQuestions}">
-
-                                    <td th:text="${questionM.title}"></td>
-                                    <td th:text="${questionM.subject}"></td>
-                                    <td>
-                                        <a th:href="@{/survey-admin/question/{id}(id=${questionM.questionId})}"
-                                           class="btn btn-primary" >Update</a>
-                                        <a th:href="@{/survey-admin/question/delete/{id}(id=${questionM.questionId})}"
-                                           class="btn btn-danger"
-                                        >Delete</a>
-                                    </td>
-
-                                </tr>
-                                <tr th:each="questionE : ${englishQuestions}">
-
-                                    <td th:text="${questionE.title}"></td>
-                                    <td th:text="${questionE.subject}"></td>
-                                    <td>
-                                        <a th:href="@{/teacher/question/{id}(id=${questionE.questionId})}"
-                                           class="btn btn-primary" >Update</a>
-                                        <a th:href="@{/teacher/question/delete/{id}(id=${questionE.questionId})}"
-                                           class="btn btn-danger"
-                                        >Delete</a>
-                                    </td>
-
-                                </tr>
-                                <tr th:each="questionP : ${physicsQuestions}">
-
-                                    <td th:text="${questionP.title}"></td>
-                                    <td th:text="${questionP.subject}"></td>
-                                    <td>
-                                        <a th:href="@{/survey-admin/question/{id}(id=${questionP.questionId})}"
-                                           class="btn btn-primary" >Update</a>
-                                        <a th:href="@{/survey-admin/delete/{id}(id=${questionP.questionId})}"
-                                           class="btn btn-danger"
-                                        >Delete</a>
-                                    </td>
-
-                                </tr>
-
-
-
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                <br>
+                <br>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Housing Resources</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Modify</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="resourceH : ${housingResources}">
 
+                                    <td th:text="${resourceH.name}"></td>
+                                    <td th:text="${resourceH.description}"></td>
+                                    <td>
+<!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceH.id})}"-->
+<!--                                           class="btn btn-primary" >Update</a>-->
+                                        <a th:href="@{/employee/resource/delete/{id}(id=${resourceH.id})}"
+                                           class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Dependent Resources</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Modify</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="resourceD : ${dependentResources}">
+
+                                    <td th:text="${resourceD.name}"></td>
+                                    <td th:text="${resourceD.description}"></td>
+                                    <td>
+<!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceD.id})}"-->
+<!--                                           class="btn btn-primary" >Update</a>-->
+                                        <a th:href="@{/employee/resource/delete/{id}(id=${resourceD.id})}"
+                                           class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.container-fluid -->
 

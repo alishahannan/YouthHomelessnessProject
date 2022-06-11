@@ -35,7 +35,7 @@ public class Address {
 
     private String website;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "address")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "address")
     private Resource resource;
 
 }

@@ -3,7 +3,7 @@ package com.youthhomelessnessproject.academicsuccess.controllers;
 import com.youthhomelessnessproject.academicsuccess.dto.ResourcesDTO;
 import com.youthhomelessnessproject.academicsuccess.models.*;
 import com.youthhomelessnessproject.academicsuccess.repositories.AddressRepository;
-import com.youthhomelessnessproject.academicsuccess.repositories.ResourceTagRepository;
+import com.youthhomelessnessproject.academicsuccess.services.AddressService;
 import com.youthhomelessnessproject.academicsuccess.services.EmployeeService;
 import com.youthhomelessnessproject.academicsuccess.services.ResourceService;
 import com.youthhomelessnessproject.academicsuccess.services.SessionService;
@@ -32,6 +32,9 @@ public class EmployeeController {
     @Autowired
     private AddressRepository addressRepository;
 
+    @Autowired
+    private AddressService addressService;
+
 //    @Autowired
 //    private ResourceTagRepository resourceTagRepository;
 
@@ -42,13 +45,10 @@ public class EmployeeController {
 
     @GetMapping("/employee/dashboard")
     public String showEmployeeDashboard(Model model) {
-        List<Session> sessions = new ArrayList<>();
-        for(Session session : sessionService.getAllSessions()) {
-            if(session.getEnd_time() != null) {
-                sessions.add(session);
-            }
-        }
-        model.addAttribute("allSessions", sessions);
+        List<Resource> resources = new ArrayList<>();
+        resources.addAll(resourceService.getAllResources());
+
+        model.addAttribute("allResources", resources);
         model.addAttribute("employee", employeeService.getEmployeeById(ContextController.getEmployee().getId()));
         return "employee-dashboard";
     }
@@ -66,17 +66,14 @@ public class EmployeeController {
     @PostMapping("employee/resource/add")
     public String addResource(@ModelAttribute ResourcesDTO resourcesDto, Model model) {
         Resource resource = new Resource();
-        List<ResourceTag> resourceTags = new ArrayList<>();
-        resourceTags.addAll(resourcesDto.getTags());
+        resource.setFoodResource(resourcesDto.getFoodResource());
+        resource.setHousingResource(resourcesDto.getHousingResource());
+        resource.setDependentResource(resourcesDto.getDependentResource());
         resource.setName(resourcesDto.getName());
         resource.setDescription(resourcesDto.getDescription());
         resource.setAddress(resourcesDto.getAddress());
+        resource.setDegree(resourcesDto.getDegree());
 
-        for(ResourceTag tag : resourceTags) {
-            tag.setResource(resource);
-        }
-
-        resource.setTags(resourceTags);
         resourceService.saveResource(resource);
 
         return "redirect:/employee/resources/list";
@@ -89,7 +86,9 @@ public class EmployeeController {
         resourcesDto.setName(existingResource.getName());
         resourcesDto.setDescription(existingResource.getDescription());
         resourcesDto.setAddress(existingResource.getAddress());
-        resourcesDto.setTags(existingResource.getTags());
+        resourcesDto.setFoodResource(existingResource.getFoodResource());
+        resourcesDto.setHousingResource(existingResource.getHousingResource());
+        resourcesDto.setDependentResource(existingResource.getDependentResource());
         model.addAttribute("resourcesDto", resourcesDto);
 
         return "employee-resources-edit";
@@ -98,21 +97,28 @@ public class EmployeeController {
     @PostMapping("/employee/resource/{id}")
     public String updateResourceDetails(@PathVariable Long id, @ModelAttribute ResourcesDTO resourcesDto, Model model) {
         Resource existingResource = resourceService.findResourceById(id);
-//        List<ResourceTag> tags = existingResource.getTags();
+        Address existingAddress = addressService.getAddressById(existingResource.getAddress().getId());
         existingResource.setName(resourcesDto.getName());
         existingResource.setDescription(resourcesDto.getDescription());
+        existingAddress.setStreet(resourcesDto.getAddress().getStreet());
+        existingAddress.setCity(resourcesDto.getAddress().getCity());
         existingResource.setAddress(resourcesDto.getAddress());
-        existingResource.setTags(resourcesDto.getTags());
+        existingResource.setFoodResource(resourcesDto.getFoodResource());
+        existingResource.setHousingResource(resourcesDto.getHousingResource());
+        existingResource.setDependentResource(resourcesDto.getDependentResource());
+        existingResource.setDegree(resourcesDto.getDegree());
         resourceService.saveResource(existingResource);
+        existingAddress.setResource(existingResource);
+        addressService.saveAddress(existingAddress);
 
         return "redirect:/employee/resources/list";
     }
 
     @GetMapping("/employee/resources/list")
     public String showAllResourcesPage(Model model) {
-        List<Resource> foodResources = resourceService.getAllResourcesByTag(new ResourceTag(ResourceTag.Tag.FOOD));
-        List<Resource> housingResources = resourceService.getAllResourcesByTag(new ResourceTag(ResourceTag.Tag.HOUSING));
-        List<Resource> dependentResources = resourceService.getAllResourcesByTag(new ResourceTag(ResourceTag.Tag.DEPENDENT));
+        List<Resource> foodResources = resourceService.getAllFoodResources();
+        List<Resource> housingResources = resourceService.getAllHousingResources();
+        List<Resource> dependentResources = resourceService.getAllDependentResources();
         model.addAttribute("foodResources", foodResources);
         model.addAttribute("housingResources", housingResources);
         model.addAttribute("dependentResources", dependentResources);
@@ -127,13 +133,6 @@ public class EmployeeController {
         // Delete properties associated with resource and resource
         addressRepository.delete(resource.getAddress());
 
-        // TODO resource tags should be static & reusable
-        //  this way, we use the same tags for each resource/question/quiz
-        //  They should not be deleted
-//        List<ResourceTag> tags = question.getTags();
-//        for(ResourceTag tag : tags) {
-//            resourceTagRepository.delete(tag);
-//        }
         resourceService.deleteResourceById(id);
 
         return "redirect:/employee/resources/list";
@@ -142,7 +141,7 @@ public class EmployeeController {
 
 
 
-    // ADMIN ACTIONS ON SURVEYADMIN ENTITY*****
+    // ADMIN ACTIONS ON SURVEY-ADMIN ENTITY*****
     @GetMapping("/employee/edit/{id}")
     public String showEmployeeEditPage(@PathVariable Long id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);

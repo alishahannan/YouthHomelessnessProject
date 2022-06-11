@@ -1,7 +1,6 @@
 package com.youthhomelessnessproject.academicsuccess.services;
 
 import com.youthhomelessnessproject.academicsuccess.models.Question;
-import com.youthhomelessnessproject.academicsuccess.models.ResourceTag;
 import com.youthhomelessnessproject.academicsuccess.repositories.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +18,20 @@ public class QuestionServiceImpl implements QuestionService {
         this.questionRepository = questionRepository;
     }
 
+
     @Override
-    public List<Question> getAllQuestionsByTags(ResourceTag tag) {
-        return questionRepository.findQuestionsByTags(tag);
+    public List<Question> getAllFoodQuestions() {
+        return questionRepository.findAllByFoodResourceIsTrue();
+    }
+
+    @Override
+    public List<Question> getAllHousingQuestions() {
+        return questionRepository.findAllByHousingResourceIsTrue();
+    }
+
+    @Override
+    public List<Question> getAllDependentQuestions() {
+        return questionRepository.findAllByDependentResourceIsTrue();
     }
 
     @Override

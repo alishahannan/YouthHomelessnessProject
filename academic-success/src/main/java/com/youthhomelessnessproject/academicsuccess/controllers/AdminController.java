@@ -41,7 +41,7 @@ public class AdminController {
         model.addAttribute("admin", ContextController.getAdmin());
         model.addAttribute("students", students);
         model.addAttribute("admins", admins);
-        model.addAttribute("survey-admins", surveyAdmins);
+        model.addAttribute("surveyAdmins", surveyAdmins);
         model.addAttribute("employees", employees);
 
         return "admin-dashboard";
