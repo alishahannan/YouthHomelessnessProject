@@ -5,7 +5,6 @@ import com.youthhomelessnessproject.academicsuccess.repositories.ResourceReposit
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @Service
@@ -26,8 +25,8 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public List<Resource> getAllFoodResourcesWithDegreeGreaterEqual(int degree) {
-        return resourceRepository.findAllByFoodResourceIsTrueAndDegreeGreaterThanEqual(degree);
+    public List<Resource> getAllFoodResourcesWithDegreeLessEqual(double degree) {
+        return resourceRepository.findAllByFoodResourceIsTrueAndDegreeLessThanEqual(degree);
     }
 
     @Override
@@ -36,8 +35,8 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public List<Resource> getAllHousingResourcesWithDegreeGreaterEqual(int degree) {
-        return resourceRepository.findAllByHousingResourceIsTrueAndDegreeGreaterThanEqual(degree);
+    public List<Resource> getAllHousingResourcesWithDegreeLessEqual(double degree) {
+        return resourceRepository.findAllByHousingResourceIsTrueAndDegreeLessThanEqual(degree);
     }
 
     @Override
@@ -46,13 +45,13 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public List<Resource> getAllDependentResourcesWithDegreeGreaterEqual(int degree) {
-        return resourceRepository.findAllByDependentResourceIsTrueAndDegreeGreaterThanEqual(degree);
+    public List<Resource> getAllDependentResourcesWithDegreeLessEqual(double degree) {
+        return resourceRepository.findAllByDependentResourceIsTrueAndDegreeLessThanEqual(degree);
     }
 
     @Override
-    public List<Resource> getAllResourcesWithDegreeGreaterThanEqual(int degree) {
-        return resourceRepository.findAllByDegreeGreaterThanEqual(degree);
+    public List<Resource> getAllResourcesWithDegreeLessEqual(double degree) {
+        return resourceRepository.findAllByDegreeLessThanEqual(degree);
     }
 
     @Override

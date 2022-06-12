@@ -3,6 +3,8 @@ package com.youthhomelessnessproject.academicsuccess.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -20,11 +22,12 @@ public class Option {
     @Column(name = "option_title", nullable = false)
     private String optionTitle;
 
-    @ManyToOne()
-    @JoinColumn(name = "question_id")
-    private Question question;
-
     private double value;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "question_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Question question;
 
     public Option(String optionTitle, double value) {
         this.optionTitle = optionTitle;

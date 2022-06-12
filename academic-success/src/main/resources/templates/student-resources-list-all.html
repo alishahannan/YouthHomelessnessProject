@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--<html lang="en">-->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>All Resources - List</title>
+    <title>All Resources</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -47,7 +47,8 @@
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/employee/dashboard}">
+
+               th:href="@{/student/dashboard}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -59,25 +60,26 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Employee Actions
+            Student Actions
         </div>
 
 
         <!-- Nav Item - Charts -->
+<!--        <li class="nav-item">-->
+<!--            <a class="nav-link"-->
+<!--               th:href="@{/employee/resource}"-->
+<!--            >-->
+<!--                <i class="fas fa-fw fa-chart-area"></i>-->
+<!--                <span>Add Resources</span></a>-->
+<!--        </li>-->
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/employee/resource}"
-            >
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Add Resources</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link"
-               th:href="@{/employee/resources/list}"
+               th:href="@{/resources}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Resources List</span></a>
         </li>
+
 
         <!-- Nav Item - logout -->
         <li class="nav-item">
@@ -163,9 +165,9 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                                      th:text="${employee.firstName}"
-                                ></span>
+                            <!--  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                              th:text="${teacher.firstName}"
+                              ></span>-->
                             <img class="img-profile rounded-circle"
                                  src="/static/js/img/undraw_profile.svg">
                         </a>
@@ -190,14 +192,14 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Employee Dashboard</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Resources Dashboard</h1>
 
                 </div>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Resource (Student) Table</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">All Resources</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -205,27 +207,31 @@
                                 <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Street Address</th>
                                     <th>Description</th>
-                                    <th>Food Resource</th>
-                                    <th>Housing Resource</th>
-                                    <th>Dependent Resource</th>
+                                    <th>Address</th>
+                                    <th>Food</th>
+                                    <th>Housing</th>
+                                    <th>Dependent</th>
+                                    <th>Details</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="resource : ${allResources}">
+                                <tr th:each="resource : ${resources}">
 
-<!--                                    <td th:text="${sess.studentName}"></td>-->
                                     <td th:text="${resource.name}"></td>
-<!--                                    <td th:text="${sess.quiz.subject}"></td>-->
-<!--                                    TODO create column for address details-->
-                                    <td th:text="${resource.address.street}"></td>
                                     <td th:text="${resource.description}"></td>
-<!--                                    TODO iterate over all tags in list if this doesn't work-->
+<!--                                    <td th:utext="${#strings.replace(#strings.escapeJava(resource.address.street + '\n' + resource.address.city + ', ' + resource.address.state + '\n' + resource.address.zip),'\n','&lt;br /&gt;')}" ></td>-->
+                                    <td th:text="${resource.address.street + '  ' + resource.address.city + ', ' + resource.address.state + ' ' + resource.address.zip}" style="white-space: pre-line"></td>
                                     <td th:text="${resource.foodResource}"></td>
                                     <td th:text="${resource.housingResource}"></td>
                                     <td th:text="${resource.dependentResource}"></td>
-
+                                    <td>
+                                        <!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceF.id})}"-->
+                                        <!--                                           class="btn btn-primary" >Update</a>-->
+                                        <a th:href="@{/resource/{id}(id=${resource.id})}"
+                                           class="btn btn-info"
+                                        >Details</a>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -290,6 +296,14 @@
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
 <!--<script src="/static/js/sb-admin-2.min.js"></script>-->
+
+
+<!---->
+<!--TODO update custom and page level custom scripts to all templates with dataTables
+TODO: Add custom script to all dataTables to disable sorting of Modify column (where needed). Link below @01:18:00 -->
+<!--https://www.youtube.com/watch?v=nP7O26fFkjI-->
+<!-- TODO add hidden id column to reuse add page as update page. Same link, @01:03:12-->
+<!-- -->
 
 <!-- Page level plugins -->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>

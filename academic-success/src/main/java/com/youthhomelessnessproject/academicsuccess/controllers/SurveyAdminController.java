@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,58 +40,119 @@ public class SurveyAdminController {
 
     @GetMapping("/survey-admin/dashboard")
     public String showSurveyAdminDashboard(Model model) {
-        List<Session> sessions = new ArrayList<>();
-        for (Session session : sessionService.getAllSessions()) {
-            if (session.getEnd_time() != null) {
-                sessions.add(session);
-            }
+//        List<Session> sessions = new ArrayList<>();
+        List<Question> questions = questionService.getAllQuestions();
+        List<List<Option>> options = new ArrayList<>();
+        for(int i = 0; i < questions.size(); i++) {
+            options.add(i, questions.get(i).getOptions());
         }
-        model.addAttribute("allSessions", sessions);
-        model.addAttribute("survey-admin", surveyAdminService.getSurveyAdminById(ContextController.getSurveyAdmin().getId()));
+
+        model.addAttribute("allQuestions", questions);
+        model.addAttribute("allOptions", options);
+
+        model.addAttribute("surveyAdmin", surveyAdminService.getSurveyAdminById(ContextController.getSurveyAdmin().getId()));
         return "survey-admin-dashboard";
     }
 
     @GetMapping("/survey-admin/question")
-    public String showAddQuestionForm(Model model) {
+    public ModelAndView showAddQuestionForm() {
+        ModelAndView mav = new ModelAndView("survey-admin-add-question");
         QuestionsDTO questionsDto = new QuestionsDTO();
-        model.addAttribute("questionsDTO", questionsDto);
-        model.addAttribute("survey-admin", surveyAdminService.getSurveyAdminById(ContextController.getSurveyAdmin().getId()));
-        return "survey-admin-add-question";
+
+        mav.addObject("questionsDto", questionsDto);
+
+        mav.addObject("surveyAdmin", surveyAdminService.getSurveyAdminById(ContextController.getSurveyAdmin().getId()));
+        return mav;
     }
 
     // TODO check correctness of this method
     @PostMapping("/survey-admin/question/add")
-    public String addQuestion(@ModelAttribute QuestionsDTO questionsDto, Model model) {
+    public String addQuestion(@ModelAttribute QuestionsDTO questionsDto) {
         Question question = new Question();
         List<Option> options = new ArrayList<>();
-        options.addAll(questionsDto.getQuestionOptions());
-        question.setTitle(questionsDto.getQuestionTitle());
+        String optionText = "";
+        Double optionValue = 0.0;
+        if(!questionsDto.getOption1().isEmpty()) {
+            optionText = questionsDto.getOption1();
+            optionValue = questionsDto.getOption1Value();
+            Option option1 = new Option(optionText, optionValue);
+            option1.setQuestion(question);
+            options.add(option1);
+            question.setOption1(optionText);
+            question.setOption1Value(optionValue);
+        }
+
+        if(!questionsDto.getOption2().isEmpty()) {
+            optionText = questionsDto.getOption2();
+            optionValue = questionsDto.getOption2Value();
+            Option option2 = new Option(optionText, optionValue);
+            option2.setQuestion(question);
+            options.add(option2);
+            question.setOption2(optionText);
+            question.setOption2Value(optionValue);
+        }
+
+        if(!questionsDto.getOption3().isEmpty()) {
+            optionText = questionsDto.getOption3();
+            optionValue = questionsDto.getOption3Value();
+            Option option3 = new Option(optionText, optionValue);
+            option3.setQuestion(question);
+            options.add(option3);
+            question.setOption3(optionText);
+            question.setOption3Value(optionValue);
+        }
+
+        if(!questionsDto.getOption4().isEmpty()) {
+            optionText = questionsDto.getOption4();
+            optionValue = questionsDto.getOption4Value();
+            Option option4 = new Option(optionText, optionValue);
+            option4.setQuestion(question);
+            options.add(option4);
+            question.setOption4(optionText);
+            question.setOption4Value(optionValue);
+        }
+
+        if(!questionsDto.getOption5().isEmpty()) {
+            optionText = questionsDto.getOption5();
+            optionValue = questionsDto.getOption5Value();
+            Option option5 = new Option(optionText, optionValue);
+            option5.setQuestion(question);
+            options.add(option5);
+            question.setOption5(optionText);
+            question.setOption5Value(optionValue);
+        }
+
+        question.setTitle(questionsDto.getTitle());
         question.setFoodResource(questionsDto.getFoodResource());
         question.setHousingResource(questionsDto.getHousingResource());
         question.setDependentResource(questionsDto.getDependentResource());
 
-        for(Option option: options) {
-           option.setQuestion(question);
-        }
+        // Not sure if this will work at present
         question.setOptions(options);
         questionService.saveQuestion(question);
+
+        for(Option option: options) {
+            optionRepository.save(option);
+        }
+
         return "redirect:/survey-admin/questions/list";
     }
 
     @GetMapping("/survey-admin/question/{id}")
-    public String showModifyQuestionForm(@PathVariable Long id, Model model) {
+    public ModelAndView showModifyQuestionForm(@PathVariable Long id, Model model) {
+        ModelAndView mav = new ModelAndView("survey-admin-questions-edit");
         Question existingQuestion = questionService.findQuestionById(id);
         QuestionsDTO questionsDto = new QuestionsDTO();
-        questionsDto.setQuestionTitle(existingQuestion.getTitle());
+        questionsDto.setTitle(existingQuestion.getTitle());
         // TODO check if this works!
         //        List<Option> options = existingQuestion.getOptions();
         questionsDto.setQuestionOptions(existingQuestion.getOptions());
         questionsDto.setFoodResource(existingQuestion.getFoodResource());
         questionsDto.setHousingResource(existingQuestion.getHousingResource());
         questionsDto.setDependentResource(existingQuestion.getDependentResource());
-        questionsDto.setQuestionId(existingQuestion.getId());
-        model.addAttribute("questionsDto", questionsDto);
-        return "survey-admin-questions-edit";
+        questionsDto.setId(existingQuestion.getId());
+        mav.addObject("questionsDto", questionsDto);
+        return mav;
     }
 
     // TODO FIX this method!!!
@@ -99,7 +161,7 @@ public class SurveyAdminController {
         // Retrieve question from DB and collect options and resource tags
         Question existingQuestion = questionService.findQuestionById(id);
         List<Option> existingOptions = existingQuestion.getOptions();
-        existingQuestion.setTitle(questionsDto.getQuestionTitle());
+        existingQuestion.setTitle(questionsDto.getTitle());
         existingQuestion.setFoodResource(questionsDto.getFoodResource());
         existingQuestion.setHousingResource(questionsDto.getHousingResource());
         existingQuestion.setDependentResource(questionsDto.getDependentResource());
@@ -117,24 +179,28 @@ public class SurveyAdminController {
     }
 
     @GetMapping("/survey-admin/questions/list")
-    public String showAllQuestionsPage(Model model) {
-        List<Question> foodQuestions = questionService.getAllFoodQuestions();
-        List<Question> housingQuestions = questionService.getAllHousingQuestions();
-        List<Question> dependentQuestions = questionService.getAllDependentQuestions();
-        model.addAttribute("foodQuestions", foodQuestions);
-        model.addAttribute("housingQuestions", housingQuestions);
-        model.addAttribute("dependentQuestions", dependentQuestions);
+    public ModelAndView showAllQuestionsPage() {
 
-        return "survey-admin-questions-list";
+        ModelAndView mav = new ModelAndView("survey-admin-questions-list");
+
+        List<Question> questions = questionService.getAllQuestions();
+
+        List<List<String>> foodQuestionOptions = new ArrayList<>();
+
+        mav.addObject("questions", questions);
+
+        return mav;
     }
 
     @GetMapping("/survey-admin/question/delete/{id}")
     public String deleteQuestion(@PathVariable Long id, Model model) {
         Question question = questionService.findQuestionById(id);
-        List<Option> options = question.getOptions();
-        for(Option option : options) {
-            optionRepository.delete(option);
-        }
+
+        // TODO verify if this is necessary due to OnDeleteAction in Options Entity
+//        List<Option> options = question.getOptions();
+//        for(Option option : options) {
+//            optionRepository.delete(option);
+//        }
 
         questionService.deleteQuestionById(id);
         return "redirect:/survey-admin/questions/list";
@@ -144,7 +210,7 @@ public class SurveyAdminController {
     @GetMapping("/survey-admin/edit/{id}")
     public String showSurveyAdminEditPage(@PathVariable Long id, Model model) {
         SurveyAdmin surveyAdmin = surveyAdminService.getSurveyAdminById(id);
-        model.addAttribute("survey-admin", surveyAdmin);
+        model.addAttribute("surveyAdmin", surveyAdmin);
         return "admin-survey-admin-edit";
     }
 

@@ -1,6 +1,5 @@
 package com.youthhomelessnessproject.academicsuccess.repositories;
 
-import com.youthhomelessnessproject.academicsuccess.models.Question;
 import com.youthhomelessnessproject.academicsuccess.models.Resource;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -10,17 +9,17 @@ public interface ResourceRepository extends JpaRepository<Resource, Long> {
 
     List<Resource> findAllByFoodResourceIsTrue();
 
-    List<Resource> findAllByFoodResourceIsTrueAndDegreeGreaterThanEqual(int degree);
+    List<Resource> findAllByFoodResourceIsTrueAndDegreeLessThanEqual(double degree);
 
     List<Resource> findAllByHousingResourceIsTrue();
 
-    List<Resource> findAllByHousingResourceIsTrueAndDegreeGreaterThanEqual(int degree);
+    List<Resource> findAllByHousingResourceIsTrueAndDegreeLessThanEqual(double degree);
 
     List<Resource> findAllByDependentResourceIsTrue();
 
-    List<Resource> findAllByDependentResourceIsTrueAndDegreeGreaterThanEqual(int degree);
+    List<Resource> findAllByDependentResourceIsTrueAndDegreeLessThanEqual(double degree);
 
-    List<Resource> findAllByDegreeGreaterThanEqual(int degree);
+    List<Resource> findAllByDegreeLessThanEqual(double degree);
 
     Resource findResourceById(Long id);
 

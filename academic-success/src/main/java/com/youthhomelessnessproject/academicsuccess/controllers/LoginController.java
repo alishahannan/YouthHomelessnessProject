@@ -43,7 +43,7 @@ public class LoginController {
     @GetMapping("/survey-admin")
     public String showSurveyAdminLoginForm(Model model) {
         SurveyAdmin surveyAdmin = new SurveyAdmin();
-        model.addAttribute("survey-admin", surveyAdmin);
+        model.addAttribute("surveyAdmin", surveyAdmin);
         return "survey-admin-login";
     }
 
@@ -88,7 +88,7 @@ public class LoginController {
     }
 
     @PostMapping("/survey-admin")
-    public String loginSurveyAdmin(@ModelAttribute("survey-admin") SurveyAdmin surveyAdmin) {
+    public String loginSurveyAdmin(@ModelAttribute("surveyAdmin") SurveyAdmin surveyAdmin) {
         SurveyAdmin savedSurveyAdmin = surveyAdminRepository.findSurveyAdminByUsername(surveyAdmin.getUsername());
         if(savedSurveyAdmin != null) {
             ContextController.setSurveyAdmin(savedSurveyAdmin);

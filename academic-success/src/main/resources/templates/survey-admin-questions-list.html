@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Teacher - Questions List</title>
+    <title>Survey Admin - Questions List</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -59,7 +59,7 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Teacher Actions
+            Survey Admin Actions
         </div>
 
 
@@ -191,83 +191,117 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Teacher Dashboard</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Questions List</h1>
 
                 </div>
 
-                <!-- DataTales Example -->
+                <!-- Food Security Table -->
+<!--                <div class="card shadow mb-4">-->
+<!--                    <div class="card-header py-3">-->
+<!--                        <h6 class="m-0 font-weight-bold text-primary">Food Security Questions</h6>-->
+<!--                    </div>-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="table-responsive">-->
+<!--                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">-->
+<!--                                <thead>-->
+<!--                                <tr>-->
+<!--                                    <th>Question</th>-->
+<!--                                    <th>Option 1</th>-->
+<!--                                    <th>Value 1</th>-->
+<!--                                    <th>Option 2</th>-->
+<!--                                    <th>Value 2</th>-->
+<!--                                    <th>Option 3</th>-->
+<!--                                    <th>Value 3</th>-->
+<!--                                    <th>Option 4</th>-->
+<!--                                    <th>Value 4</th>-->
+<!--                                    <th>Option 5</th>-->
+<!--                                    <th>Value 5</th>-->
+
+<!--                                    <th>Modify</th>-->
+
+<!--                                </tr>-->
+<!--                                </thead>-->
+<!--                                <tbody>-->
+<!--                                <tr th:each="questionF : ${foodQuestions}">-->
+
+<!--                                    <td th:text="${questionF.title}"></td>-->
+<!--                                    <td th:text="${questionF.option1}"></td>-->
+<!--                                    <td th:text="${questionF.option1Value}"></td>-->
+<!--                                    <td th:text="${questionF.option2}"></td>-->
+<!--                                    <td th:text="${questionF.option2Value}"></td>-->
+<!--                                    <td th:text="${questionF.option3}"></td>-->
+<!--                                    <td th:text="${questionF.option3Value}"></td>-->
+<!--                                    <td th:text="${questionF.option4}"></td>-->
+<!--                                    <td th:text="${questionF.option4Value}"></td>-->
+<!--                                    <td th:text="${questionF.option5}"></td>-->
+<!--                                    <td th:text="${questionF.option5Value}"></td>-->
+<!--                                    <td>-->
+<!--&lt;!&ndash;                                        <a th:href="@{/survey-admin/question/{id}(id=${questionF.id})}"&ndash;&gt;-->
+<!--&lt;!&ndash;                                           class="btn btn-primary" >Update</a>&ndash;&gt;-->
+<!--                                        <a th:href="@{/survey-admin/question/delete/{id}(id=${questionF.id})}"-->
+<!--                                           class="btn btn-danger"-->
+<!--                                        >Delete</a>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                                </tbody>-->
+<!--                            </table>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                Housing Security Table-->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Student Table</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Questions</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <table class="table table-bordered table-striped" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Question Title</th>
-                                    <th>Question Subject</th>
-                                    <th>
-                                        Modify
-                                    </th>
+                                    <th>Question</th>
+                                    <th>Option 1</th>
+                                    <th>Value 1</th>
+                                    <th>Option 2</th>
+                                    <th>Value 2</th>
+                                    <th>Option 3</th>
+                                    <th>Value 3</th>
+                                    <th>Option 4</th>
+                                    <th>Value 4</th>
+                                    <th>Option 5</th>
+                                    <th>Value 5</th>
+                                    <th>Food</th>
+                                    <th>Housing</th>
+                                    <th>Dependent</th>
+                                    <th>Modify</th>
 
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="questionS : ${scienceQuestions}">
+                                <tr th:each="question : ${questions}">
 
-                                    <td th:text="${questionS.title}"></td>
-                                    <td th:text="${questionS.subject}"></td>
+                                    <td th:text="${question.title}"></td>
+                                    <td th:text="${question.option1}"></td>
+                                    <td th:text="${question.option1Value}"></td>
+                                    <td th:text="${question.option2}"></td>
+                                    <td th:text="${question.option2Value}"></td>
+                                    <td th:text="${question.option3}"></td>
+                                    <td th:text="${question.option3Value}"></td>
+                                    <td th:text="${question.option4}"></td>
+                                    <td th:text="${question.option4Value}"></td>
+                                    <td th:text="${question.option5}"></td>
+                                    <td th:text="${question.option5Value}"></td>
+                                    <td th:text="${question.foodResource}"></td>
+                                    <td th:text="${question.housingResource}"></td>
+                                    <td th:text="${question.dependentResource}"></td>
                                     <td>
-                                        <a th:href="@{/teacher/question/{id}(id=${questionS.questionId})}"
-                                           class="btn btn-primary" >Update</a>
-                                        <a th:href="@{/teacher/question/delete/{id}(id=${questionS.questionId})}"
+                                        <!--                                        <a th:href="@{/survey-admin/question/{id}(id=${questionH.id})}"-->
+                                        <!--                                           class="btn btn-primary" >Update</a>-->
+                                        <a th:href="@{/survey-admin/question/delete/{id}(id=${question.id})}"
                                            class="btn btn-danger"
                                         >Delete</a>
                                     </td>
                                 </tr>
-                                <tr th:each="questionM : ${mathsQuestions}">
-
-                                    <td th:text="${questionM.title}"></td>
-                                    <td th:text="${questionM.subject}"></td>
-                                    <td>
-                                        <a th:href="@{/survey-admin/question/{id}(id=${questionM.questionId})}"
-                                           class="btn btn-primary" >Update</a>
-                                        <a th:href="@{/survey-admin/question/delete/{id}(id=${questionM.questionId})}"
-                                           class="btn btn-danger"
-                                        >Delete</a>
-                                    </td>
-
-                                </tr>
-                                <tr th:each="questionE : ${englishQuestions}">
-
-                                    <td th:text="${questionE.title}"></td>
-                                    <td th:text="${questionE.subject}"></td>
-                                    <td>
-                                        <a th:href="@{/teacher/question/{id}(id=${questionE.questionId})}"
-                                           class="btn btn-primary" >Update</a>
-                                        <a th:href="@{/teacher/question/delete/{id}(id=${questionE.questionId})}"
-                                           class="btn btn-danger"
-                                        >Delete</a>
-                                    </td>
-
-                                </tr>
-                                <tr th:each="questionP : ${physicsQuestions}">
-
-                                    <td th:text="${questionP.title}"></td>
-                                    <td th:text="${questionP.subject}"></td>
-                                    <td>
-                                        <a th:href="@{/survey-admin/question/{id}(id=${questionP.questionId})}"
-                                           class="btn btn-primary" >Update</a>
-                                        <a th:href="@{/survey-admin/delete/{id}(id=${questionP.questionId})}"
-                                           class="btn btn-danger"
-                                        >Delete</a>
-                                    </td>
-
-                                </tr>
-
-
-
                                 </tbody>
                             </table>
                         </div>
@@ -329,14 +363,27 @@
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="/static/js/sb-admin-2.min.js"></script>
+<script src="/js/sb-admin-2.min.js"></script>
+<!--<script src="/static/js/sb-admin-2.min.js"></script>-->
 
 <!-- Page level plugins -->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="/static/js/demo/datatables-demo.js"></script>
+<script src="/js/demo/datatables-demo.js"></script>
+<!--<script src="/static/js/demo/datatables-demo.js"></script>-->
+<!--<script>-->
+<!--    $(document).ready(function() {-->
+<!--        $("#dataTable").DataTable({-->
+<!--            "aoColumnDefs": [{-->
+<!--                'bSortable': false,-->
+<!--                'aTargets': [-1]-->
+<!--            }]-->
+<!--        });-->
+<!--    })-->
+
+<!--</script>-->
 
 </body>
 

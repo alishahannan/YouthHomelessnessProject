@@ -71,10 +71,16 @@ public class EmployeeController {
         resource.setDependentResource(resourcesDto.getDependentResource());
         resource.setName(resourcesDto.getName());
         resource.setDescription(resourcesDto.getDescription());
-        resource.setAddress(resourcesDto.getAddress());
         resource.setDegree(resourcesDto.getDegree());
 
+        // Set address resource
+        resource.getAddress().setResource(resource);
+
+        // Set resource address
+        resource.setAddress(resourcesDto.getAddress());
         resourceService.saveResource(resource);
+        // TODO verify that following line did not break method!!
+        addressRepository.save(resource.getAddress());
 
         return "redirect:/employee/resources/list";
     }

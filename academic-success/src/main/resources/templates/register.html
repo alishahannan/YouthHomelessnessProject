@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>SB Admin 2 - Register</title>
+    <title>Register</title>
 
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -35,7 +35,7 @@
                         </div>
                         <form class="user" th:action="@{/students}" th:object="${student}" method="POST">
                             <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                <div class="col-sm-12 mb-3 mb-sm-0">
                                     <input
                                             type="text"
                                             name="zip"
@@ -43,14 +43,14 @@
                                             class="form-control form-control-user"
                                             placeholder="Zip Code" required/>
                                 </div>
-                                <div class="col-sm-6">
+<!--                                <div class="col-sm-6">-->
 <!--                                    <input-->
 <!--                                            type="text"-->
 <!--                                            name="lastName"-->
 <!--                                            th:field="*{lastName}"-->
 <!--                                            class="form-control form-control-user"-->
 <!--                                            placeholder="Last Name" required/>-->
-                                </div>
+<!--                                </div>-->
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">

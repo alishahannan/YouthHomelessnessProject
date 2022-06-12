@@ -5,14 +5,18 @@ package com.youthhomelessnessproject.academicsuccess.controllers;
 import com.youthhomelessnessproject.academicsuccess.dto.AnswersDTO;
 import com.youthhomelessnessproject.academicsuccess.models.*;
 import com.youthhomelessnessproject.academicsuccess.services.QuestionService;
+import com.youthhomelessnessproject.academicsuccess.services.ResourceService;
 import com.youthhomelessnessproject.academicsuccess.services.SessionService;
 import com.youthhomelessnessproject.academicsuccess.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -24,6 +28,9 @@ public class SurveyController {
     @Autowired
     private SessionService sessionService;
 
+    @Autowired
+    private ResourceService resourceService;
+
     public SurveyController(QuestionService questionService) {
         super();
         this.questionService = questionService;
@@ -31,10 +38,17 @@ public class SurveyController {
 
     // TODO MAKE THIS HAPPEN!!!
     @GetMapping("/survey")
-    public String showSurvey(Model model) {
+    public ModelAndView showSurvey() {
+
+        AnswersDTO answersDto = new AnswersDTO();
+
+        ModelAndView mav = new ModelAndView("survey");
+
+        List<Question> questions = questionService.getAllQuestions();
+
         Session session = new Session();
         session.setStart_time(new Timestamp(System.currentTimeMillis()));
-        List<Question> questions = questionService.getAllQuestions();
+
         Survey survey = new Survey(questions, session);
         session.setSurvey(survey);
 
@@ -49,23 +63,32 @@ public class SurveyController {
         ContextController.setSession(session);
         sessionService.saveSession(session);
         ContextController.questions = questions;
-        model.addAttribute("questions", questions);
-        AnswersDTO answersDto = new AnswersDTO();
-        model.addAttribute("answersDto", answersDto);
-        model.addAttribute("student", ContextController.getStudent());
+        mav.addObject("questions", questions);
+        mav.addObject("answersDto", answersDto);
+        mav.addObject("student", ContextController.getStudent());
 
-        return "survey";
+        return mav;
     }
 
     @PostMapping("/survey/submit")
     public String validateSurvey(@ModelAttribute AnswersDTO answersDto, Model model) {
 
         double foodScore = 0;
+        double totalPossibleFoodScore = 0;
         double housingScore = 0;
+        double totalPossibleHousingScore = 0;
         double dependentScore = 0;
+        double totalPossibleDependentScore = 0;
+
+        int optionIndex = 0;
+        String responseText = "";
+        double responseValue = 0;
 
         List<Question> questions = ContextController.questions;
-        Option[] submittedAnswers = answersDto.getAnswers();
+
+        ArrayList<Option> answers = new ArrayList<>();
+
+        Integer[] submittedAnswers = answersDto.getAnswers();
 
         Session existingSession = sessionService.findSessionById(ContextController
                 .getSession().getId());
@@ -77,40 +100,121 @@ public class SurveyController {
 
             if(questions.get(i).getFoodResource()) {
 
-                double responseValue = submittedAnswers[i].getValue();
+                optionIndex = submittedAnswers[i];
+                responseText = questions.get(i).getOptions().get(optionIndex).getOptionTitle();
+                responseValue = questions.get(i).getOptions().get(optionIndex).getValue();
+
+                answers.add(new Option(responseText, responseValue));
+
+                System.out.println("Question " + (i + i) + " response = " + responseText + " && value = " + responseValue + ". Added to foodScore");
 
                 foodScore += responseValue;
 
-            } else if (questions.get(i).getHousingResource()) {
+                // NOTE: THIS ASSUMES THAT OPTION VALUE 1 IS MAX VALUE
+                // TODO Create logic to determine highest value of all options?
+                totalPossibleFoodScore += questions.get(i).getOptions().get(0).getValue();
 
-                double responseValue = submittedAnswers[i].getValue();
+            }
+
+            if (questions.get(i).getHousingResource()) {
+
+                optionIndex = submittedAnswers[i];
+                responseText = questions.get(i).getOptions().get(optionIndex).getOptionTitle();
+                responseValue = questions.get(i).getOptions().get(optionIndex).getValue();
+
+                answers.add(new Option(responseText, responseValue));
+
+                System.out.println("Question " + (i + i) + " response = " + responseText + " && value = " + responseValue + ". Added to housingScore");
 
                 housingScore += responseValue;
 
-            } else if (questions.get(i).getDependentResource()) {
+            }
 
-                double responseValue = submittedAnswers[i].getValue();
+            if (questions.get(i).getDependentResource()) {
+
+                optionIndex = submittedAnswers[i];
+                responseText = questions.get(i).getOptions().get(optionIndex).getOptionTitle();
+                responseValue = questions.get(i).getOptions().get(optionIndex).getValue();
+
+                answers.add(new Option(responseText, responseValue));
+
+                System.out.println("Question " + (i + i) + " response = " + responseText + " && value = " + responseValue + ". Added to dependentScore");
 
                 dependentScore += responseValue;
 
             }
 
         }
+
+        // Round scores up for better resource coverage
+        foodScore = Math.ceil(foodScore);
+        housingScore = Math.ceil(housingScore);
+        dependentScore = Math.ceil(dependentScore);
+
         existingSession.setFoodScore(foodScore);
-        System.out.println("Food score: " + foodScore);
+        System.out.println("Final Food score: " + foodScore);
 
         existingSession.setHousingScore(housingScore);
-        System.out.println("Housing score: " + housingScore);
+        System.out.println("Final Housing score: " + housingScore);
 
         existingSession.setDependentScore(dependentScore);
-        System.out.println("Dependent score: " + dependentScore);
+        System.out.println("Final Dependent score: " + dependentScore);
 
-        model.addAttribute("food-score", foodScore);
-        model.addAttribute("housing-score", housingScore);
-        model.addAttribute("dependent-score", dependentScore);
+        // Retrieve resources for each category based on scores
+        List<Resource> foodResources =
+                resourceService.getAllFoodResourcesWithDegreeLessEqual(foodScore);
+
+        System.out.println(" ");
+        System.out.println("-------------------------------------------------");
+        System.out.println("Food Resources Returned");
+        for(Resource r : foodResources) {
+            System.out.println(r.getName());
+        }
+
+        List<Resource> housingResources =
+                resourceService.getAllHousingResourcesWithDegreeLessEqual(housingScore);
+
+        System.out.println(" ");
+        System.out.println("-------------------------------------------------");
+        System.out.println("Housing Resources Returned");
+        for(Resource r : housingResources) {
+            System.out.println(r.getName());
+        }
+
+        List<Resource> dependentResources =
+                resourceService.getAllDependentResourcesWithDegreeLessEqual(dependentScore);
+
+        System.out.println(" ");
+        System.out.println("-------------------------------------------------");
+        System.out.println("Dependent Resources Returned");
+        for(Resource r : dependentResources) {
+            System.out.println(r.getName());
+        }
+
+        List<Resource> allResources = new ArrayList<>();
+        allResources.addAll(foodResources);
+        allResources.addAll(housingResources);
+        allResources.addAll(dependentResources);
+
+        // Add to model
+        model.addAttribute("foodScore", foodScore);
+        model.addAttribute("possibleFoodScore", totalPossibleFoodScore);
+        model.addAttribute("foodResources", foodResources);
+
+        model.addAttribute("housingScore", housingScore);
+        model.addAttribute("possibleHousingScore", totalPossibleHousingScore);
+        model.addAttribute("housingResources", housingResources);
+
+        model.addAttribute("dependentScore", dependentScore);
+        model.addAttribute("possibleDependentScore", totalPossibleDependentScore);
+        model.addAttribute("dependentResources", dependentResources);
+
+        model.addAttribute("allResources", allResources);
 
 //        model.addAttribute("total", "Out of " + questions.size());
         model.addAttribute("student", ContextController.getStudent());
+
+        sessionService.saveSession(existingSession);
 
         return "survey-results";
 

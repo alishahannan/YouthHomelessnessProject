@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>All questions - List</title>
+    <title>All Questions</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,9 +45,9 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
+<!--     TODO make sure change to href didn't break th:href="@{/survey-admin/dashboard}">-->
         <li class="nav-item">
-            <a class="nav-link"
-               th:href="@{/survey-admin/dashboard}">
+            <a class="nav-link" href="/survey-admin/dashboard">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -59,24 +59,23 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Teacher Actions
+            Survey Admin Actions
         </div>
 
 
         <!-- Nav Item - Charts -->
+<!--        TODO make sure change to href didn't break: th:href="@{/survey-admin/question}"-->
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/survey-admin/question}"
+               href="/survey-admin/question"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>Add Questions</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link"
-               th:href="@{/survey-admin/questions/list}"
-            >
+            <a class="nav-link" href="/survey-admin/questions/list">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Questions List</span></a>
+                <span>List All Questions</span></a>
         </li>
 
         <!-- Nav Item - logout -->
@@ -164,7 +163,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                                      th:text="${survey-admin.firstName}"
+                                      th:text="${surveyAdmin.firstName}"
                                 ></span>
                             <img class="img-profile rounded-circle"
                                  src="/static/js/img/undraw_profile.svg">
@@ -190,38 +189,42 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Teacher Dashboard</h1>
-
+                    <h1 class="h3 mb-0 text-gray-800">Survey Admin Dashboard</h1>
                 </div>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Student Table</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Questions Table</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Student Name</th>
-                                    <th>Quiz Subject</th>
-                                    <th>Start Time</th>
-                                    <th>End Time</th>
-                                    <th>Score</th>
+                                    <th>Number</th>
+                                    <th>Question</th>
+                                    <th>Options</th>
+                                    <th>Food</th>
+                                    <th>Housing</th>
+                                    <th>Dependent</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="sess : ${allSessions}">
+                                <tr th:each="ques : ${allQuestions}">
 
-                                    <td th:text="${sess.studentName}"></td>
-                                    <td th:text="${sess.quiz.subject}"></td>
-                                    <td th:text="${sess.start_time}"></td>
-                                    <td th:text="${sess.end_time}"></td>
-                                    <td th:text="${sess.score}"></td>
+                                    <td th:text="${ques.id}"></td>
+                                    <td th:text="${ques.title}"></td>
+<!--                                    TODO COME BACK FOR THIS. TRY th:list as well =) -->
+                                    <td>N/A</td>
+<!--                                <tr th:each="opt : *{ques.options}">-->
+<!--                                    <td th:text="${opt.optionTitle}"></td>-->
+<!--                                    <td th:value="${opt.value}"></td>-->
+<!--                                </tr>-->
+                                    <td th:text="${ques.foodResource}"></td>
+                                    <td th:text="${ques.housingResource}"></td>
+                                    <td th:text="${ques.dependentResource}"></td>
                                 </tr>
-
-
 
                                 </tbody>
                             </table>
@@ -284,14 +287,19 @@
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="/static/js/sb-admin-2.min.js"></script>
+<script src="/js/sb-admin-2.min.js"></script>
+<!--<script src="/static/js/sb-admin-2.min.js"></script>-->
 
 <!-- Page level plugins -->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="/static/js/demo/datatables-demo.js"></script>
+<script src="/js/demo/datatables-demo.js"></script>
+<!--<script src="/static/js/demo/datatables-demo.js"></script>-->
+<script>
+
+</script>
 
 </body>
 

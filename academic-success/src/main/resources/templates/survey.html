@@ -171,8 +171,8 @@
             <!-- TODO Remove th:action="@{/survey/science/submit}"-->
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <form th:action="@{/survey/submit}" th:object="${answersDTO}" method="POST">
-                    <div th:object"${questions}">
+                <form th:action="@{/survey/submit}" th:object="${answersDto}" method="POST">
+<!--                    <div th:object="${questions}">-->
                     <div class="card">
                         <div class="card-body ">
                             <br>
@@ -182,13 +182,14 @@
 
                                 <ul >
                                     <li th:each="option, i : ${question.options}" style="text-decoration:none">
-                                        <input th:name="${question.questionId}"
-                                               th:value="${option.optionTitle}"
+                                        <input th:name="${question.id}"
+                                               th:value="${i.index}"
                                                th:id="${'option' + (i.index + 1)}"
                                                type="radio"
-                                               th:answer="${question.optionCorrect}"
+                                               th:answer="${i.index}"
                                                th:field ="*{answers[__${count.index}__]}"
                                         />
+<!--                                        th:field ="*{answers[__${count.index}__]}" />-->
                                         <label th:text="${option.optionTitle}"
                                                th:for="${'option' + (i.index + 1)}"
                                         ></label>
@@ -199,21 +200,17 @@
                             </fieldset>
 
                         </div>
-                    </div>
 
+                    </div>
 
                     <br>
                     <button type="submit" class="btn btn-primary btn-user">Finish Attempt</button>
+
+                </form>
+
             </div>
-            </form>
-
-
-
-
 
         </div>
-
-
 
     </div>
     <!-- End of Main Content -->

@@ -11,17 +11,17 @@ public interface ResourceService {
 
     List<Resource> getAllFoodResources();
 
-    List<Resource> getAllFoodResourcesWithDegreeGreaterEqual(int degree);
+    List<Resource> getAllResourcesWithDegreeLessEqual(double degree);
+
+    List<Resource> getAllFoodResourcesWithDegreeLessEqual(double degree);
 
     List<Resource> getAllHousingResources();
 
-    List<Resource> getAllHousingResourcesWithDegreeGreaterEqual(int degree);
+    List<Resource> getAllHousingResourcesWithDegreeLessEqual(double degree);
 
     List<Resource> getAllDependentResources();
 
-    List<Resource> getAllDependentResourcesWithDegreeGreaterEqual(int degree);
-
-    List<Resource> getAllResourcesWithDegreeGreaterThanEqual(int degree);
+    List<Resource> getAllDependentResourcesWithDegreeLessEqual(double degree);
 
     Resource saveResource(Resource resource);
 

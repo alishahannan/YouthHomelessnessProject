@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <!--<html lang="en">-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
 <head>
 
     <meta charset="utf-8">
@@ -20,6 +19,10 @@
 
     <!-- Custom styles for this template-->
     <link href="/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="/css/score-card.css" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -36,7 +39,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fa-solid fa-pen-clip"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">V Quiz App </div>
+            <div class="sidebar-brand-text mx-3">V Quiz App</div>
         </a>
 
         <!-- Divider -->
@@ -61,22 +64,7 @@
             Student Actions
         </div>
 
-
         <!-- Nav Item - Charts -->
-        <!--        <li class="nav-item">-->
-        <!--            <a class="nav-link"-->
-        <!--               th:href="@{/student/resources}"-->
-        <!--            >-->
-        <!--                <i class="fas fa-fw fa-chart-area"></i>-->
-        <!--                <span>My Resources</span></a>-->
-        <!--        </li>-->
-        <li class="nav-item">
-            <a class="nav-link"
-               th:href="@{/resources}"
-            >
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>List All Resources</span></a>
-        </li>
         <!-- Nav Item - logout -->
         <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -142,10 +130,10 @@
                     <li class="nav-item dropdown no-arrow">
 
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           style="margin-right: 50px;">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                                      th:text="${student.username}"
-                                >
+                                      th:text="${student.username}">
 
 
                                 </span>
@@ -173,126 +161,94 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Student Dashboard</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Resource Details</h1>
 
                 </div>
 
+
+
+
+
                 <!-- Content Row -->
+                <div class="col">
+
                 <div class="row">
+
+<!--                    <div class="col-xl-3 col-md-6 mb-4">-->
+                    <div class="col">
+                        <div class="card border-left-primary shadow h-100 py-1">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="h4 mb-2 font-weight-bold text-gray-800">
+                                            <a th:text="${resource.name}"></a>
+                                        </div>
+                                        <div class="text-m font-weight-bold text-primary mb-1" th:text="${resource.description}"></div>
+                                        <div class="text-s text-gray-900 mb-1" th:text="${resource.address.website}"></div>
+                                        <div class="text-s text-gray-900 mb-3" th:text="${resource.address.phone}"></div>
+
+                                        <div class="text-s font-weight-bold text-primary mb-1">Address</div>
+                                        <h6 class="m-0 text-gray-900 mb-0" th:text="${resource.address.street}"></h6>
+                                        <h6 class="m-0 text-gray-900 mb-0" th:text="${resource.address.city}">,</h6>
+                                        <h6 class="m-0 text-gray-900 mb-0" th:text="${resource.address.state}"></h6>
+                                        <h6 class="m-0 text-gray-900 mb-0" th:text="${resource.address.zip}"></h6>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-book fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
 
                     <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            10 Marks</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800"
-                                        >
-<!--                                            <a th:href="@{/quiz/science}">Science</a>-->
-                                            <a th:href="@{/survey}">Start New Survey</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-book fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TODO create student-survey-results-list >> student-resources-list -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-success shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <a th:href="@{/survey}">Existing Survey Results</a>
-                                        </div>
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            View resources from prior surveys</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-book fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TODO create student-resources-list template -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-info shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                                    <a th:href="@{/resources}">View All Resources</a>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">View All Unfiltered Resources
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-book fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <!-- Pending Requests Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-warning shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            05 Marks</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <a th:href="@{/survey}">Survey</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-book fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!--                    <div class="col-xl-3 col-md-6 mb-4">-->
+<!--                        <div class="card border-left-warning shadow h-100 py-2">-->
+<!--                            <div class="card-body">-->
+<!--                                <div class="row no-gutters align-items-center">-->
+<!--                                    <div class="col mr-2">-->
+<!--                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">-->
+<!--                                            05 Marks-->
+<!--                                        </div>-->
+<!--                                        <div class="h5 mb-0 font-weight-bold text-gray-800">English</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-auto">-->
+<!--                                        <i class="fas fa-book fa-2x text-gray-300"></i>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
 
 
                 <!-- Content Row -->
-                <div class="row">
+<!--                <div class="row">-->
 
-                    <div class="col-lg-6 mb-4">
+<!--                    <div class="col-lg-6 mb-4">-->
 
-                        <!-- Approach -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Read Quiz Instructions</h6>
-                            </div>
-                            <div class="card-body">
-                                <ul>
-                                    <li>To pass the Quiz, you must secure a minimum of 70%</li>
-                                    <li>Use faster, reliable and continued internet connection</li>
-                                    <li>You can skip a tough question and come back to it later</li>
-                                    <li>The quiz will start as soon as you click the Start Quiz button</li>
-                                </ul>
+<!--                        &lt;!&ndash; Approach &ndash;&gt;-->
+<!--                        <div class="card shadow mb-4">-->
+<!--                            <div class="card-header py-3">-->
+<!--                                <h6 class="m-0 font-weight-bold text-primary">Read Quiz Instructions</h6>-->
+<!--                            </div>-->
+<!--                            <div class="card-body">-->
+<!--                                <ul>-->
+<!--                                    <li>To pass the Quiz, you must secure a minimum of 70%</li>-->
+<!--                                    <li>Use faster, reliable and continued internet connection</li>-->
+<!--                                    <li>You can skip a tough question and come back to it later</li>-->
+<!--                                    <li>The quiz will start as soon as you click the Start Quiz button</li>-->
+<!--                                </ul>-->
 
-                            </div>
-                        </div>
+<!--                            </div>-->
+<!--                        </div>-->
 
-                    </div>
-                </div>
+<!--                    </div>-->
+<!--                </div>-->
 
             </div>
             <!-- /.container-fluid -->
@@ -357,6 +313,7 @@
 <!-- Page level custom scripts -->
 <script src="/js/demo/chart-area-demo.js"></script>
 <script src="/js/demo/chart-pie-demo.js"></script>
+<script src="/js/demo/datatables-demo.js"></script>
 
 </body>
 

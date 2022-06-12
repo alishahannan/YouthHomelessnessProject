@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 // TODO make sure this is implemented correctly
 public class AnswersDTO {
-    Option[] answers = new Option[50];
+    Integer[] answers = new Integer[50];
 }

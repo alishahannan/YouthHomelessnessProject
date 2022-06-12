@@ -41,7 +41,7 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Survey Admin Login</h1>
                                 </div>
-                                <form class="user" th:action="@{/login/survey-admin}" th:object="${survey-admin}" method="POST">
+                                <form class="user" th:action="@{/login/survey-admin}" th:object="${surveyAdmin}" method="POST">
                                     <div th:if="${param.error}">
                                         <div class="alert alert-danger">
                                             Invalid username or password.
