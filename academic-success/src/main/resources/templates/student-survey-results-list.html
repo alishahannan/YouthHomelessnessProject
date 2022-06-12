@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--<html lang="en">-->
 
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -9,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Add User</title>
+    <title>All Survey Results</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -29,12 +30,15 @@
 
 <!-- Page Wrapper -->
 <div id="wrapper">
+
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-        <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
 
-            <div class="sidebar-brand-text mx-3">V Quiz App<sup></sup></div>
+        <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+
+
+            <div class="sidebar-brand-text mx-3">V Quiz App</div>
         </a>
         <br>
         <!-- Divider -->
@@ -42,7 +46,9 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="/admin/dashboard">
+            <a class="nav-link"
+
+               th:href="@{/student/dashboard}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -54,24 +60,35 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Admin Actions
+            Student Actions
         </div>
 
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="/admin/users">
+            <a class="nav-link"
+               th:href="@{/student/survey-results}"
+            >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Add Users</span></a>
+                <span>View My Resources</span></a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/resources}"
+            >
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>List All Resources</span></a>
+        </li>
+
 
         <!-- Nav Item - logout -->
         <li class="nav-item">
-            <a class="nav-link" href="/" data-toggle="modal" data-target="#logoutModal">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt "></i>
                 Logout
             </a>
         </li>
+
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -97,7 +114,6 @@
                 <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                     <i class="fa fa-bars"></i>
                 </button>
-
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -128,16 +144,25 @@
 
                     <!-- Nav Item - Alerts -->
 
+                    <!-- Nav Item - Messages -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-chalkboard-user"></i>
+
+                        </a>
+
+                    </li>
+
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow" th:object="${admin}">
+                    <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-
-                                      th:text="${admin.firstName}"
-                                ></span>
+                            <!--  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                              th:text="${teacher.firstName}"
+                              ></span>-->
                             <img class="img-profile rounded-circle"
                                  src="/static/js/img/undraw_profile.svg">
                         </a>
@@ -160,59 +185,47 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Survey Results Dashboard</h1>
 
+                </div>
 
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4" style="padding: 80px 200px;">
-                    <h1 class="h4 text-gray-900 mb-4">Add a New User</h1>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">All Survey Results</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Food Score</th>
+                                    <th>Housing Score</th>
+                                    <th>Dependent Score</th>
+                                    <th>Resources</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="sess : ${sessions}">
 
-
-                    <form th:action="@{/register}" th:object="${userDto}" method="POST">
-                        <br>
-                        <div class="row">
-                            <div class="col">
-                                <input type="text"
-                                       class="form-control"
-                                       th:field="*{firstName}"
-                                       placeholder="First Name">
-                            </div>
-                            <div class="col">
-                                <input type="text"
-                                       class="form-control"
-                                       th:field="*{lastName}"
-                                       placeholder="Last Name">
-                            </div>
+                                    <td th:text="${sess.id}"></td>
+                                    <td th:text="${#dates.format(sess.end_time, 'dd/MM/yyyy')}"></td>
+                                    <td th:text="${sess.foodScore}"></td>
+                                    <td th:text="${sess.housingScore}"></td>
+                                    <td th:text="${sess.dependentScore}"></td>
+                                    <td>
+                                        <a th:href="@{/student/survey-results/{id}(id=${sess.id})}"
+                                           class="btn btn-info">View Resources</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col">
-                                <input type="text"
-                                       class="form-control"
-                                       th:field="*{username}"
-                                       placeholder="Username">
-                            </div>
-                            <div class="col">
-                                <input type="text"
-                                       class="form-control"
-                                       th:field="*{password}"
-                                       placeholder="Password">
-                            </div>
-                        </div>
-                        <br>
-
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Role</label>
-                            <select id="inputState" class="form-control"
-                                    th:field="*{role}">
-                                <option value="employee" selected>Employee</option >
-                                <option value="survey-admin">Survey Admin</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
-
-                        <br>
-                        <button type="submit" class="btn btn-primary">Add this User</button>
-                    </form>
+                    </div>
                 </div>
 
             </div>
@@ -270,14 +283,24 @@
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="/static/js/sb-admin-2.min.js"></script>
+<script src="/js/sb-admin-2.min.js"></script>
+<!--<script src="/static/js/sb-admin-2.min.js"></script>-->
+
+
+<!---->
+<!--TODO update custom and page level custom scripts to all templates with dataTables
+TODO: Add custom script to all dataTables to disable sorting of Modify column (where needed). Link below @01:18:00 -->
+<!--https://www.youtube.com/watch?v=nP7O26fFkjI-->
+<!-- TODO add hidden id column to reuse add page as update page. Same link, @01:03:12-->
+<!-- -->
 
 <!-- Page level plugins -->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="/static/js/demo/datatables-demo.js"></script>
+<script src="/js/demo/datatables-demo.js"></script>
+<!--<script src="/static/js/demo/datatables-demo.js"></script>-->
 
 </body>
 

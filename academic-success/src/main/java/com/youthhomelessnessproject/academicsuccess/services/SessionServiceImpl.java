@@ -25,6 +25,11 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
+    public List<Session> getAllSessionsByStudentId(Long studentId) {
+        return sessionRepository.findAllByStudentId(studentId);
+    }
+
+    @Override
     public Session saveSession(Session session) {
         return sessionRepository.save(session);
     }

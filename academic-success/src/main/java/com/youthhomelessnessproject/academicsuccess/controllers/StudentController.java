@@ -1,12 +1,17 @@
 package com.youthhomelessnessproject.academicsuccess.controllers;
 
+import com.youthhomelessnessproject.academicsuccess.models.Session;
 import com.youthhomelessnessproject.academicsuccess.models.Student;
+import com.youthhomelessnessproject.academicsuccess.services.SessionService;
 import com.youthhomelessnessproject.academicsuccess.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class StudentController {
@@ -21,13 +26,11 @@ public class StudentController {
 
     // Only students can register
     @GetMapping("/register/new")
-//    public String showStudentRegistrationForm(Model model) {
     public ModelAndView showStudentRegistrationForm() {
         Student student = new Student();
         ModelAndView mav = new ModelAndView("register");
         mav.addObject("student", student);
-//        model.addAttribute("student", student);
-//        return "register";
+
         return mav;
     }
     @PostMapping("/students")
@@ -44,6 +47,8 @@ public class StudentController {
         return "student-dashboard";
     }
 
+
+    //ADMIN ACTIONS ON STUDENTS ENITITY*****
     @GetMapping("/student/edit/{id}")
     public String showUpdateStudentPage(@PathVariable Long id, Model model) {
         Student student = studentService.getStudentById(id);
@@ -51,7 +56,6 @@ public class StudentController {
         return "admin-student-edit";
     }
 
-    //ADMIN ACTIONS ON STUDENTS ENITITY*****
     @GetMapping("/student/delete/{id}")
     public String deleteStudent(@PathVariable Long id, Model model) {
         studentService.deleteStudentById(id);
