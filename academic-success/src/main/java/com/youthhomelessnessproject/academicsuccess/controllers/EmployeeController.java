@@ -73,11 +73,12 @@ public class EmployeeController {
         resource.setDescription(resourcesDto.getDescription());
         resource.setDegree(resourcesDto.getDegree());
 
+        // Set resource address
+        resource.setAddress(resourcesDto.getAddress());
+
         // Set address resource
         resource.getAddress().setResource(resource);
 
-        // Set resource address
-        resource.setAddress(resourcesDto.getAddress());
         resourceService.saveResource(resource);
         // TODO verify that following line did not break method!!
         addressRepository.save(resource.getAddress());

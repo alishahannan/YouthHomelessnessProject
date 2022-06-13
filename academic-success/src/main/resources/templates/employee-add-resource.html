@@ -229,15 +229,35 @@
                                            placeholder="Zip"
                                            required>
                                     <br>
-                                    <input type="text"
-                                           class="form-control"
-                                           th:field="*{address.phone}"
-                                           placeholder="Phone">
+                                    <div class="input-group">
+                                        <input type="tel"
+                                               class="form-control"
+                                               id="phone"
+                                               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                               autocomplete="off"
+                                               th:field="*{address.phone}"
+                                               placeholder="Phone - Format: 123-456-7890"/>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
+                                        </div>
+                                    </div>
                                     <br>
-                                    <input type="text"
-                                           class="form-control"
-                                           th:field="*{address.website}"
-                                           placeholder="Website">
+                                    <div class="input-group">
+                                        <input type="url"
+                                               class="form-control"
+                                               id="website"
+                                               pattern="https://www.*"
+                                               autocomplete="off"
+                                               th:field="*{address.website}"
+                                               placeholder="Website - Format: https://www.example.com"/>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text"><i class="fas fa-globe"></i></span>
+                                        </div>
+                                    </div>
+<!--                                    <input type="text"-->
+<!--                                           class="form-control"-->
+<!--                                           th:field="*{address.website}"-->
+<!--                                           placeholder="Website">-->
                                 </div>
                             </div>
                             <br>
@@ -291,7 +311,7 @@
 
 
                         <br>
-                        <button type="submit" class="btn btn-primary">Add this Resource</button>
+                        <button type="submit" class="btn btn-primary">Save Resource</button>
                     </form>
                 </div>
 
