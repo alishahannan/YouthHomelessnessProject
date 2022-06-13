@@ -16,7 +16,7 @@ public class ResourcesDTO {
     private Boolean housingResource;
     private Boolean dependentResource;
     private Double degree;
-    private Long resourceId;
+    private Long id;
 
     public ResourcesDTO(String name, String description, Address address,
                         Boolean foodResource, Boolean housingResource,

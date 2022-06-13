@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Quizz App Dashboard</title>
+    <title>Details</title>
 
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -47,7 +47,7 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item active">
-            <a class="nav-link" th:href="@{/student/dashboard}">
+            <a class="nav-link" th:href="@{/employee/dashboard}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -61,27 +61,27 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Student Actions
+            Employee Actions
         </div>
 
 
-        <!-- Nav Item - Charts -->
+        <!-- Nav Item - Add Resources -->
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/student/survey-results}"
+               th:href="@{/employee/resource}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>View My Resources</span></a>
+                <span>Add Resources</span></a>
         </li>
+        <!-- Nav Item - List Resources -->
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/resources}"
+               th:href="@{/employee/resources/list}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>List All Resources</span></a>
+                <span>Resources List</span></a>
         </li>
 
-        <!-- Nav Item - Charts -->
         <!-- Nav Item - logout -->
         <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -150,7 +150,7 @@
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                            style="margin-right: 50px;">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                                      th:text="${student.username}">
+                                      th:text="${employee.firstName}">
 
 
                                 </span>
@@ -188,7 +188,7 @@
 
                     <div class="row">
 
-                        <!--                    <div class="col-xl-3 col-md-6 mb-4">-->
+
                         <div class="col">
                             <div class="card border-left-primary shadow h-100 py-1">
                                 <div class="card-body">

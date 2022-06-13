@@ -31,6 +31,8 @@ public class ResourceController {
     @Autowired
     private ResourceService resourceService;
 
+
+    // STUDENT RESOURCE METHODS
     @GetMapping("/resource/{id}")
     public ModelAndView showResourceDetails(@PathVariable Long id) {
         ModelAndView mav = new ModelAndView("/student-resource-details");
@@ -105,6 +107,9 @@ public class ResourceController {
 
         return mav;
     }
+
+
+
 
 
 }

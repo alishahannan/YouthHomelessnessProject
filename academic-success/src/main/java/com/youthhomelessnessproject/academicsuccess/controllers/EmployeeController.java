@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +88,20 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/resource/{id}")
-    public String showModifyResourceForm(@PathVariable Long id, Model model) {
+    public ModelAndView showResourceDetails(@PathVariable Long id) {
+        ModelAndView mav = new ModelAndView("employee-resource-details");
+        Resource resource = resourceService.findResourceById(id);
+        mav.addObject("employee", ContextController.getEmployee());
+        mav.addObject("resource", resource);
+
+        return mav;
+    }
+
+
+
+    @GetMapping("/employee/resource/update/{id}")
+    public ModelAndView showModifyResourceForm(@PathVariable Long id) {
+        ModelAndView mav = new ModelAndView("employee-add-resource");
         Resource existingResource = resourceService.findResourceById(id);
         ResourcesDTO resourcesDto = new ResourcesDTO();
         resourcesDto.setName(existingResource.getName());
@@ -96,12 +110,17 @@ public class EmployeeController {
         resourcesDto.setFoodResource(existingResource.getFoodResource());
         resourcesDto.setHousingResource(existingResource.getHousingResource());
         resourcesDto.setDependentResource(existingResource.getDependentResource());
-        model.addAttribute("resourcesDto", resourcesDto);
+        mav.addObject("resourcesDto", resourcesDto);
+        mav.addObject("employee",
+                employeeService.getEmployeeById(ContextController.getEmployee().getId()));
+        mav.addObject("resource", existingResource);
 
-        return "employee-resources-edit";
+        return mav;
+//        model.addAttribute("resourcesDto", resourcesDto);
+//        return "employee-resources-edit";
     }
 
-    @PostMapping("/employee/resource/{id}")
+    @PostMapping("/employee/resource/update/{id}")
     public String updateResourceDetails(@PathVariable Long id, @ModelAttribute ResourcesDTO resourcesDto, Model model) {
         Resource existingResource = resourceService.findResourceById(id);
         Address existingAddress = addressService.getAddressById(existingResource.getAddress().getId());
@@ -122,15 +141,15 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/resources/list")
-    public String showAllResourcesPage(Model model) {
-        List<Resource> foodResources = resourceService.getAllFoodResources();
-        List<Resource> housingResources = resourceService.getAllHousingResources();
-        List<Resource> dependentResources = resourceService.getAllDependentResources();
-        model.addAttribute("foodResources", foodResources);
-        model.addAttribute("housingResources", housingResources);
-        model.addAttribute("dependentResources", dependentResources);
+    public ModelAndView showAllResourcesPage() {
+        ModelAndView mav = new ModelAndView("employee-resources-list");
+        List<Resource> resources = new ArrayList<>();
+        resources.addAll(resourceService.getAllResources());
 
-        return "employee-resources-list";
+        mav.addObject("allResources", resources);
+        mav.addObject("employee", employeeService.getEmployeeById(ContextController.getEmployee().getId()));
+
+        return mav;
     }
 
     @GetMapping("/employee/resource/delete/{id}")

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Employee Add Resource</title>
+    <title>Add Resource</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -173,7 +173,7 @@
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4" style="padding: 80px 200px;">
-                    <h1 class="h4 text-gray-900 mb-4">Add a New Resource</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Add / Update Resource</h1>
 
 
                     <form th:action="@{/employee/resource/add}" th:object="${resourcesDto}" method="POST">
@@ -197,7 +197,7 @@
                                            class="form-control"
                                            th:field="*{description}"
                                            id="descriptionTextInput1"
-                                           placeholder="Description"
+                                           placeholder="Description (services offered, hours, etc.)"
                                            required>
                                 </div>
                             </div>
@@ -254,13 +254,15 @@
                                             <span class="input-group-text"><i class="fas fa-globe"></i></span>
                                         </div>
                                     </div>
-<!--                                    <input type="text"-->
-<!--                                           class="form-control"-->
-<!--                                           th:field="*{address.website}"-->
-<!--                                           placeholder="Website">-->
                                 </div>
                             </div>
                             <br>
+
+                            <div >
+
+
+
+                            </div>
                             <div class="row">
                                 <div class="col">
                                     <label for="degreeNumberInput1">
@@ -297,6 +299,7 @@
                                        th:value="${dependentResource}"
                                        th:field="*{dependentResource}">
                             </div>
+<!--                            <input type="hidden" th:field="*{id}"/>-->
                             <script>
                                 function checkResourceCategorySelected() {
                                     if(!$('input[name=resourceCheckbox]:checked').length > 0) {
@@ -308,8 +311,6 @@
                                 }
                             </script>
                         </div>
-
-
                         <br>
                         <button type="submit" class="btn btn-primary">Save Resource</button>
                     </form>

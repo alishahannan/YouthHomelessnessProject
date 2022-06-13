@@ -148,7 +148,9 @@
                                       th:text="${surveyAdmin.firstName}"
                                 ></span>
                             <img class="img-profile rounded-circle"
-                                 src="/static/js/img/undraw_profile.svg">
+                                 src="/img/undraw_profile.svg">
+                            <!--                                 src="/static/js/img/undraw_profile.svg"> DOESN'T WORK....-->
+
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -171,121 +173,198 @@
             <div class="container-fluid">
 
 
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4" style="padding: 80px 200px;">
-                    <h1 class="h4 text-gray-900 mb-4">Add a New Question</h1>
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Add a New Question</h1>
 
-
-                    <form th:action="@{/survey-admin/question/add}" th:object="${questionsDto}" method="POST">
-                        <div class="form-group">
-                            <div class="col">
-                                <div class="row">
-                                    <div class="col">
-                                        <label>Question</label>
-
-                                        <input type="text"
-                                               class="form-control"
-                                               th:field="*{title}"
-                                                placeholder="Question"
-                                                required>
-                                        <br>
-                                        <input type="text"
-                                               class="form-control"
-                                               th:field="*{option1}"
-                                               placeholder="Option 1"
-                                               required>
-                                        <br>
-                                        <input type="number" step="0.1" min="0.0"
-                                               class="form-control"
-                                               th:field="*{option1Value}"
-                                               placeholder="Option 1 Value"
-                                               required>
-                                        <br>
-                                        <input type="text"
-                                               class="form-control"
-                                               th:field="*{option2}"
-                                               placeholder="Option 2">
-                                        <br>
-                                        <input type="number" step="0.1" min="0.0"
-                                               class="form-control"
-                                               th:field="*{option2Value}"
-                                               placeholder="Option 2 Value">
-                                        <br>
-                                        <input type="text"
-                                               class="form-control"
-                                               th:field="*{option3}"
-                                               placeholder="Option 3">
-                                        <br>
-                                        <input type="number" step="0.1" min="0.0"
-                                               class="form-control"
-                                               th:field="*{option3Value}"
-                                               placeholder="Option 3 Value">
-                                        <br>
-                                        <input type="text"
-                                               class="form-control"
-                                               th:field="*{option4}"
-                                               placeholder="Option 4">
-                                        <br>
-                                        <input type="number" step="0.1" min="0.0"
-                                               class="form-control"
-                                               th:field="*{option4Value}"
-                                               placeholder="Option 4 Value">
-                                        <br>
-                                        <input type="text"
-                                               class="form-control"
-                                               th:field="*{option5}"
-                                               placeholder="Option 5">
-                                        <br>
-                                        <input type="number" step="0.1" min="0.0"
-                                               class="form-control"
-                                               th:field="*{option5Value}"
-                                               placeholder="Option 5 Value">
-                                        <br>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <label for="resourceTagCheckboxSelect1">Resource Category</label>
-                            </div>
-                            <div class="row" id="resourceTagCheckboxSelect1">
-                                <input type="checkbox"
-                                       name="resourceCheckbox"
-                                       th:text="Food"
-                                       th:value="${foodResource}"
-                                       th:field="*{foodResource}">
-                            </div>
-                            <div class="row">
-                                <input type="checkbox"
-                                       name="resourceCheckbox"
-                                       th:text="Housing"
-                                       th:value="${housingResource}"
-                                       th:field="*{housingResource}">
-                            </div>
-                            <div class="row">
-                                <input type="checkbox"
-                                       name="resourceCheckbox"
-                                       th:text="Dependent"
-                                       th:value="${dependentResource}"
-                                       th:field="*{dependentResource}">
-                            </div>
-                            <script>
-                                function checkResourceCategorySelected() {
-                                    if(!$('input[name=resourceCheckbox]:checked').length > 0) {
-                                        document.getElementById("errMessage").innerHTML = "At least one resource category must be selected";
-                                        return false;
-                                    }
-                                    alert("Success");
-                                    return true;
-                                }
-                            </script>
-                            <br>
-                        </div>
-
-                        <br>
-                        <button type="submit" class="btn btn-primary">Add this Question</button>
-                    </form>
                 </div>
+
+                <!-- Content Col -->
+                <div class="col">
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Content Col -->
+                        <div class="col">
+
+                            <!-- Card border-left -->
+                            <div class="card border-left-primary shadow h100 py-1">
+
+                                <!-- card-body -->
+                                <div class="card-body">
+
+                                    <!-- row no-gutters -->
+                                    <div class="row no-gutters align-items-center">
+
+                                        <!-- col mr-2 -->
+<!--                                        <div class="col mr-2">-->
+                                        <div class="col">
+
+                                            <form th:action="@{/survey-admin/question/add}" th:object="${questionsDto}"
+                                                  method="POST">
+                                                <div class="form-group">
+                                                    <div class="col">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <label style="font-weight: bold">Question</label>
+
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{title}"
+                                                                       placeholder="Question"
+                                                                       required>
+                                                                <br>
+
+                                                                <label style="font-weight: bold">Options</label>
+
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{option1}"
+                                                                       placeholder="Option 1"
+                                                                       required>
+                                                                <br>
+                                                                <input type="number" step="0.1" min="0.0"
+                                                                       class="form-control"
+                                                                       th:field="*{option1Value}"
+                                                                       placeholder="Option 1 Value"
+                                                                       required>
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{option2}"
+                                                                       placeholder="Option 2">
+                                                                <br>
+                                                                <input type="number" step="0.1" min="0.0"
+                                                                       class="form-control"
+                                                                       th:field="*{option2Value}"
+                                                                       placeholder="Option 2 Value">
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{option3}"
+                                                                       placeholder="Option 3">
+                                                                <br>
+                                                                <input type="number" step="0.1" min="0.0"
+                                                                       class="form-control"
+                                                                       th:field="*{option3Value}"
+                                                                       placeholder="Option 3 Value">
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{option4}"
+                                                                       placeholder="Option 4">
+                                                                <br>
+                                                                <input type="number" step="0.1" min="0.0"
+                                                                       class="form-control"
+                                                                       th:field="*{option4Value}"
+                                                                       placeholder="Option 4 Value">
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{option5}"
+                                                                       placeholder="Option 5">
+                                                                <br>
+                                                                <input type="number" step="0.1" min="0.0"
+                                                                       class="form-control"
+                                                                       th:field="*{option5Value}"
+                                                                       placeholder="Option 5 Value">
+                                                                <br>
+
+
+                                                                <div class="col">
+                                                                    <div class="row">
+                                                                        <label for="resourceTagCheckboxSelect1" style="font-weight: bold;">Resource Category</label>
+                                                                    </div>
+                                                                    <div class="row" id="resourceTagCheckboxSelect1">
+                                                                        <label style="align-items: center; display: flex; padding: 4px;">
+                                                                            <input type="checkbox"
+                                                                                   name="resourceCheckbox"
+                                                                                   style="margin-right: 4px;"
+                                                                                   th:text="Food"
+                                                                                   th:value="${foodResource}"
+                                                                                   th:field="*{foodResource}"> Food
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <label style="align-items: center; display: flex; padding: 4px;">
+                                                                            <input type="checkbox"
+                                                                                   name="resourceCheckbox"
+                                                                                   style="margin-right: 4px;"
+                                                                                   th:value="${housingResource}"
+                                                                                   th:field="*{housingResource}"/> Housing
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <label style="align-items: center; display: flex; padding: 4px;">
+                                                                            <input type="checkbox"
+                                                                                   name="resourceCheckbox"
+                                                                                   style="margin-right: 4px;"
+                                                                                   th:value="${dependentResource}"
+                                                                                   th:field="*{dependentResource}"> Dependent
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <script>
+                                                                        function checkResourceCategorySelected() {
+                                                                            if (!$('input[name=resourceCheckbox]:checked').length > 0) {
+                                                                                document.getElementById("errMessage").innerHTML = "At least one resource category must be selected";
+                                                                                return false;
+                                                                            }
+                                                                            alert("Success");
+                                                                            return true;
+                                                                        }
+                                                                    </script>
+
+
+                                                                </div>
+
+                                                                <button type="submit" class="btn btn-primary" style="margin-top: 4px;">Add this Question</button>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!-- WHERE BUTTON WAS BEFORE MESSING AROUND !!! -->
+
+
+                                            </form>
+
+
+                                        </div>
+                                        <!-- End col mr-2 -->
+
+                                    </div>
+                                    <!-- End row no-gutters -->
+
+                                </div>
+                                <!-- End card-body -->
+
+                            </div>
+                            <!-- End card border-left -->
+
+                        </div>
+                        <!-- End Content Col -->
+
+                    </div>
+                    <!-- End Content Row -->
+
+                </div>
+                <!-- End Content Col -->
+
+                <!-- DataTales Example -->
+<!--                <div class="card shadow mb-4" style="padding: 80px 200px;">-->
+<!--                    <h1 class="h4 text-gray-900 mb-4">Add a New Question</h1>-->
+
+
+<!--                </div>-->
 
             </div>
             <!-- /.container-fluid -->

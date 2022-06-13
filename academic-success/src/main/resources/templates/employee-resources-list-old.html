@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--<html lang="en">-->
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>All Questions</title>
+    <title>Employee - Resources List</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,9 +45,10 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-<!--     TODO make sure change to href didn't break th:href="@{/survey-admin/dashboard}">-->
         <li class="nav-item">
-            <a class="nav-link" href="/survey-admin/dashboard">
+            <a class="nav-link"
+
+               th:href="@{/employee/dashboard}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -59,24 +60,26 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Survey Admin Actions
+            Teacher Actions
         </div>
 
 
         <!-- Nav Item - Charts -->
-<!--        TODO make sure change to href didn't break: th:href="@{/survey-admin/question}"-->
         <li class="nav-item">
             <a class="nav-link"
-               href="/survey-admin/question"
+               th:href="@{/employee/resource}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Add Questions</span></a>
+                <span>Add Resources</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/survey-admin/questions/list">
+            <a class="nav-link"
+               th:href="@{/employee/resources/list}"
+            >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>List All Questions</span></a>
+                <span>Resources List</span></a>
         </li>
+
 
         <!-- Nav Item - logout -->
         <li class="nav-item">
@@ -162,12 +165,11 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                                      th:text="${surveyAdmin.firstName}"
-                                ></span>
+                            <!--  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                              th:text="${teacher.firstName}"
+                              ></span>-->
                             <img class="img-profile rounded-circle"
-                                 src="/img/undraw_profile.svg">
-<!--                                 src="/static/js/img/undraw_profile.svg">-->
+                                 src="/static/js/img/undraw_profile.svg">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -190,49 +192,109 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Survey Admin Dashboard</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Employee Dashboard</h1>
+
                 </div>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Questions Table</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Food Resources</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th>Number</th>
-                                    <th>Question</th>
-                                    <th>Options</th>
-                                    <th>Food</th>
-                                    <th>Housing</th>
-                                    <th>Dependent</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Modify</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr th:each="ques : ${allQuestions}">
+                                <tr th:each="resourceF : ${foodResources}">
 
-                                    <td th:text="${ques.id}"></td>
-                                    <td th:text="${ques.title}"></td>
-<!--                                    TODO COME BACK FOR THIS. TRY th:list as well =) -->
-                                    <td>N/A</td>
-<!--                                <tr th:each="opt : *{ques.options}">-->
-<!--                                    <td th:text="${opt.optionTitle}"></td>-->
-<!--                                    <td th:value="${opt.value}"></td>-->
-<!--                                </tr>-->
-                                    <td th:text="${ques.foodResource}"></td>
-                                    <td th:text="${ques.housingResource}"></td>
-                                    <td th:text="${ques.dependentResource}"></td>
+                                    <td th:text="${resourceF.name}"></td>
+                                    <td th:text="${resourceF.description}"></td>
+                                    <td>
+                                        <!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceF.id})}"-->
+                                        <!--                                           class="btn btn-primary" >Update</a>-->
+                                        <a th:href="@{/employee/resource/delete/{id}(id=${resourceF.id})}"
+                                           class="btn btn-danger"
+                                        >Delete</a>
+                                    </td>
                                 </tr>
-
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                <br>
+                <br>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Housing Resources</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Modify</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="resourceH : ${housingResources}">
 
+                                    <td th:text="${resourceH.name}"></td>
+                                    <td th:text="${resourceH.description}"></td>
+                                    <td>
+                                        <!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceH.id})}"-->
+                                        <!--                                           class="btn btn-primary" >Update</a>-->
+                                        <a th:href="@{/employee/resource/delete/{id}(id=${resourceH.id})}"
+                                           class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Dependent Resources</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Modify</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="resourceD : ${dependentResources}">
+
+                                    <td th:text="${resourceD.name}"></td>
+                                    <td th:text="${resourceD.description}"></td>
+                                    <td>
+                                        <!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceD.id})}"-->
+                                        <!--                                           class="btn btn-primary" >Update</a>-->
+                                        <a th:href="@{/employee/resource/delete/{id}(id=${resourceD.id})}"
+                                           class="btn btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- /.container-fluid -->
 
@@ -291,6 +353,14 @@
 <script src="/js/sb-admin-2.min.js"></script>
 <!--<script src="/static/js/sb-admin-2.min.js"></script>-->
 
+
+<!---->
+<!--TODO update custom and page level custom scripts to all templates with dataTables
+TODO: Add custom script to all dataTables to disable sorting of Modify column (where needed). Link below @01:18:00 -->
+<!--https://www.youtube.com/watch?v=nP7O26fFkjI-->
+<!-- TODO add hidden id column to reuse add page as update page. Same link, @01:03:12-->
+<!-- -->
+
 <!-- Page level plugins -->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
@@ -298,9 +368,6 @@
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
 <!--<script src="/static/js/demo/datatables-demo.js"></script>-->
-<script>
-
-</script>
 
 </body>
 
