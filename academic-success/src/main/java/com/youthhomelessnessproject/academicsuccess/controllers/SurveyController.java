@@ -160,37 +160,12 @@ public class SurveyController {
         existingSession.setDependentScore(dependentScore);
         System.out.println("Final Dependent score: " + dependentScore);
 
-        // Retrieve resources for each category based on scores
-        List<Resource> foodResources =
-                resourceService.getAllFoodResourcesWithDegreeLessEqual(foodScore);
+        // Retrieve resources for each category based on scores;
+        List<Resource> foodResources = Utils.getSurveyResources(1, foodScore);
+        List<Resource> housingResources = Utils.getSurveyResources(2, housingScore);
+        List<Resource> dependentResources = Utils.getSurveyResources(3, dependentScore);
 
-        System.out.println(" ");
-        System.out.println("-------------------------------------------------");
-        System.out.println("Food Resources Returned");
-        for(Resource r : foodResources) {
-            System.out.println(r.getName());
-        }
-
-        List<Resource> housingResources =
-                resourceService.getAllHousingResourcesWithDegreeLessEqual(housingScore);
-
-        System.out.println(" ");
-        System.out.println("-------------------------------------------------");
-        System.out.println("Housing Resources Returned");
-        for(Resource r : housingResources) {
-            System.out.println(r.getName());
-        }
-
-        List<Resource> dependentResources =
-                resourceService.getAllDependentResourcesWithDegreeLessEqual(dependentScore);
-
-        System.out.println(" ");
-        System.out.println("-------------------------------------------------");
-        System.out.println("Dependent Resources Returned");
-        for(Resource r : dependentResources) {
-            System.out.println(r.getName());
-        }
-
+        // Compile all do list
         List<Resource> allResources = new ArrayList<>();
         allResources.addAll(foodResources);
         allResources.addAll(housingResources);
