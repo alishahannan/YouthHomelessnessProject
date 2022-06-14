@@ -225,7 +225,7 @@
                                                                        placeholder="Option 1"
                                                                        required>
                                                                 <br>
-                                                                <input type="number" step="0.1" min="0.0"
+                                                                <input type="number" step="1" min="-5.0" max="5.0"
                                                                        class="form-control"
                                                                        th:field="*{option1Value}"
                                                                        placeholder="Option 1 Value"
@@ -236,7 +236,7 @@
                                                                        th:field="*{option2}"
                                                                        placeholder="Option 2">
                                                                 <br>
-                                                                <input type="number" step="0.1" min="0.0"
+                                                                <input type="number" step="1" min="-5.0" max="5.0"
                                                                        class="form-control"
                                                                        th:field="*{option2Value}"
                                                                        placeholder="Option 2 Value">
@@ -246,7 +246,7 @@
                                                                        th:field="*{option3}"
                                                                        placeholder="Option 3">
                                                                 <br>
-                                                                <input type="number" step="0.1" min="0.0"
+                                                                <input type="number" step="1" min="-5.0" max="5.0"
                                                                        class="form-control"
                                                                        th:field="*{option3Value}"
                                                                        placeholder="Option 3 Value">
@@ -256,7 +256,7 @@
                                                                        th:field="*{option4}"
                                                                        placeholder="Option 4">
                                                                 <br>
-                                                                <input type="number" step="0.1" min="0.0"
+                                                                <input type="number" step="1" min="-5.0" max="5.0"
                                                                        class="form-control"
                                                                        th:field="*{option4Value}"
                                                                        placeholder="Option 4 Value">
@@ -266,7 +266,7 @@
                                                                        th:field="*{option5}"
                                                                        placeholder="Option 5">
                                                                 <br>
-                                                                <input type="number" step="0.1" min="0.0"
+                                                                <input type="number" step="1" min="-5.0" max="5.0"
                                                                        class="form-control"
                                                                        th:field="*{option5Value}"
                                                                        placeholder="Option 5 Value">
@@ -282,7 +282,6 @@
                                                                             <input type="checkbox"
                                                                                    name="resourceCheckbox"
                                                                                    style="margin-right: 4px;"
-                                                                                   th:text="Food"
                                                                                    th:value="${foodResource}"
                                                                                    th:field="*{foodResource}"> Food
                                                                         </label>
@@ -319,7 +318,15 @@
                                                                         }
                                                                     </script>
 
+                                                                    <!-- Question Weight Multiplier Option -->
+<!--                                                                    <div class="row">-->
+<!--                                                                        <label for="resourceTagCheckboxSelect1" style="font-weight: bold;">Question Weight</label>-->
+<!--                                                                    </div>-->
+<!--                                                                    <select th:field="*{option3Value}">-->
+<!--                                                                        <option th:each="i : ${#numbers.sequence(-2, 2)}" th:value="${i}" th:text="${i}">-->
 
+<!--                                                                        </option>-->
+<!--                                                                    </select>-->
                                                                 </div>
 
                                                                 <button type="submit" class="btn btn-primary" style="margin-top: 4px;">Add this Question</button>
@@ -331,9 +338,6 @@
                                                     </div>
 
                                                 </div>
-
-                                                <!-- WHERE BUTTON WAS BEFORE MESSING AROUND !!! -->
-
 
                                             </form>
 
