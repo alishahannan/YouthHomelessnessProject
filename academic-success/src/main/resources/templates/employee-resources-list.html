@@ -210,7 +210,7 @@
                                     <th>Food</th>
                                     <th>Housing</th>
                                     <th>Dependent</th>
-                                    <th>Details</th>
+                                    <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -227,18 +227,23 @@
                                     <td th:text="${resource.housingResource}"></td>
                                     <td th:text="${resource.dependentResource}"></td>
                                     <td>
-                                        <!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceF.id})}"-->
-                                        <!--                                           class="btn btn-primary" >Update</a>-->
                                         <a th:href="@{/employee/resource/{id}(id=${resource.id})}"
-                                           class="btn btn-info"
-                                        >Details</a>
+                                           class="btn btn-primary">Details</a>
+
+                                        <a th:href="@{/employee/resource/delete/{id}(id=${resource.id})}"
+                                           class="btn btn-danger">Delete</a>
                                     </td>
 
                                 </tr>
+
                                 </tbody>
+
                             </table>
+
                         </div>
+
                     </div>
+
                 </div>
 
             </div>
