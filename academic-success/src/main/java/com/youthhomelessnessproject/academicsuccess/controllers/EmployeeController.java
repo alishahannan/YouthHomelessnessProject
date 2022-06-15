@@ -169,8 +169,8 @@ public class EmployeeController {
     @GetMapping("/employee/edit/{id}")
     public String showEmployeeEditPage(@PathVariable Long id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);
-        model.addAttribute("survey-admin", employee);
-        return "admin-survey-admin-edit";
+        model.addAttribute("employee", employee);
+        return "admin-employee-edit";
     }
 
     @PostMapping("/employee/edit/{id}")
