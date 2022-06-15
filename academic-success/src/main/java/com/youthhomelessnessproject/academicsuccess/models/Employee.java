@@ -39,5 +39,6 @@ public class Employee {
 
     @Column(name = "user_role")
     private String role = "teacher";
+    // TODO change this to employee...
 
 }

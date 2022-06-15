@@ -148,7 +148,8 @@
                                       th:text="${employee.firstName}"
                                 ></span>
                             <img class="img-profile rounded-circle"
-                                 src="/static/js/img/undraw_profile.svg">
+                                 src="/img/undraw_profile.svg">
+<!--                                 src="/static/js/img/undraw_profile.svg">-->
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -173,7 +174,7 @@
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4" style="padding: 80px 200px;">
-                    <h1 class="h4 text-gray-900 mb-4">Add / Update Resource</h1>
+                    <h1 class="h4 text-gray-900 mb-4">Add Resource</h1>
 
 
                     <form th:action="@{/employee/resource/add}" th:object="${resourcesDto}" method="POST">

@@ -39,7 +39,6 @@ public class ResourceController {
         Resource resource = resourceService.findResourceById(id);
         mav.addObject("student", ContextController.getStudent());
         mav.addObject("resource", resource);
-
         return mav;
     }
 
@@ -107,9 +106,5 @@ public class ResourceController {
 
         return mav;
     }
-
-
-
-
 
 }
