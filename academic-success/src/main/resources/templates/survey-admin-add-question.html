@@ -140,7 +140,7 @@
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow" th:object="${admin}">
+                    <li class="nav-item dropdown no-arrow" th:object="${surveyAdmin}">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"
@@ -176,7 +176,6 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Add a New Question</h1>
-
                 </div>
 
                 <!-- Content Col -->
@@ -273,6 +272,7 @@
                                                                 <br>
 
 
+                                                                <!-- Column for Resource Categories -->
                                                                 <div class="col">
                                                                     <div class="row">
                                                                         <label for="resourceTagCheckboxSelect1" style="font-weight: bold;">Resource Category</label>
@@ -328,6 +328,7 @@
 <!--                                                                        </option>-->
 <!--                                                                    </select>-->
                                                                 </div>
+                                                                <!-- End of Column for Resource Categories -->
 
                                                                 <button type="submit" class="btn btn-primary" style="margin-top: 4px;">Add this Question</button>
 

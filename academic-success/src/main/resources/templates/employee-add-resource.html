@@ -107,7 +107,6 @@
                     <i class="fa fa-bars"></i>
                 </button>
 
-
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
 
@@ -140,7 +139,7 @@
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow" th:object="${admin}">
+                    <li class="nav-item dropdown no-arrow" th:object="${employee}">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"
@@ -149,7 +148,7 @@
                                 ></span>
                             <img class="img-profile rounded-circle"
                                  src="/img/undraw_profile.svg">
-<!--                                 src="/static/js/img/undraw_profile.svg">-->
+                            <!--                                 src="/static/js/img/undraw_profile.svg">-->
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -171,154 +170,223 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4" style="padding: 80px 200px;">
-                    <h1 class="h4 text-gray-900 mb-4">Add Resource</h1>
-
-
-                    <form th:action="@{/employee/resource/add}" th:object="${resourcesDto}" method="POST">
-                        <div class="col">
-                            <div class="row">
-                                <div class="col">
-                                    <label for="nameTextInput1">Name</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           th:field="*{name}"
-                                           id="nameTextInput1"
-                                           placeholder="Name"
-                                           required>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="descriptionTextInput1">Description</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           th:field="*{description}"
-                                           id="descriptionTextInput1"
-                                           placeholder="Description (services offered, hours, etc.)"
-                                           required>
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <div class="col">
-                                    <label>Address</label>
-                                    <input type="text"
-                                           class="form-control"
-                                           th:field="*{address.street}"
-                                           placeholder="Street"
-                                           required>
-                                    <br>
-                                    <input type="text"
-                                           class="form-control"
-                                           th:field="*{address.city}"
-                                           placeholder="City"
-                                           required>
-                                    <br>
-                                    <input type="text"
-                                           class="form-control"
-                                           th:field="*{address.state}"
-                                           placeholder="State"
-                                           required>
-                                    <br>
-                                    <input type="text"
-                                           class="form-control"
-                                           th:field="*{address.zip}"
-                                           placeholder="Zip"
-                                           required>
-                                    <br>
-                                    <div class="input-group">
-                                        <input type="tel"
-                                               class="form-control"
-                                               id="phone"
-                                               pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                               autocomplete="off"
-                                               th:field="*{address.phone}"
-                                               placeholder="Phone - Format: 123-456-7890"/>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                                        </div>
-                                    </div>
-                                    <br>
-                                    <div class="input-group">
-                                        <input type="url"
-                                               class="form-control"
-                                               id="website"
-                                               pattern="https://www.*"
-                                               autocomplete="off"
-                                               th:field="*{address.website}"
-                                               placeholder="Website - Format: https://www.example.com"/>
-                                        <div class="input-group-append">
-                                            <span class="input-group-text"><i class="fas fa-globe"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-
-                            <div >
-
-
-
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <label for="degreeNumberInput1">
-                                        Degree (0 - 5.0 = low, 5.0 > 10.0 = medium, ^15 = high
-                                    </label>
-                                    <input type="number" step="0.1" min="0.0"
-                                           class="form-control"
-                                           th:field="*{degree}"
-                                            id="degreeNumberInput1">
-                                </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                                <label for="resourceTagCheckboxSelect1">Resource Category</label>
-                            </div>
-                            <div class="row" id="resourceTagCheckboxSelect1">
-                                <input type="checkbox"
-                                       name="resourceCheckbox"
-                                       th:text="Food"
-                                       th:value="${foodResource}"
-                                       th:field="*{foodResource}">
-                            </div>
-                            <div class="row">
-                                <input type="checkbox"
-                                       name="resourceCheckbox"
-                                       th:text="Housing"
-                                       th:value="${housingResource}"
-                                       th:field="*{housingResource}">
-                            </div>
-                            <div class="row">
-                                <input type="checkbox"
-                                       name="resourceCheckbox"
-                                       th:text="Dependent"
-                                       th:value="${dependentResource}"
-                                       th:field="*{dependentResource}">
-                            </div>
-<!--                            <input type="hidden" th:field="*{id}"/>-->
-                            <script>
-                                function checkResourceCategorySelected() {
-                                    if(!$('input[name=resourceCheckbox]:checked').length > 0) {
-                                        document.getElementById("errMessage").innerHTML = "At least one resource category must be selected";
-                                        return false;
-                                    }
-                                    alert("Success");
-                                    return true;
-                                }
-                            </script>
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary">Save Resource</button>
-                    </form>
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Add a New Question</h1>
                 </div>
 
+                <!-- Content Col 1 -->
+                <div class="col">
+
+                    <!-- Content Row 1 -->
+                    <div class="row">
+
+                        <!-- Content Col 2 -->
+                        <div class="col">
+
+                            <!-- Card border-left -->
+                            <div class="card border-left-primary shadow h100 py-1">
+
+                                <!-- card-body -->
+                                <div class="card-body">
+
+                                    <!-- row no-gutters-->
+                                    <div class="row no-gutters align-items-center">
+
+                                        <!-- Col -->
+                                        <div class="col">
+
+                                            <form th:action="@{/employee/resource/add}" th:object="${resourcesDto}"
+                                                  method="POST">
+                                                <div class="form-group">
+                                                    <div class="col">
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <label for="nameTextInput1" style="font-weight: bold;">Name</label>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{name}"
+                                                                       id="nameTextInput1"
+                                                                       placeholder="Name"
+                                                                       required>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <label for="descriptionTextInput1"
+                                                                       style="font-weight: bold;">Description</label>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{description}"
+                                                                       id="descriptionTextInput1"
+                                                                       placeholder="Description (services offered, hours, etc.)"
+                                                                       required>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <label style="font-weight: bold;">Address</label>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{address.street}"
+                                                                       placeholder="Street"
+                                                                       required>
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{address.city}"
+                                                                       placeholder="City"
+                                                                       required>
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{address.state}"
+                                                                       placeholder="State"
+                                                                       required>
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{address.zip}"
+                                                                       placeholder="Zip"
+                                                                       required>
+                                                                <br>
+                                                                <div class="input-group">
+                                                                    <input type="tel"
+                                                                           class="form-control"
+                                                                           id="phone"
+                                                                           pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                                                           autocomplete="off"
+                                                                           th:field="*{address.phone}"
+                                                                           placeholder="Phone - Format: 123-456-7890"/>
+                                                                    <div class="input-group-append">
+                                                                <span class="input-group-text"><i
+                                                                        class="fas fa-phone"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                                <br>
+                                                                <div class="input-group">
+                                                                    <input type="url"
+                                                                           class="form-control"
+                                                                           id="website"
+                                                                           pattern="https://www.*"
+                                                                           autocomplete="off"
+                                                                           th:field="*{address.website}"
+                                                                           placeholder="Website - Format: https://www.example.com"/>
+                                                                    <div class="input-group-append">
+                                                                <span class="input-group-text"><i
+                                                                        class="fas fa-globe"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <br>
+
+                                                        <div>
+
+
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col">
+                                                                <label for="degreeNumberInput1">
+                                                                    Degree (0 - 5.0 = low, 5.0 > 10.0 = medium, ^15 =
+                                                                    high
+                                                                </label>
+                                                                <input type="number" step="0.1" min="0.0"
+                                                                       class="form-control"
+                                                                       th:field="*{degree}"
+                                                                       id="degreeNumberInput1">
+                                                            </div>
+                                                        </div>
+                                                        <br>
+                                                        <!-- Column for Resource Categories -->
+                                                        <div class="col">
+
+                                                            <div class="row">
+                                                                <label for="resourceTagCheckboxSelect1"
+                                                                       style="font-weight: bold;">Resource
+                                                                    Category</label>
+                                                            </div>
+                                                            <div class="row" id="resourceTagCheckboxSelect1">
+                                                                <label style="align-items: center; display: flex; padding: 4px;">
+                                                                    <input type="checkbox"
+                                                                           name="resourceCheckbox"
+                                                                           style="margin-right: 4px;"
+                                                                           th:text="Food"
+                                                                           th:value="${foodResource}"
+                                                                           th:field="*{foodResource}">
+                                                                </label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <label style="align-items: center; display: flex; padding: 4px;">
+                                                                    <input type="checkbox"
+                                                                           name="resourceCheckbox"
+                                                                           style="margin-right: 4px;"
+                                                                           th:text="Housing"
+                                                                           th:value="${housingResource}"
+                                                                           th:field="*{housingResource}">
+                                                                </label>
+                                                            </div>
+                                                            <div class="row">
+                                                                <label style="align-items: center; display: flex; padding: 4px;">
+                                                                    <input type="checkbox"
+                                                                           name="resourceCheckbox"
+                                                                           style="margin-right: 4px;"
+                                                                           th:text="Dependent"
+                                                                           th:value="${dependentResource}"
+                                                                           th:field="*{dependentResource}">
+                                                                </label>
+                                                            </div>
+
+                                                            <script>
+                                                                function checkResourceCategorySelected() {
+                                                                    if (!$('input[name=resourceCheckbox]:checked').length > 0) {
+                                                                        document.getElementById("errMessage").innerHTML = "At least one resource category must be selected";
+                                                                        return false;
+                                                                    }
+                                                                    alert("Success");
+                                                                    return true;
+                                                                }
+                                                            </script>
+
+                                                        </div>
+                                                        <!-- End of Column for Resource Categories -->
+                                                        <!--                            <input type="hidden" th:field="*{id}"/>-->
+
+                                                    </div>
+
+                                                </div>
+
+                                                <br>
+
+                                                <button type="submit" class="btn btn-primary">Save Resource</button>
+
+                                            </form>
+
+                                        </div>
+                                        <!-- End of Col -->
+
+                                    </div>
+                                    <!-- end of row no-gutters -->
+
+                                </div>
+                                <!-- End of card-body -->
+
+                            </div>
+                            <!-- End of card border-left-primary -->
+
+                        </div>
+                        <!-- End of Content Col 2 -->
+
+                    </div>
+                    <!-- End of Content Row 1 -->
+
+                </div>
+                <!-- End of Content Col 1 -->
+
             </div>
-            <!-- /.container-fluid -->
+            <!-- End of container-fluid -->
 
         </div>
         <!-- End of Main Content -->
