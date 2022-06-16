@@ -193,15 +193,24 @@
                                     <!-- row no-gutters-->
                                     <div class="row no-gutters align-items-center">
 
-                                        <!-- Col -->
+                                        <!-- Col containing -->
                                         <div class="col">
 
                                             <form th:action="@{/employee/resource/add}" th:object="${resourcesDto}"
                                                   method="POST">
+
+                                                <!-- form-group -->
                                                 <div class="form-group">
+
+                                                    <!-- Col inside form-group -->
                                                     <div class="col">
+
+                                                        <!-- Row inside form-group -->
                                                         <div class="row">
+
+                                                            <!-- Col 2 inside form-group -->
                                                             <div class="col">
+
                                                                 <label for="nameTextInput1" style="font-weight: bold;">Name</label>
                                                                 <input type="text"
                                                                        class="form-control"
@@ -210,8 +219,11 @@
                                                                        placeholder="Name"
                                                                        required>
                                                             </div>
+                                                            <!-- End of Col 2 inside form-group -->
                                                         </div>
+                                                        <!-- End of Row inside form-group -->
                                                         <br>
+
                                                         <div class="row">
                                                             <div class="col">
                                                                 <label for="descriptionTextInput1"
@@ -278,9 +290,13 @@
                                                                 <span class="input-group-text"><i
                                                                         class="fas fa-globe"></i></span>
                                                                     </div>
+
                                                                 </div>
+
                                                             </div>
+
                                                         </div>
+
                                                         <br>
 
                                                         <div>
@@ -354,18 +370,18 @@
                                                         <!-- End of Column for Resource Categories -->
                                                         <!--                            <input type="hidden" th:field="*{id}"/>-->
 
+                                                        <button type="submit" class="btn btn-primary">Save Resource</button>
+
                                                     </div>
+                                                    <!-- End of Col inside form-group -->
 
                                                 </div>
-
-                                                <br>
-
-                                                <button type="submit" class="btn btn-primary">Save Resource</button>
+                                                <!-- End of form-group -->
 
                                             </form>
 
                                         </div>
-                                        <!-- End of Col -->
+                                        <!-- End of Col containing -->
 
                                     </div>
                                     <!-- end of row no-gutters -->

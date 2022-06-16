@@ -196,15 +196,18 @@
                                     <!-- row no-gutters -->
                                     <div class="row no-gutters align-items-center">
 
-                                        <!-- col mr-2 -->
-<!--                                        <div class="col mr-2">-->
+                                        <!-- Col containing -->
                                         <div class="col">
 
                                             <form th:action="@{/survey-admin/question/add}" th:object="${questionsDto}"
                                                   method="POST">
+
                                                 <div class="form-group">
+
                                                     <div class="col">
+
                                                         <div class="row">
+
                                                             <div class="col">
                                                                 <label style="font-weight: bold">Question</label>
 
@@ -330,7 +333,7 @@
                                                                 </div>
                                                                 <!-- End of Column for Resource Categories -->
 
-                                                                <button type="submit" class="btn btn-primary" style="margin-top: 4px;">Add this Question</button>
+                                                                <button type="submit" class="btn btn-primary">Add this Question</button>
 
                                                             </div>
 
@@ -341,7 +344,6 @@
                                                 </div>
 
                                             </form>
-
 
                                         </div>
                                         <!-- End col mr-2 -->
