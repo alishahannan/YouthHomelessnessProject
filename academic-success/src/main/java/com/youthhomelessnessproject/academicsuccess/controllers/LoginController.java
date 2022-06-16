@@ -1,5 +1,6 @@
 package com.youthhomelessnessproject.academicsuccess.controllers;
 
+import com.youthhomelessnessproject.academicsuccess.dto.ForgotPasswordDTO;
 import com.youthhomelessnessproject.academicsuccess.models.Admin;
 import com.youthhomelessnessproject.academicsuccess.models.Employee;
 import com.youthhomelessnessproject.academicsuccess.models.Student;
@@ -9,9 +10,11 @@ import com.youthhomelessnessproject.academicsuccess.repositories.EmployeeReposit
 import com.youthhomelessnessproject.academicsuccess.repositories.StudentRepository;
 import com.youthhomelessnessproject.academicsuccess.repositories.SurveyAdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/login")
@@ -114,5 +117,23 @@ public class LoginController {
 
     }
 
+    @GetMapping("/reset")
+    public String showForgotPasswordForm(Model model) {
+        ForgotPasswordDTO forgotPasswordDto = new ForgotPasswordDTO();
+        model.addAttribute("forgotPasswordDto", forgotPasswordDto);
+        return "forgot-password";
+    }
+
+    @PostMapping("/reset")
+    public String resetStudentPassword(@ModelAttribute ForgotPasswordDTO forgotPasswordDto) {
+        if(!forgotPasswordDto.getNewPassword().equals(forgotPasswordDto.getNewConfirmPassword())) {
+            return "redirect:/reset?mismatch";
+        }
+        Student student = studentRepository.findStudentByUsername(forgotPasswordDto.getUsername());
+        if(student == null) return "redirect:/reset?errorusername";
+        student.setPassword(forgotPasswordDto.getNewPassword());
+        studentRepository.save(student);
+        return "redirect:/login/student";
+    }
 
 }
