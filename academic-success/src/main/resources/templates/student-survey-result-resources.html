@@ -37,10 +37,13 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
 
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fa-solid fa-pen-clip"></i>
+            </div>
 
             <div class="sidebar-brand-text mx-3">V Quiz App</div>
         </a>
-        <br>
+<!--        <br>-->
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
@@ -70,14 +73,14 @@
                th:href="@{/student/survey-results}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>View My Resources</span></a>
+                <span>My Survey Results</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                th:href="@{/resources}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>List All Resources</span></a>
+                <span>Resources List</span></a>
         </li>
 
 
@@ -88,9 +91,6 @@
                 Logout
             </a>
         </li>
-
-
-
 
 
         <!-- Divider -->

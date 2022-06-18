@@ -35,7 +35,7 @@ public class ResourceController {
     // STUDENT RESOURCE METHODS
     @GetMapping("/resource/{id}")
     public ModelAndView showResourceDetails(@PathVariable Long id) {
-        ModelAndView mav = new ModelAndView("/student-resource-details");
+        ModelAndView mav = new ModelAndView("student-resource-details");
         Resource resource = resourceService.findResourceById(id);
         mav.addObject("student", ContextController.getStudent());
         mav.addObject("resource", resource);

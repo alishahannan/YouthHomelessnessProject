@@ -19,13 +19,12 @@ import java.util.List;
 @Controller
 public class EmployeeController {
 
-    // TODO figure out if ResourceTagRepo is necessary because
-    //  we want to use the same handful of tags for every resource & question
-
+    @Autowired
     private EmployeeService employeeService;
 
     @Autowired
     private SessionService sessionService;
+    // Will need sessionService for building reports
 
     @Autowired
     private ResourceService resourceService;
@@ -36,13 +35,11 @@ public class EmployeeController {
     @Autowired
     private AddressService addressService;
 
-//    @Autowired
-//    private ResourceTagRepository resourceTagRepository;
-
-    public EmployeeController(EmployeeService employeeService) {
-        super();
-        this.employeeService = employeeService;
-    }
+    // TODO why does employeeService not work when Autowired?
+//    public EmployeeController(EmployeeService employeeService) {
+//        super();
+//        this.employeeService = employeeService;
+//    }
 
     @GetMapping("/employee/dashboard")
     public String showEmployeeDashboard(Model model) {
@@ -81,7 +78,7 @@ public class EmployeeController {
         resource.getAddress().setResource(resource);
 
         resourceService.saveResource(resource);
-        // TODO verify that following line did not break method!!
+
         addressRepository.save(resource.getAddress());
 
         return "redirect:/employee/resources/list";
@@ -114,8 +111,6 @@ public class EmployeeController {
         mav.addObject("resource", existingResource);
 
         return mav;
-//        model.addAttribute("resourcesDto", resourcesDto);
-//        return "employee-resources-edit";
     }
 
     @PostMapping("/employee/resource/update/{id}")
