@@ -35,7 +35,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fa-solid fa-pen-clip"></i>
             </div>
@@ -46,14 +46,11 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" th:href="@{/employee/dashboard}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
 
 
         <!-- Divider -->
@@ -70,7 +67,7 @@
             <a class="nav-link"
                th:href="@{/employee/resource}"
             >
-                <i class="fas fa-fw fa-chart-area"></i>
+                <i class="fas fa-fw fa-plus"></i>
                 <span>Add Resources</span></a>
         </li>
         <!-- Nav Item - List Resources -->
@@ -145,23 +142,20 @@
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
-
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                           style="margin-right: 50px;">
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<!--                           style="margin-right: 36px;">-->
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"
                                       th:text="${employee.firstName}">
-
-
                                 </span>
-                            <img class="/img-profile rounded-circle"
+                            <img class="img-profile rounded-circle"
                                  src="/img/undraw_profile.svg">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/" data-toggle="modal" data-target="#logoutModal">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
                             </a>
@@ -222,7 +216,7 @@
                                                 ,</h6>
                                         </div>
                                         <div class="col-auto">
-                                            <i class="fas fa-book fa-2x text-gray-300"></i>
+                                            <i class="fas fa-address-card fa-2x text-gray-300"></i>
                                         </div>
 
                                     </div>

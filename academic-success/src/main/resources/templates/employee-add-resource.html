@@ -33,10 +33,12 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fa-solid fa-pen-clip"></i>
+            </div>
             <div class="sidebar-brand-text mx-3">V Quiz App<sup></sup></div>
         </a>
-        <br>
+<!--        <br>-->
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
@@ -46,7 +48,6 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
-
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -58,11 +59,11 @@
         </div>
 
 
-        <li class="nav-item">
+        <li class="nav-item active">
             <a class="nav-link"
                th:href="@{/employee/resource}"
             >
-                <i class="fas fa-fw fa-chart-area"></i>
+                <i class="fas fa-fw fa-plus"></i>
                 <span>Add Resources</span></a>
         </li>
         <li class="nav-item">
@@ -76,7 +77,7 @@
 
         <!-- Nav Item - logout -->
         <li class="nav-item">
-            <a class="nav-link" href="/" data-toggle="modal" data-target="">
+            <a class="nav-link" href="/" data-toggle="modal" data-target="logoutModal">
                 <i class="fas fa-sign-out-alt "></i>
                 Logout
             </a>
@@ -135,7 +136,6 @@
                     </li>
 
                     <!-- Nav Item - Alerts -->
-
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
@@ -172,7 +172,7 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Add a New Question</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Add a New Resource</h1>
                 </div>
 
                 <!-- Content Col 1 -->
