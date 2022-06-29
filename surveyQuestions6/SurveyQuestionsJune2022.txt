@@ -1,0 +1,311 @@
+Youth Homelessness Project 
+
+Questions for survey Design
+
+USDA FOOD SECURITY SCALE
+
+The food that I bought just didn’t last and I
+didn’t have money to get more (in the last
+30 days).
+Often
+Sometimes
+Never
+
+I couldn’t afford to eat balanced meals (in
+the last 30 days).
+Often 
+Sometimes
+Never
+
+In the last 30 days, did you ever cut the size
+of your meals or skip meals because there
+wasn’t enough money for food?
+Yes
+No
+
+How many days did this happen? (Skipped
+or cut size of meals due to money)*
+Fewer than 3 times per week
+Three or more days
+
+In the last 30 days, did you ever eat less
+than you felt you should because there 
+Wasn’t enough money for food?
+Yes 
+No
+
+n the last 30 days, were you ever hungry
+but didn’t eat because there wasn’t
+enough food?
+Yes
+No
+
+Housing Security Scale (past 12 months)
+
+
+I had difficulty paying for my rent (past 12
+months).
+True
+False
+I don't know
+
+I didn’t pay the full amount of my rent
+(past 12 months).
+True
+False
+I don't’ know
+
+I had difficulty paying the full amount of a
+gas, oil, or electricity bill (past 12 months).
+True
+False
+I don't know
+
+I moved 2 or more times (past 12 months).
+True
+False
+I don't know
+
+I lived with others beyond the expected
+capacity of my house or apartment (past
+12 months).
+True
+False
+I don’t know
+
+I moved in with other people due to
+financial problems (past 12 months).
+True 
+False
+I don’t know
+
+Homelessness scale 
+
+Since starting college, have you ever been
+Homeless?
+Yes
+No
+I don’t Know
+
+I was thrown out of my home (in past 12
+months).
+True 
+False
+I don’t know
+
+I was evicted from my home (in past 12
+months).
+True 
+False
+I don’t know
+
+I stayed in a shelter (in past 12 months).
+True 
+False
+I don’t know
+
+I stayed in an abandoned building (in past
+12 months).
+True 
+False
+I don’t know
+
+I didn’t know where I would sleep at night
+(in past 12 months)
+True 
+False
+I don’t know
+
+I didn’t have a home (in past 12 months)
+True 
+False
+I don’t know
+
+I temporarily stayed with a relative, friend,
+or couch surfed while I looked for housing
+(in past 12 months).
+True 
+False
+I don’t know
+
+I slept in an outdoor location such as a
+street, sidewalk, or alley, bus or train stop
+(in past 12 months).
+True 
+False
+I don’t know
+
+I slept in a closed area/space not meant for
+human habitation such as a car or truck,
+van, RV, or camper, encampment or tent,
+or unconverted garage, attic, or basement
+(in past 12 months).
+True 
+False
+I don’t know
+
+Imagine that the interest rate on your
+savings account is 1% per year and inflation
+is 2% per year. After 1 year, would you be
+able to buy more than today, exactly the
+same as today, or less than today with the
+money in this account?
+More than today
+Exactly the same as today
+Less than today
+I don’t know
+
+Suppose you have $100 in a savings
+account and the interest rate was 2% per
+year. After 5 years, how much would you
+have in the account if you left the money
+to grow?
+More than $102
+Exactly $102
+Less than $102
+I don’t know
+
+Suppose you borrowed $5,000 to help
+cover college expenses for the coming
+year. You can choose to repay this loan
+over 10 years, 20 years, or 30 years. Which
+of these repayments options will cost you
+the least amount of money over the length
+of the repayment period?
+10-year
+20-year
+30-year
+I don’t know
+
+Public assistance use
+
+Food Assistance - In the past 12 months,
+have you used public assistance in the
+following areas?
+Yes
+No
+I don't know
+
+Unemployment Assistance - In the past 12
+months, have you used public assistance in
+the following areas?
+Yes
+No
+I don't know
+
+Housing Assistance - In the past 12 months,
+have you used public assistance in the
+following areas?
+Yes
+No
+I don't know
+
+Utility Assistance - In the past 12 months,
+have you used public assistance in the
+following areas?
+Yes
+No
+I don't know
+
+Medical Assistance - In the past 12 months,
+have you used public assistance in the
+following areas?
+Yes
+No
+I don't know
+
+Child Care Assistance - In the past 12
+months, have you used public assistance in
+the following areas?
+Yes
+No
+I don't know
+
+In the past 12 months, how many times did
+you borrow money from your family
+and/or friends
+Never
+One time
+Two times
+Three times
+Four times
+Five or more times
+
+I worry about being able to pay my current
+monthly expenses
+Strongly agree
+Agree
+Neutral
+Disagree
+Strongly disagree
+
+In the past 12 months, how many times did
+you borrow a pay day loan?*
+Never
+One time
+Two times
+Three times
+Four times
+Five or more times
+
+Desktop Computer - Do you use any of the
+following devices for college coursework?
+All of the time
+Some of the time
+Not at all
+I don't know 
+
+Laptop Computer - Do you use any of the
+following devices for college coursework?
+All of the time
+Some of the time
+Not at all
+I don't know 
+
+Are you a citizen of the United States of
+America?
+Yes
+No
+
+At any time since you turned 13, were you
+in foster care or were you a dependent of
+the court?
+Yes
+No
+I don't know
+
+Did you indicate on the FAFSA (Free
+Application for Federal Student Aid) that
+you were previously in foster care or a
+ward of the state?*
+Yes
+No
+I don't know
+
+Did you receive increased funding/support
+as a result of identifying yourself as a
+former foster youth on the FAFSA?*
+Yes
+No
+I don't know
+
+During the school year, about how many
+hours do you spend in a typical 7-day week
+working for pay?
+Less than 20 hours
+30-39 hours
+40 or more hours
+
+Are you a dependent or independent
+Student?
+Dependant
+Independant
+I don't know
+
+About how many hours do you spend in a
+typical 7-day week providing care
+ for
+dependents (children, parents, etc)?*
+Less than 20 hours
+21-39 hours
+40 or more hours
