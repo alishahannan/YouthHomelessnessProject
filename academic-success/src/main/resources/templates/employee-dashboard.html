@@ -39,7 +39,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fa-solid fa-pen-clip"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">V Quiz App</div>
+            <div class="sidebar-brand-text mx-3">Student Success</div>
         </a>
 <!--        <br>-->
         <!-- Divider -->
@@ -53,31 +53,49 @@
                 <span>Dashboard</span></a>
         </li>
 
-
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-
         <!-- Heading -->
         <div class="sidebar-heading">
-            Employee Actions
+            Resource Actions
         </div>
-
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/employee/resource}"
+               th:href="@{/employee/resources/new}"
             >
                 <i class="fas fa-fw fa-plus"></i>
-                <span>Add Resources</span></a>
+                <span>Add New Resources</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/employee/resources/list}"
+               th:href="@{/employee/resources}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Resources List</span></a>
+                <span>List All Resources</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Survey Actions
+        </div>
+
+        <li class="nav-item">
+            <a class="nav-link"
+               href="/employee/questions/new"
+            >
+                <i class="fas fa-fw fa-plus"></i>
+                <span>Add New Questions</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/employee/questions">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>List All Questions</span></a>
         </li>
 
         <!-- Nav Item - logout -->
