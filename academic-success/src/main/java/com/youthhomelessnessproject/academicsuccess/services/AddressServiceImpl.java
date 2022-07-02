@@ -28,11 +28,6 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address updateAddress(Address address) {
-        return addressRepository.save(address);
-    }
-
-    @Override
     public void deleteAddressById(Long id) {
         addressRepository.deleteAddressById(id);
     }
