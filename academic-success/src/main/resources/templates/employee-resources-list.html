@@ -36,11 +36,12 @@
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-
-
-            <div class="sidebar-brand-text mx-3">V Quiz App</div>
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fa-solid fa-pen-clip"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">Student Success</div>
         </a>
-        <br>
+<!--        <br>-->
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
@@ -52,31 +53,49 @@
                 <span>Dashboard</span></a>
         </li>
 
-
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-
         <!-- Heading -->
         <div class="sidebar-heading">
-            Employee Actions
+            Resource Actions
         </div>
-
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/employee/resource}"
+               th:href="@{/employee/resources/new}"
+            >
+                <i class="fas fa-fw fa-plus"></i>
+                <span>Add New Resources</span></a>
+        </li>
+        <li class="nav-item active">
+            <a class="nav-link"
+               th:href="@{/employee/resources}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Add Resources</span></a>
+                <span>List All Resources</span></a>
         </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Survey Actions
+        </div>
+
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/employee/resources/list}"
+               href="/employee/questions/new"
             >
+                <i class="fas fa-fw fa-plus"></i>
+                <span>Add New Questions</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/employee/questions">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Resources List</span></a>
+                <span>List All Questions</span></a>
         </li>
 
         <!-- Nav Item - logout -->
@@ -86,8 +105,6 @@
                 Logout
             </a>
         </li>
-
-
 
 
 
@@ -145,19 +162,15 @@
                     </li>
 
                     <!-- Nav Item - Alerts -->
-
+                    <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - Messages -->
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-chalkboard-user"></i>
-
-                        </a>
-
-                    </li>
-
-                    <div class="topbar-divider d-none d-sm-block"></div>
+<!--                    <li class="nav-item dropdown no-arrow mx-1">-->
+<!--                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"-->
+<!--                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                            <i class="fas fa-chalkboard-user"></i>-->
+<!--                        </a>-->
+<!--                    </li>-->
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
@@ -167,7 +180,8 @@
                                       th:text="${employee.firstName}"
                                 ></span>
                             <img class="img-profile rounded-circle"
-                                 src="/static/js/img/undraw_profile.svg">
+                                 src="/img/undraw_profile.svg">
+<!--                                 src="/static/js/img/undraw_profile.svg">-->
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -190,14 +204,13 @@
             <div class="container-fluid">
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Employee Dashboard</h1>
-
+                    <h1 class="h3 mb-0 text-gray-800">Resources List</h1>
                 </div>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">All Resources</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Resources</h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -216,21 +229,17 @@
                                 <tbody>
                                 <tr th:each="resource : ${allResources}">
 
-                                    <!--                                    <td th:text="${sess.studentName}"></td>-->
                                     <td th:text="${resource.name}"></td>
-                                    <!--                                    <td th:text="${sess.quiz.subject}"></td>-->
-                                    <!--                                    TODO create column for address details-->
                                     <td th:text="${resource.address.street}"></td>
                                     <td th:text="${resource.description}"></td>
-                                    <!--                                    TODO iterate over all tags in list if this doesn't work-->
                                     <td th:text="${resource.foodResource}"></td>
                                     <td th:text="${resource.housingResource}"></td>
                                     <td th:text="${resource.dependentResource}"></td>
                                     <td>
-                                        <a th:href="@{/employee/resource/{id}(id=${resource.id})}"
+                                        <a th:href="@{/employee/resources/{id}(id=${resource.id})}"
                                            class="btn btn-primary">Details</a>
 
-                                        <a th:href="@{/employee/resource/delete/{id}(id=${resource.id})}"
+                                        <a th:href="@{/employee/resources/{id}/delete(id=${resource.id})}"
                                            class="btn btn-danger">Delete</a>
                                     </td>
 
@@ -301,16 +310,16 @@
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.min.js"></script>
-<!--<script src="/static/js/sb-admin-2.min.js"></script>-->
+<!--<script src="/js/sb-admin-2.min.js"></script>-->
+<script src="/static/js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="/js/demo/datatables-demo.js"></script>
-<!--<script src="/static/js/demo/datatables-demo.js"></script>-->
+<!--<script src="/js/demo/datatables-demo.js"></script>-->
+<script src="/static/js/demo/datatables-demo.js"></script>
 
 </body>
 

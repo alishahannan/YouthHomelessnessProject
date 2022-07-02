@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Quizz App Dashboard</title>
+    <title>Survey</title>
 
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -24,11 +24,11 @@
 </head>
 
 <body id="page-top">
-<script src="/js/timer.js" type="text/javascript"></script>
-<script src="/js/monitor.js" type="text/javascript"></script>
-<script  src="/js/webcam.js" type="text/javascript" defer></script>
+<!--<script src="/js/timer.js" type="text/javascript"></script>-->
+<!--<script src="/js/monitor.js" type="text/javascript"></script>-->
+<!--<script src="/js/webcam.js" type="text/javascript" defer></script>-->
 <style>
-    .sidebar #sidebarToggle{
+    .sidebar #sidebarToggle {
         display: none;
     }
 </style>
@@ -44,44 +44,42 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fa-solid fa-pen-clip"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">V Quiz App </div>
+            <div class="sidebar-brand-text mx-3">Student Success</div>
         </a>
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/student/dashboard}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Test Mode</span></a>
+                <span>Dashboard</span></a>
         </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
 
-        <!-- Divider -->
-        <hr class="sidebar-divider">
+        <!-- Webcam feed-->
+<!--        <div class="sidebar-heading">-->
+<!--            <video id="webcam" style="height:150px; width:200px; border:2px solid" autoplay="true"></video>-->
+<!--        </div>-->
 
-        <div class="sidebar-heading">
-            <video id="webcam" style="height:150px; width:200px; border:2px solid" autoplay="true"></video>
+        <!-- Time Left Heading -->
+<!--        <div class="sidebar-heading">-->
+<!--            Time Left-->
+<!--        </div>-->
 
-        </div>
-        <!-- Heading -->
-        <div class="sidebar-heading">
-            Time Left
-        </div>
-
-        <div class="sidebar-heading">
-            <p id="timerSection" style="font-size: 50px; color:white;"></p>
-        </div>
+<!--        <div class="sidebar-heading">-->
+<!--            <p id="timerSection" style="font-size: 50px; color:white;"></p>-->
+<!--        </div>-->
 
         <!-- Nav Item - Charts -->
 
 
         <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
+<!--        <hr class="sidebar-divider d-none d-md-block">-->
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
@@ -104,11 +102,11 @@
                     <i class="fa fa-bars"></i>
                 </button>
 
+                <!-- You're being monitored -->
+<!--                <span class="mr-2 d-none d-lg-inline text-gray-600 large">You are being monitored</span>-->
+<!--                <p id="blink" style="color: black; font-size: 20px;">III</p>-->
 
-                <span class="mr-2 d-none d-lg-inline text-gray-600 large">You are being monitored</span>
-                <p id="blink" style="color: black; font-size: 20px;">III</p>
-
-                <div class="status-indicator bg-success"></div>
+<!--                <div class="status-indicator bg-success"></div>-->
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -135,6 +133,15 @@
                                 </div>
                             </form>
                         </div>
+                    </li>
+
+
+                    <!-- Nav Item - Messages -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-chalkboard-user"></i>
+                        </a>
                     </li>
 
                     <!-- Nav Item - Alerts -->
@@ -168,11 +175,10 @@
             </nav>
             <!-- End of Topbar -->
 
-            <!-- TODO Remove th:action="@{/survey/science/submit}"-->
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <form th:action="@{/survey/submit}" th:object="${answersDto}" method="POST">
-<!--                    <div th:object="${questions}">-->
+                    <!--                    <div th:object="${questions}">-->
                     <div class="card">
                         <div class="card-body ">
                             <br>
@@ -180,19 +186,19 @@
 
                                 <label> <strong th:text="${question.title}"></strong></label>
 
-                                <ul >
+                                <ul>
                                     <li th:each="option, i : ${question.options}" style="text-decoration:none">
                                         <input th:name="${question.id}"
                                                th:value="${i.index}"
                                                th:id="${'option' + (i.index + 1)}"
                                                type="radio"
                                                th:answer="${i.index}"
-                                               th:field ="*{answers[__${count.index}__]}"
-                                        />
-<!--                                        th:field ="*{answers[__${count.index}__]}" />-->
+                                               th:field="*{answers[__${count.index}__]}"/>
+                                        <!--                                        th:field ="*{answers[__${count.index}__]}" />-->
                                         <label th:text="${option.optionTitle}"
-                                               th:for="${'option' + (i.index + 1)}"
-                                        ></label>
+                                               th:for="${'option' + (i.index + 1)}">
+                                        </label>
+
                                     </li>
 
                                 </ul>
@@ -200,33 +206,36 @@
                             </fieldset>
 
                         </div>
+                        <!-- End of card-body -->
 
                     </div>
+                    <!-- End of card -->
 
                     <br>
-                    <button type="submit" class="btn btn-primary btn-user">Finish Attempt</button>
+
+                    <button type="submit" class="btn btn-primary btn-user">Submit Survey</button>
 
                 </form>
 
             </div>
+            <!-- End of Page Content-->
+
 
         </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Virtusa 2022</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
 
     </div>
-    <!-- End of Main Content -->
-
-    <!-- Footer -->
-    <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-                <span>Copyright &copy; Virtusa 2022</span>
-            </div>
-        </div>
-    </footer>
-    <!-- End of Footer -->
-
-</div>
-<!-- End of Content Wrapper -->
+    <!-- End of Content Wrapper -->
 
 </div>
 <!-- End of Page Wrapper -->

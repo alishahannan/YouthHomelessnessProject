@@ -34,7 +34,7 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
 
-            <div class="sidebar-brand-text mx-3">V Quiz App<sup></sup></div>
+            <div class="sidebar-brand-text mx-3">Student Success<sup></sup></div>
         </a>
         <br>
         <!-- Divider -->
@@ -127,7 +127,6 @@
                     </li>
 
                     <!-- Nav Item - Alerts -->
-
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
@@ -139,8 +138,10 @@
                                       th:text="${admin.firstName}"
                                 ></span>
                             <img class="img-profile rounded-circle"
-                                 src="/static/js/img/undraw_profile.svg">
+                                 src="/img/undraw_profile.svg">
+<!--                                 src="/static/js/img/undraw_profile.svg">-->
                         </a>
+
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
@@ -161,11 +162,10 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-
-                <!-- DataTales Example -->
+                <!-- DataTables Example -->
                 <div class="card shadow mb-4" style="padding: 80px 200px;">
-                    <h1 class="h4 text-gray-900 mb-4">Add a New User</h1>
 
+                    <h1 class="h4 text-gray-900 mb-4">Add a New User</h1>
 
                     <form th:action="@{/register}" th:object="${userDto}" method="POST">
                         <br>
@@ -205,7 +205,6 @@
                             <select id="inputState" class="form-control"
                                     th:field="*{role}">
                                 <option value="employee" selected>Employee</option >
-                                <option value="survey-admin">Survey Admin</option>
                                 <option value="admin">Admin</option>
                             </select>
                         </div>

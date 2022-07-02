@@ -38,6 +38,7 @@ public class Employee {
     private String password;
 
     @Column(name = "user_role")
-    private String role = "teacher";
+    private String role = "employee";
+    // TODO change this to employee...
 
 }

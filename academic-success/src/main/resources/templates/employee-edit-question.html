@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--<html lang="en">-->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
@@ -10,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>All Questions</title>
+    <title>Edit Question</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -30,65 +29,77 @@
 
 <!-- Page Wrapper -->
 <div id="wrapper">
-
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
 
-
-            <div class="sidebar-brand-text mx-3">V Quiz App</div>
+            <div class="sidebar-brand-text mx-3">Student Success<sup></sup></div>
         </a>
-        <br>
+<!--        <br>-->
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-<!--     TODO make sure change to href didn't break th:href="@{/survey-admin/dashboard}">-->
         <li class="nav-item">
-            <a class="nav-link" href="/survey-admin/dashboard">
+            <a class="nav-link"
+               th:href="@{/employee/dashboard}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
 
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Resource Actions
+        </div>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/employee/resources/new}"
+            >
+                <i class="fas fa-fw fa-plus"></i>
+                <span>Add New Resources</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/employee/resources}"
+            >
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>List All Resources</span></a>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-
         <!-- Heading -->
         <div class="sidebar-heading">
-            Survey Admin Actions
+            Survey Actions
         </div>
 
-
-        <!-- Nav Item - Charts -->
-<!--        TODO make sure change to href didn't break: th:href="@{/survey-admin/question}"-->
         <li class="nav-item">
             <a class="nav-link"
-               href="/survey-admin/question"
+               href="/employee/questions/new"
             >
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Add Questions</span></a>
+                <i class="fas fa-fw fa-plus"></i>
+                <span>Add New Questions</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/survey-admin/questions/list">
+            <a class="nav-link" href="/employee/questions">
                 <i class="fas fa-fw fa-chart-area"></i>
                 <span>List All Questions</span></a>
         </li>
 
         <!-- Nav Item - logout -->
         <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
+            <a class="nav-link" href="/" data-toggle="modal" data-target="">
                 <i class="fas fa-sign-out-alt "></i>
                 Logout
             </a>
         </li>
-
-
-
-
 
         <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
@@ -145,26 +156,16 @@
 
                     <!-- Nav Item - Alerts -->
 
-
-                    <!-- Nav Item - Messages -->
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-chalkboard-user"></i>
-
-                        </a>
-
-                    </li>
-
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
+                    <li class="nav-item dropdown no-arrow" th:object="${admin}">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                                      th:text="${surveyAdmin.firstName}"
-                                ></span>
+                            <!--<span class="mr-2 d-none d-lg-inline text-gray-600 small"
+
+                             th:text="${teacher.firstName}"
+                            ></span>-->
                             <img class="img-profile rounded-circle"
                                  src="/img/undraw_profile.svg">
 <!--                                 src="/static/js/img/undraw_profile.svg">-->
@@ -188,49 +189,68 @@
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Survey Admin Dashboard</h1>
-                </div>
+
 
                 <!-- DataTales Example -->
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Questions Table</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th>Number</th>
-                                    <th>Question</th>
-                                    <th>Options</th>
-                                    <th>Food</th>
-                                    <th>Housing</th>
-                                    <th>Dependent</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="ques : ${allQuestions}">
+                <div class="card shadow mb-4" style="padding: 80px 200px;">
+                    <h1 class="h4 text-gray-900 mb-4">Update the Question</h1>
 
-                                    <td th:text="${ques.id}"></td>
-                                    <td th:text="${ques.title}"></td>
-<!--                                    TODO COME BACK FOR THIS. TRY th:list as well =) -->
-                                    <td>N/A</td>
-<!--                                <tr th:each="opt : *{ques.options}">-->
-<!--                                    <td th:text="${opt.optionTitle}"></td>-->
-<!--                                    <td th:value="${opt.value}"></td>-->
-<!--                                </tr>-->
-                                    <td th:text="${ques.foodResource}"></td>
-                                    <td th:text="${ques.housingResource}"></td>
-                                    <td th:text="${ques.dependentResource}"></td>
-                                </tr>
 
-                                </tbody>
-                            </table>
+                    <form th:action="@{/employee/questions/{id}/edit(id=${questionsDto.id})}" th:object="${questionsDto}" method="POST">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Subject</label>
+
+                            <select id="inputState" class="form-control"
+                                    th:field="*{subject}">
+                                <option value="science">Science</option>
+                                <option value="maths">Maths</option>
+                                <option value="physics">Physics</option>
+                                <option value="english">English</option >
+                            </select>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Question Title</label>
+                            <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                   th:field="*{questionTitle}"
+                                   placeholder="">
+
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Option 1" th:field="*{optionOne}">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Option 2" th:field="*{optionTwo}">
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Option 3" th:field="*{optionThree}">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Option 4" th:field="*{optionFour}">
+                            </div>
+                        </div>
+                        <br>
+
+                        <div class="form-group">
+                            <label for="exampleFormControlSelect1">Correct Option</label>
+                            <select class="form-control"
+
+                                    th:field="*{correctAnswer}"
+                                    id="exampleFormControlSelect1">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+
+                            </select>
+                        </div>
+
+                        <br>
+                        <button type="submit" class="btn btn-primary">Update this question</button>
+                    </form>
                 </div>
 
             </div>
@@ -288,19 +308,14 @@
 <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="/js/sb-admin-2.min.js"></script>
-<!--<script src="/static/js/sb-admin-2.min.js"></script>-->
+<script src="/static/js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
 <script src="/vendor/datatables/jquery.dataTables.min.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
-<script src="/js/demo/datatables-demo.js"></script>
-<!--<script src="/static/js/demo/datatables-demo.js"></script>-->
-<script>
-
-</script>
+<script src="/static/js/demo/datatables-demo.js"></script>
 
 </body>
 

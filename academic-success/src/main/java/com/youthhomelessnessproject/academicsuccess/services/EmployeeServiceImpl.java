@@ -3,6 +3,7 @@ package com.youthhomelessnessproject.academicsuccess.services;
 import com.youthhomelessnessproject.academicsuccess.models.Employee;
 import com.youthhomelessnessproject.academicsuccess.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     // Runtime constructor-based injection of EmployeeRepository dependency
     private final EmployeeRepository employeeRepository;
-
+    
+    
     @Autowired
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
@@ -47,4 +49,5 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteEmployeeById(Long id) {
         employeeRepository.deleteById(id);
     }
+
 }

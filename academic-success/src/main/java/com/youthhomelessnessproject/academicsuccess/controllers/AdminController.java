@@ -55,14 +55,12 @@ public class AdminController {
         return "admin-add-user";
     }
 
-
     @GetMapping("/admin/edit/{id}")
     public String showAdminEditPage(@PathVariable Long id, Model model) {
         Admin admin = adminService.getAdminById(id);
         model.addAttribute("admin", admin);
         return "admin-admin-edit";
     }
-
 
     @PostMapping("/admin/edit/{id}")
     public String updateAdminDetails(@PathVariable Long id, @ModelAttribute("admin") Admin admin,
@@ -86,6 +84,5 @@ public class AdminController {
         adminService.deleteAdminById(id);
         return "redirect:/admin/dashboard";
     }
-
 
 }

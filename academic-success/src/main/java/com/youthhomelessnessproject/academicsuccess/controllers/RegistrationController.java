@@ -10,6 +10,7 @@ import com.youthhomelessnessproject.academicsuccess.services.EmployeeService;
 import com.youthhomelessnessproject.academicsuccess.services.StudentService;
 import com.youthhomelessnessproject.academicsuccess.services.SurveyAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,7 +30,8 @@ public class RegistrationController {
 
     @Autowired
     private SurveyAdminService surveyAdminService;
-
+    
+    
 
     @PostMapping("/register")
     public String registerNewUser(@ModelAttribute UserDTO userDto) {

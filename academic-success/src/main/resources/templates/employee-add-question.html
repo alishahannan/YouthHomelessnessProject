@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Survey Admin Add Question</title>
+    <title>Add Question</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -34,49 +34,68 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
 
-            <div class="sidebar-brand-text mx-3">V Quiz App<sup></sup></div>
+            <div class="sidebar-brand-text mx-3">Student Success<sup></sup></div>
         </a>
-        <br>
+<!--        <br>-->
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" href="/survey-admin/dashboard">
+            <a class="nav-link" href="/employee/dashboard">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
 
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Resource Actions
+        </div>
+
+        <!-- Nav Item - Charts -->
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/employee/resources/new}"
+            >
+                <i class="fas fa-fw fa-plus"></i>
+                <span>Add New Resources</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               th:href="@{/employee/resources}"
+            >
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>List All Resources</span></a>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-
         <!-- Heading -->
         <div class="sidebar-heading">
-            Survey Admin Actions
+            Survey Actions
         </div>
 
-
-        <li class="nav-item">
+        <li class="nav-item active">
             <a class="nav-link"
-               th:href="@{/survey-admin/question}"
+               href="/employee/questions/new"
             >
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Add Questions</span></a>
+                <i class="fas fa-fw fa-plus"></i>
+                <span>Add New Questions</span></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link"
-               th:href="@{/survey-admin/questions/list}"
-            >
+            <a class="nav-link" href="/employee/questions">
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Questions List</span></a>
+                <span>List All Questions</span></a>
         </li>
 
 
         <!-- Nav Item - logout -->
         <li class="nav-item">
-            <a class="nav-link" href="/" data-toggle="modal" data-target="">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt "></i>
                 Logout
             </a>
@@ -140,12 +159,12 @@
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow" th:object="${admin}">
+                    <li class="nav-item dropdown no-arrow" th:object="${employee}">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"
 
-                                      th:text="${surveyAdmin.firstName}"
+                                      th:text="${employee.firstName}"
                                 ></span>
                             <img class="img-profile rounded-circle"
                                  src="/img/undraw_profile.svg">
@@ -176,7 +195,6 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Add a New Question</h1>
-
                 </div>
 
                 <!-- Content Col -->
@@ -197,15 +215,18 @@
                                     <!-- row no-gutters -->
                                     <div class="row no-gutters align-items-center">
 
-                                        <!-- col mr-2 -->
-<!--                                        <div class="col mr-2">-->
+                                        <!-- Col containing -->
                                         <div class="col">
 
-                                            <form th:action="@{/survey-admin/question/add}" th:object="${questionsDto}"
+                                            <form th:action="@{/employee/questions/new}" th:object="${questionsDto}"
                                                   method="POST">
+
                                                 <div class="form-group">
+
                                                     <div class="col">
+
                                                         <div class="row">
+
                                                             <div class="col">
                                                                 <label style="font-weight: bold">Question</label>
 
@@ -273,6 +294,7 @@
                                                                 <br>
 
 
+                                                                <!-- Column for Resource Categories -->
                                                                 <div class="col">
                                                                     <div class="row">
                                                                         <label for="resourceTagCheckboxSelect1" style="font-weight: bold;">Resource Category</label>
@@ -328,8 +350,9 @@
 <!--                                                                        </option>-->
 <!--                                                                    </select>-->
                                                                 </div>
+                                                                <!-- End of Column for Resource Categories -->
 
-                                                                <button type="submit" class="btn btn-primary" style="margin-top: 4px;">Add this Question</button>
+                                                                <button type="submit" class="btn btn-primary">Add this Question</button>
 
                                                             </div>
 
@@ -340,7 +363,6 @@
                                                 </div>
 
                                             </form>
-
 
                                         </div>
                                         <!-- End col mr-2 -->

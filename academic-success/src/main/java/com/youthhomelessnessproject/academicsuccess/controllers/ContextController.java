@@ -16,7 +16,7 @@ public class ContextController {
     public static Session session;
     public static Survey survey;
     public static List<Question> questions;
-    // TODO do we need resources or resource tags here?
+
 
     public static Student getStudent() { return student; }
     public static void setStudent(Student  student) { ContextController.student = student; }
@@ -30,4 +30,5 @@ public class ContextController {
     public static void setSession(Session session) { ContextController.session = session; }
     public static Survey getSurvey() { return survey; }
     public static void setSurvey(Survey survey) { ContextController.survey = survey; }
+
 }

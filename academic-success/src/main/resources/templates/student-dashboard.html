@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Quizz App Dashboard</title>
+    <title>Student Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -36,7 +36,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fa-solid fa-pen-clip"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">V Quiz App </div>
+            <div class="sidebar-brand-text mx-3">Student Success</div>
         </a>
 
         <!-- Divider -->
@@ -48,9 +48,6 @@
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider">
 
 
         <!-- Divider -->
@@ -67,14 +64,14 @@
                th:href="@{/student/survey-results}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>View My Resources</span></a>
+                <span>My Survey Results</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                th:href="@{/resources}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>List All Resources</span></a>
+                <span>Resources List</span></a>
         </li>
 
         <!-- Nav Item - logout -->
@@ -135,23 +132,29 @@
                         </div>
                     </li>
 
+
+                    <!-- Nav Item - Messages -->
+                    <li class="nav-item dropdown no-arrow mx-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-chalkboard-user"></i>
+                        </a>
+                    </li>
+
                     <!-- Nav Item - Alerts -->
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
-
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                                      th:text="${student.username}"
-                                >
-
-
+                                      th:text="${student.username}">
                                 </span>
-                            <img class="/img-profile rounded-circle"
+                            <img class="img-profile rounded-circle"
                                  src="/img/undraw_profile.svg">
                         </a>
+
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">
@@ -174,7 +177,6 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Student Dashboard</h1>
-
                 </div>
 
                 <!-- Content Row -->

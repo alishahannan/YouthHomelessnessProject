@@ -37,10 +37,13 @@
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
 
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fa-solid fa-pen-clip"></i>
+            </div>
 
-            <div class="sidebar-brand-text mx-3">V Quiz App</div>
+            <div class="sidebar-brand-text mx-3">Student Success</div>
         </a>
-        <br>
+<!--        <br>-->
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
@@ -70,14 +73,14 @@
                th:href="@{/student/survey-results}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>View My Resources</span></a>
+                <span>My Survey Results</span></a>
         </li>
         <li class="nav-item">
             <a class="nav-link"
                th:href="@{/resources}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>List All Resources</span></a>
+                <span>Resources List</span></a>
         </li>
 
 
@@ -88,9 +91,6 @@
                 Logout
             </a>
         </li>
-
-
-
 
 
         <!-- Divider -->
@@ -146,31 +146,31 @@
                         </div>
                     </li>
 
-                    <!-- Nav Item - Alerts -->
-
 
                     <!-- Nav Item - Messages -->
                     <li class="nav-item dropdown no-arrow mx-1">
                         <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-chalkboard-user"></i>
-
                         </a>
-
                     </li>
 
+                    <!-- Nav Item - Alerts -->
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!--  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                              th:text="${teacher.firstName}"
-                              ></span>-->
+<!--                            style="margin-right: 50px;">-->
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                                  th:text="${student.username}">
+                                </span>
                             <img class="img-profile rounded-circle"
-                                 src="/static/js/img/undraw_profile.svg">
+                                 src="/img/undraw_profile.svg">
+<!--                                 src="/static/js/img/undraw_profile.svg">-->
                         </a>
+
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                              aria-labelledby="userDropdown">

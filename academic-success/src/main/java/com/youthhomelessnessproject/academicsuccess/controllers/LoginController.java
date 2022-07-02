@@ -1,5 +1,6 @@
 package com.youthhomelessnessproject.academicsuccess.controllers;
 
+import com.youthhomelessnessproject.academicsuccess.dto.ForgotPasswordDTO;
 import com.youthhomelessnessproject.academicsuccess.models.Admin;
 import com.youthhomelessnessproject.academicsuccess.models.Employee;
 import com.youthhomelessnessproject.academicsuccess.models.Student;
@@ -9,9 +10,11 @@ import com.youthhomelessnessproject.academicsuccess.repositories.EmployeeReposit
 import com.youthhomelessnessproject.academicsuccess.repositories.StudentRepository;
 import com.youthhomelessnessproject.academicsuccess.repositories.SurveyAdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/login")
@@ -24,9 +27,6 @@ public class LoginController {
     private AdminRepository adminRepository;
 
     @Autowired
-    private SurveyAdminRepository surveyAdminRepository;
-
-    @Autowired
     private EmployeeRepository employeeRepository;
 
 
@@ -35,16 +35,6 @@ public class LoginController {
         Admin admin = new Admin();
         model.addAttribute("admin", admin);
         return "admin-login";
-    }
-
-
-    // TODO verify that survey-admin property works in survey-admin-login.html
-    // TODO for that matter, verify all teacher -> survey-admin stuff works!
-    @GetMapping("/survey-admin")
-    public String showSurveyAdminLoginForm(Model model) {
-        SurveyAdmin surveyAdmin = new SurveyAdmin();
-        model.addAttribute("surveyAdmin", surveyAdmin);
-        return "survey-admin-login";
     }
 
     @GetMapping("/student")
@@ -61,19 +51,6 @@ public class LoginController {
         return "employee-login";
     }
 
-    @PostMapping("/student")
-    public String loginStudent(@ModelAttribute("student") Student student) {
-        Student savedStudent = studentRepository.findStudentByUsername(student.getUsername());
-        if(savedStudent != null) {
-            ContextController.setStudent(savedStudent);
-            if(savedStudent.getPassword().equalsIgnoreCase(student.getPassword())) {
-                return "redirect:/student/dashboard";
-            }
-        }
-        System.out.println("Student Login failed");
-        return "redirect:/login/student?error";
-    }
-
     @PostMapping("/admin")
     public String loginAdmin(@ModelAttribute("admin") Admin admin) {
         Admin savedAdmin = adminRepository.findAdminByUsername(admin.getUsername());
@@ -87,17 +64,17 @@ public class LoginController {
         return "redirect:/login/admin?error";
     }
 
-    @PostMapping("/survey-admin")
-    public String loginSurveyAdmin(@ModelAttribute("surveyAdmin") SurveyAdmin surveyAdmin) {
-        SurveyAdmin savedSurveyAdmin = surveyAdminRepository.findSurveyAdminByUsername(surveyAdmin.getUsername());
-        if(savedSurveyAdmin != null) {
-            ContextController.setSurveyAdmin(savedSurveyAdmin);
-            if(savedSurveyAdmin.getPassword().equalsIgnoreCase(surveyAdmin.getPassword())) {
-                return "redirect:/survey-admin/dashboard";
+    @PostMapping("/student")
+    public String loginStudent(@ModelAttribute("student") Student student) {
+        Student savedStudent = studentRepository.findStudentByUsername(student.getUsername());
+        if(savedStudent != null) {
+            ContextController.setStudent(savedStudent);
+            if(savedStudent.getPassword().equalsIgnoreCase(student.getPassword())) {
+                return "redirect:/student/dashboard";
             }
         }
-        System.out.println("Survey Admin Login failed");
-        return "redirect:/login/survey-admin?error";
+        System.out.println("Student Login failed");
+        return "redirect:/login/student?error";
     }
 
     @PostMapping("/employee")
@@ -114,5 +91,23 @@ public class LoginController {
 
     }
 
+    @GetMapping("/reset")
+    public String showForgotPasswordForm(Model model) {
+        ForgotPasswordDTO forgotPasswordDto = new ForgotPasswordDTO();
+        model.addAttribute("forgotPasswordDto", forgotPasswordDto);
+        return "forgot-password";
+    }
+
+    @PostMapping("/reset")
+    public String resetStudentPassword(@ModelAttribute ForgotPasswordDTO forgotPasswordDto) {
+        if(!forgotPasswordDto.getNewPassword().equals(forgotPasswordDto.getNewConfirmPassword())) {
+            return "redirect:/reset?mismatch";
+        }
+        Student student = studentRepository.findStudentByUsername(forgotPasswordDto.getUsername());
+        if(student == null) return "redirect:/reset?errorusername";
+        student.setPassword(forgotPasswordDto.getNewPassword());
+        studentRepository.save(student);
+        return "redirect:/login/student";
+    }
 
 }
