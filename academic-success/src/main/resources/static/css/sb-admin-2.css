@@ -10850,7 +10850,9 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("https://bsmedia.business-standard.com/_media/bs/img/article/2019-11/03/full/1572796865-0693.jpg");
+  /*background: url("https://bsmedia.business-standard.com/_media/bs/img/article/2019-11/03/full/1572796865-0693.jpg");*/
+  /*#2 background: url("https://www.mycustomer.com/sites/default/files/styles/inline_banner/public/istock_blossomstar_survey.jpg?itok=Aek4OAA3");*/
+  background: url("https://3.files.edl.io/e2ea/19/11/07/195655-3adb49b9-5894-4607-8fd1-818692f64ba5.jpg");
   background-position: center;
   background-size: cover;
 }

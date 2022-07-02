@@ -27,9 +27,6 @@ public class LoginController {
     private AdminRepository adminRepository;
 
     @Autowired
-    private SurveyAdminRepository surveyAdminRepository;
-
-    @Autowired
     private EmployeeRepository employeeRepository;
 
 
@@ -38,16 +35,6 @@ public class LoginController {
         Admin admin = new Admin();
         model.addAttribute("admin", admin);
         return "admin-login";
-    }
-
-
-    // TODO verify that survey-admin property works in survey-admin-login.html
-    // TODO for that matter, verify all teacher -> survey-admin stuff works!
-    @GetMapping("/survey-admin")
-    public String showSurveyAdminLoginForm(Model model) {
-        SurveyAdmin surveyAdmin = new SurveyAdmin();
-        model.addAttribute("surveyAdmin", surveyAdmin);
-        return "survey-admin-login";
     }
 
     @GetMapping("/student")
@@ -64,19 +51,6 @@ public class LoginController {
         return "employee-login";
     }
 
-    @PostMapping("/student")
-    public String loginStudent(@ModelAttribute("student") Student student) {
-        Student savedStudent = studentRepository.findStudentByUsername(student.getUsername());
-        if(savedStudent != null) {
-            ContextController.setStudent(savedStudent);
-            if(savedStudent.getPassword().equalsIgnoreCase(student.getPassword())) {
-                return "redirect:/student/dashboard";
-            }
-        }
-        System.out.println("Student Login failed");
-        return "redirect:/login/student?error";
-    }
-
     @PostMapping("/admin")
     public String loginAdmin(@ModelAttribute("admin") Admin admin) {
         Admin savedAdmin = adminRepository.findAdminByUsername(admin.getUsername());
@@ -90,17 +64,17 @@ public class LoginController {
         return "redirect:/login/admin?error";
     }
 
-    @PostMapping("/survey-admin")
-    public String loginSurveyAdmin(@ModelAttribute("surveyAdmin") SurveyAdmin surveyAdmin) {
-        SurveyAdmin savedSurveyAdmin = surveyAdminRepository.findSurveyAdminByUsername(surveyAdmin.getUsername());
-        if(savedSurveyAdmin != null) {
-            ContextController.setSurveyAdmin(savedSurveyAdmin);
-            if(savedSurveyAdmin.getPassword().equalsIgnoreCase(surveyAdmin.getPassword())) {
-                return "redirect:/survey-admin/dashboard";
+    @PostMapping("/student")
+    public String loginStudent(@ModelAttribute("student") Student student) {
+        Student savedStudent = studentRepository.findStudentByUsername(student.getUsername());
+        if(savedStudent != null) {
+            ContextController.setStudent(savedStudent);
+            if(savedStudent.getPassword().equalsIgnoreCase(student.getPassword())) {
+                return "redirect:/student/dashboard";
             }
         }
-        System.out.println("Survey Admin Login failed");
-        return "redirect:/login/survey-admin?error";
+        System.out.println("Student Login failed");
+        return "redirect:/login/student?error";
     }
 
     @PostMapping("/employee")

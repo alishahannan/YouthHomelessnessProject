@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Details</title>
+    <title>Resource Details</title>
 
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -39,7 +39,7 @@
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fa-solid fa-pen-clip"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">V Quiz App</div>
+            <div class="sidebar-brand-text mx-3">Student Success</div>
         </a>
 
         <!-- Divider -->
@@ -47,36 +47,55 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link" th:href="@{/employee/dashboard}">
+            <a class="nav-link"
+               th:href="@{/employee/dashboard}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
-
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Employee Actions
+            Resource Actions
         </div>
 
-
-        <!-- Nav Item - Add Resources -->
+        <!-- Nav Item - Charts -->
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/employee/resource}"
+               th:href="@{/employee/resources/new}"
             >
                 <i class="fas fa-fw fa-plus"></i>
-                <span>Add Resources</span></a>
+                <span>Add New Resources</span></a>
         </li>
-        <!-- Nav Item - List Resources -->
         <li class="nav-item">
             <a class="nav-link"
-               th:href="@{/employee/resources/list}"
+               th:href="@{/employee/resources}"
             >
                 <i class="fas fa-fw fa-chart-area"></i>
-                <span>Resources List</span></a>
+                <span>List All Resources</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Survey Actions
+        </div>
+
+        <li class="nav-item">
+            <a class="nav-link"
+               href="/employee/questions/new"
+            >
+                <i class="fas fa-fw fa-plus"></i>
+                <span>Add New Questions</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/employee/questions">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>List All Questions</span></a>
         </li>
 
         <!-- Nav Item - logout -->
@@ -236,53 +255,6 @@
 
                 </div>
                 <!-- End of Content Col 1 inside container-fluid -->
-
-                <!-- Earnings (Monthly) Card Example -->
-
-                <!-- Pending Requests Card Example -->
-                <!--                    <div class="col-xl-3 col-md-6 mb-4">-->
-                <!--                        <div class="card border-left-warning shadow h-100 py-2">-->
-                <!--                            <div class="card-body">-->
-                <!--                                <div class="row no-gutters align-items-center">-->
-                <!--                                    <div class="col mr-2">-->
-                <!--                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">-->
-                <!--                                            05 Marks-->
-                <!--                                        </div>-->
-                <!--                                        <div class="h5 mb-0 font-weight-bold text-gray-800">English</div>-->
-                <!--                                    </div>-->
-                <!--                                    <div class="col-auto">-->
-                <!--                                        <i class="fas fa-book fa-2x text-gray-300"></i>-->
-                <!--                                    </div>-->
-                <!--                                </div>-->
-                <!--                            </div>-->
-                <!--                        </div>-->
-                <!--                    </div>-->
-                <!--                </div>-->
-
-
-                <!-- Content Row -->
-                <!--                <div class="row">-->
-
-                <!--                    <div class="col-lg-6 mb-4">-->
-
-                <!--                        &lt;!&ndash; Approach &ndash;&gt;-->
-                <!--                        <div class="card shadow mb-4">-->
-                <!--                            <div class="card-header py-3">-->
-                <!--                                <h6 class="m-0 font-weight-bold text-primary">Read Quiz Instructions</h6>-->
-                <!--                            </div>-->
-                <!--                            <div class="card-body">-->
-                <!--                                <ul>-->
-                <!--                                    <li>To pass the Quiz, you must secure a minimum of 70%</li>-->
-                <!--                                    <li>Use faster, reliable and continued internet connection</li>-->
-                <!--                                    <li>You can skip a tough question and come back to it later</li>-->
-                <!--                                    <li>The quiz will start as soon as you click the Start Quiz button</li>-->
-                <!--                                </ul>-->
-
-                <!--                            </div>-->
-                <!--                        </div>-->
-
-                <!--                    </div>-->
-                <!--                </div>-->
 
             </div>
             <!-- End of Container-fluid -->
