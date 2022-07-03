@@ -42,7 +42,7 @@ private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		
-		return passwordEncoder;
+		return new BCryptPasswordEncoder();
 	}
 	
 	

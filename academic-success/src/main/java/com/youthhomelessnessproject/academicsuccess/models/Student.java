@@ -33,7 +33,7 @@ public class Student {
     private String username;
 
     @NotBlank(message = "Password should not be empty")
-    @Size(min = 5, message = "Password should be at least 5 characters long.")
+    @Size(min = 5, max = 200, message = "Password should be at least 5 characters long.")
     private String password;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy ="student")

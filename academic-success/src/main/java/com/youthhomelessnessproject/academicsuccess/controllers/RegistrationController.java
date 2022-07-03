@@ -31,6 +31,8 @@ public class RegistrationController {
     @Autowired
     private SurveyAdminService surveyAdminService;
     
+    @Autowired
+	private PasswordEncoder bcryptEncoder;
     
 
     @PostMapping("/register")

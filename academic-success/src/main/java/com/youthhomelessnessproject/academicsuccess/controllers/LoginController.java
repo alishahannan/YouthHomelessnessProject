@@ -11,6 +11,7 @@ import com.youthhomelessnessproject.academicsuccess.repositories.StudentReposito
 import com.youthhomelessnessproject.academicsuccess.repositories.SurveyAdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,9 @@ public class LoginController {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+    
+    @Autowired
+	private PasswordEncoder bcryptEncoder;
 
 
     @GetMapping("/admin")
@@ -69,7 +73,7 @@ public class LoginController {
         Student savedStudent = studentRepository.findStudentByUsername(student.getUsername());
         if(savedStudent != null) {
             ContextController.setStudent(savedStudent);
-            if(savedStudent.getPassword().equalsIgnoreCase(student.getPassword())) {
+            if(savedStudent.getPassword().equalsIgnoreCase(bcryptEncoder.encode(student.getPassword()))); {
                 return "redirect:/student/dashboard";
             }
         }
