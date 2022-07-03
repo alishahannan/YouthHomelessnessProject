@@ -24,4 +24,5 @@ public interface ResourceRepository extends JpaRepository<Resource, Long> {
     Resource findResourceById(Long id);
 
     void deleteResourceById(Long id);
+
 }

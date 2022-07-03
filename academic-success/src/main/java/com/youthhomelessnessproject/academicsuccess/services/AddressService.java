@@ -10,9 +10,6 @@ public interface AddressService {
     // READ
     Address getAddressById(Long id);
 
-    // UPDATE
-    Address updateAddress(Address address);
-
     // DELETE
     void deleteAddressById(Long id);
 }

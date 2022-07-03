@@ -5,9 +5,11 @@ import com.youthhomelessnessproject.academicsuccess.repositories.ResourceReposit
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class ResourceServiceImpl implements ResourceService {
 
     // Runtime constructor-based injection of ResourceRepository dependency
@@ -58,6 +60,7 @@ public class ResourceServiceImpl implements ResourceService {
     public Resource saveResource(Resource resource) {
         return resourceRepository.save(resource);
     }
+
 
     @Override
     public Resource findResourceById(Long id) {

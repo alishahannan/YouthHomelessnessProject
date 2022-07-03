@@ -38,7 +38,7 @@
             </div>
             <div class="sidebar-brand-text mx-3">Student Success<sup></sup></div>
         </a>
-<!--        <br>-->
+        <!--        <br>-->
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
@@ -58,7 +58,7 @@
         </div>
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link"
                th:href="@{/employee/resources/new}"
             >
@@ -192,7 +192,7 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Add a New Resource</h1>
+                    <h1 class="h3 mb-0 text-gray-800">Edit Resource Details</h1>
                 </div>
 
                 <!-- Content Col 1 -->
@@ -216,8 +216,8 @@
                                         <!-- Col containing -->
                                         <div class="col">
 
-                                            <form th:action="@{/employee/resources/new}" th:object="${resourcesDto}"
-                                                  method="POST">
+                                            <form th:action="@{/employee/resources/{id}/edit(id=${resourceId})}"
+                                                  th:object="${resourcesDto}" method="POST">
 
                                                 <!-- form-group -->
                                                 <div class="form-group">
@@ -312,7 +312,7 @@
                                                                     </div>
 
                                                                 </div>
-
+                                                                <input type="hidden" th:field="*{address.id}" name="addressId"/>
                                                             </div>
 
                                                         </div>
@@ -321,12 +321,15 @@
 
                                                         <div>
 
+
                                                         </div>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <label for="degreeNumberInput1">
                                                                     Degree: (0 - 5.0 = low, 5.0 - 10.0 = medium, 15+ = high)
                                                                 </label>
+                                                                <br>
+                                                                <span th:text="|Current value: ${currentDegree}|"></span>
                                                                 <input type="number" step="0.1" min="0.0"
                                                                        class="form-control"
                                                                        th:field="*{degree}"
@@ -383,12 +386,12 @@
                                                                     return true;
                                                                 }
                                                             </script>
+                                                            <input type="hidden" th:field="*{id}"/>
 
                                                         </div>
                                                         <!-- End of Column for Resource Categories -->
-                                                        <!--                            <input type="hidden" th:field="*{id}"/>-->
 
-                                                        <button type="submit" class="btn btn-primary">Save Resource</button>
+                                                        <button type="submit" class="btn btn-primary">Update Resource</button>
 
                                                     </div>
                                                     <!-- End of Col inside form-group -->
