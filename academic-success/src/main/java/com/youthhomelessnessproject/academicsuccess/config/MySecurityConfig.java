@@ -5,15 +5,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
-public class MySecurityConfig extends WebSecurityConfigurerAdapter {
+public class MySecurityConfig extends WebSecurityConfigurerAdapter{
 	
-	private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 	
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
 		
@@ -32,8 +30,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/login/admin", "/", "/login").permitAll()
-			.anyRequest().authenticated();
+			.anyRequest()
+			.permitAll();
+			
 			
 		
 	
@@ -45,5 +44,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		return passwordEncoder;
 	}
+	
+	
 
 }
