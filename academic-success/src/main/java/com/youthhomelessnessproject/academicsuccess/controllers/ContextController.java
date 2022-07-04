@@ -11,7 +11,6 @@ public class ContextController {
 
     public static Student student;
     public static Admin admin;
-    public static SurveyAdmin surveyAdmin;
     public static Employee employee;
     public static Session session;
     public static Survey survey;
@@ -22,8 +21,6 @@ public class ContextController {
     public static void setStudent(Student  student) { ContextController.student = student; }
     public static Admin getAdmin() { return admin; }
     public static void setAdmin(Admin admin) { ContextController.admin = admin; }
-    public static SurveyAdmin getSurveyAdmin() { return surveyAdmin; }
-    public static void setSurveyAdmin(SurveyAdmin surveyAdmin) { ContextController.surveyAdmin = surveyAdmin; }
     public static Employee getEmployee() { return employee; }
     public static void setEmployee(Employee employee) { ContextController.employee = employee; }
     public static Session getSession() { return session; }
