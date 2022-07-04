@@ -11,8 +11,6 @@
 -- VALUES (1, 'derek', 'admin', 'admin', 'admin', 'admin');
 -- INSERT INTO tbl_employees (id, first_name, last_name, password, user_role, username) 
 -- VALUES (1, 'derek', 'employee', 'employee', 'employee', 'employee');
--- INSERT INTO tbl_survey_admins (id, first_name, last_name, password, user_role, username) 
--- VALUES (2, 'derek', 'survey-admin', 'sadmin', 'survey-admin', 'sadmin');
 -- INSERT INTO tbl_students (id, password, user_role, username, zip) 
 -- VALUES (1, 'student', 'student', 'student', '32926');
 
@@ -35,13 +33,14 @@
 -- INSERT INTO tbl_resources (id, degree, name, description, address_id, food_resource, housing_resource, dependent_resource)
 -- VALUE (3, 5.0, 'Be Free, LTD.', 'Soup Kitchen', 3, false, false, true);
 
--- -- Populate Questions (Haven't quite figured this out)
+-- -- 4) Populate Questions
+
+
 
 
 -- View Users
 -- SELECT * FROM studentsuccess.tbl_admins;
 -- SELECT * FROM studentsuccess.tbl_employees;
--- SELECT * FROM studentsuccess.tbl_survey_admins;
 -- SELECT * FROM studentsuccess.tbl_students;
 
 -- View other entities

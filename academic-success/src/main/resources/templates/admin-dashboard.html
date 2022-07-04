@@ -230,15 +230,6 @@
                                         <a th:href="@{/employee/delete/{id}(id=${employee.id})}" class="btn btn-danger">Delete</a>
                                     </td>
                                 </tr>
-                                <tr th:each="surveyAdmin: ${surveyAdmins}">
-                                    <td th:text="${surveyAdmin.username}"></td>
-                                    <td th:text="${surveyAdmin.firstName}"></td>
-                                    <td th:text="${surveyAdmin.role}"></td>
-                                    <td>
-                                        <a th:href="@{/survey-admin/edit/{id}(id=${surveyAdmin.id})}" class="btn btn-primary" >Update</a>
-                                        <a th:href="@{/survey-admin/delete/{id}(id=${surveyAdmin.id})}" class="btn btn-danger">Delete</a>
-                                    </td>
-                                </tr>
                                 </tbody>
                             </table>
                         </div>

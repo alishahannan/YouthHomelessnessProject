@@ -4,16 +4,13 @@ import com.youthhomelessnessproject.academicsuccess.dto.UserDTO;
 import com.youthhomelessnessproject.academicsuccess.models.Admin;
 import com.youthhomelessnessproject.academicsuccess.models.Employee;
 import com.youthhomelessnessproject.academicsuccess.models.Student;
-import com.youthhomelessnessproject.academicsuccess.models.SurveyAdmin;
 import com.youthhomelessnessproject.academicsuccess.services.AdminService;
 import com.youthhomelessnessproject.academicsuccess.services.EmployeeService;
 import com.youthhomelessnessproject.academicsuccess.services.StudentService;
-import com.youthhomelessnessproject.academicsuccess.services.SurveyAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class RegistrationController {
@@ -26,9 +23,6 @@ public class RegistrationController {
 
     @Autowired
     private AdminService adminService;
-
-    @Autowired
-    private SurveyAdminService surveyAdminService;
 
 
     @PostMapping("/register")
@@ -52,13 +46,6 @@ public class RegistrationController {
             admin.setUsername(userDto.getUsername());
             admin.setPassword(userDto.getPassword());
             adminService.saveAdmin(admin);
-        } else if (userDto.getRole().equalsIgnoreCase("survey-admin")) {
-            SurveyAdmin surveyAdmin = new SurveyAdmin();
-            surveyAdmin.setFirstName(userDto.getFirstName());
-            surveyAdmin.setLastName(userDto.getLastName());
-            surveyAdmin.setUsername(userDto.getUsername());
-            surveyAdmin.setPassword(userDto.getPassword());
-            surveyAdminService.saveSurveyAdmin(surveyAdmin);
         }
         return "redirect:/admin/dashboard";
     }
