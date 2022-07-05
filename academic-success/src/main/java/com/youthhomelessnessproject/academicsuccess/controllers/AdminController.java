@@ -4,11 +4,9 @@ import com.youthhomelessnessproject.academicsuccess.dto.UserDTO;
 import com.youthhomelessnessproject.academicsuccess.models.Admin;
 import com.youthhomelessnessproject.academicsuccess.models.Employee;
 import com.youthhomelessnessproject.academicsuccess.models.Student;
-import com.youthhomelessnessproject.academicsuccess.models.SurveyAdmin;
 import com.youthhomelessnessproject.academicsuccess.services.AdminService;
 import com.youthhomelessnessproject.academicsuccess.services.EmployeeService;
 import com.youthhomelessnessproject.academicsuccess.services.StudentService;
-import com.youthhomelessnessproject.academicsuccess.services.SurveyAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,9 +24,6 @@ public class AdminController {
     private AdminService adminService;
 
     @Autowired
-    private SurveyAdminService surveyAdminService;
-
-    @Autowired
     private EmployeeService employeeService;
 
 
@@ -36,12 +31,10 @@ public class AdminController {
     public String showAdminDashboard(Model model) {
         List<Student> students = studentService.getAllStudents();
         List<Admin> admins = adminService.getAllAdmins();
-        List<SurveyAdmin> surveyAdmins = surveyAdminService.getAllSurveyAdmins();
         List<Employee> employees = employeeService.getAllEmployees();
         model.addAttribute("admin", ContextController.getAdmin());
         model.addAttribute("students", students);
         model.addAttribute("admins", admins);
-        model.addAttribute("surveyAdmins", surveyAdmins);
         model.addAttribute("employees", employees);
 
         return "admin-dashboard";

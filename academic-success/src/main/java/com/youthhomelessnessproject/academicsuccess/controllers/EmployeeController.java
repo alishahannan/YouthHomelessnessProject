@@ -37,8 +37,8 @@ public class EmployeeController {
     @Autowired
     private ResourceService resourceService;
 
-    @Autowired
-    private AddressRepository addressRepository;
+//    @Autowired
+//    private AddressRepository addressRepository;
 
     @Autowired
     private AddressService addressService;
@@ -197,7 +197,6 @@ public class EmployeeController {
         return "redirect:/employee/questions";
     }
 
-
     // Add Resources Page (GET)
     // TODO Thymeleaf templates fore these endpoints!
     @GetMapping("/employee/resources/new")
@@ -224,9 +223,7 @@ public class EmployeeController {
 
         // Set address resource
         resource.getAddress().setResource(resource);
-
         resourceService.saveResource(resource);
-        addressRepository.save(resource.getAddress());
 
         return "redirect:/employee/resources";
     }
@@ -242,7 +239,7 @@ public class EmployeeController {
 
     @GetMapping("/employee/resources/{id}/edit")
     public ModelAndView showModifyResourceForm(@PathVariable Long id) {
-        ModelAndView mav = new ModelAndView("employee-add-resource");
+        ModelAndView mav = new ModelAndView("employee-edit-resource");
         Resource existingResource = resourceService.findResourceById(id);
         ResourcesDTO resourcesDto = new ResourcesDTO();
         resourcesDto.setName(existingResource.getName());
@@ -255,6 +252,8 @@ public class EmployeeController {
         mav.addObject("employee",
                 employeeService.getEmployeeById(ContextController.getEmployee().getId()));
         mav.addObject("resource", existingResource);
+        mav.addObject("resourceId", existingResource.getId());
+        mav.addObject("currentDegree", existingResource.getDegree().toString());
 
         return mav;
     }
@@ -290,17 +289,13 @@ public class EmployeeController {
 
     @GetMapping("/employee/resources/{id}/delete")
     public String deleteResources(@PathVariable Long id) {
-        Resource resource = resourceService.findResourceById(id);
-
+//        Resource resource = resourceService.findResourceById(id);
         // Delete properties associated with resource and resource
-        addressRepository.delete(resource.getAddress());
-
+//        addressService.deleteAddressById(resource.getAddress().getId());
         resourceService.deleteResourceById(id);
 
         return "redirect:/employee/resources";
     }
-
-
 
 
     // ADMIN ACTIONS ON EMPLOYEE ENTITY*****
