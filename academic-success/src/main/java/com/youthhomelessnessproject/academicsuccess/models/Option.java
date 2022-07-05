@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 
 @Data
+@AllArgsConstructor
 @NoArgsConstructor
 
 @Entity

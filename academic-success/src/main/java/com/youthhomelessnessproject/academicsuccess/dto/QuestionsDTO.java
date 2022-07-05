@@ -77,6 +77,8 @@ public class QuestionsDTO {
         this.options = options;
     }
 
+    public void addOption(Option option) { this.options.add(option); }
+
     public Boolean getFoodResource() {
         return foodResource;
     }

@@ -255,8 +255,9 @@
                                     <td th:text="${question.housingResource}"></td>
                                     <td th:text="${question.dependentResource}"></td>
                                     <td>
-                                        <!--                                        <a th:href="@{/employee/question/{id}(id=${questionH.id})}"-->
-                                        <!--                                           class="btn btn-primary" >Update</a>-->
+                                        <a th:href="@{/employee/questions/{id}/edit(id=${question.id})}"
+                                           class="btn btn-outline-primary"
+                                        >Edit</a>
                                         <a th:href="@{/employee/questions/{id}/delete(id=${question.id})}"
                                            class="btn btn-danger"
                                         >Delete</a>
@@ -267,7 +268,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- /.container-fluid -->
 
