@@ -8,6 +8,7 @@ import com.youthhomelessnessproject.academicsuccess.services.AdminService;
 import com.youthhomelessnessproject.academicsuccess.services.EmployeeService;
 import com.youthhomelessnessproject.academicsuccess.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,10 @@ public class RegistrationController {
 
     @Autowired
     private AdminService adminService;
+   
+    @Autowired
+	  private PasswordEncoder bcryptEncoder;
+    
 
 
     @PostMapping("/register")

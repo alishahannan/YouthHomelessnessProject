@@ -8,6 +8,7 @@
         <version>2.7.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+   
     <groupId>com.youth-homelessness-project</groupId>
     <artifactId>academic-success</artifactId>
     <version>1.0.0</version>
@@ -62,11 +63,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+        
     </dependencies>
 
     <build>
