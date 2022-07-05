@@ -36,14 +36,13 @@
 
             <div class="sidebar-brand-text mx-3">Student Success<sup></sup></div>
         </a>
-<!--        <br>-->
+        <!--        <br>-->
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link"
-               th:href="@{/employee/dashboard}">
+            <a class="nav-link" href="/employee/dashboard">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -93,9 +92,10 @@
                 <span>List All Questions</span></a>
         </li>
 
+
         <!-- Nav Item - logout -->
         <li class="nav-item">
-            <a class="nav-link" href="/" data-toggle="modal" data-target="">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fas fa-sign-out-alt "></i>
                 Logout
             </a>
@@ -159,16 +159,17 @@
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow" th:object="${admin}">
+                    <li class="nav-item dropdown no-arrow" th:object="${employee}">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!--<span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"
 
-                             th:text="${teacher.firstName}"
-                            ></span>-->
+                                      th:text="${employee.firstName}"
+                                ></span>
                             <img class="img-profile rounded-circle"
                                  src="/img/undraw_profile.svg">
-<!--                                 src="/static/js/img/undraw_profile.svg">-->
+                            <!--                                 src="/static/js/img/undraw_profile.svg"> DOESN'T WORK....-->
+
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -191,67 +192,207 @@
             <div class="container-fluid">
 
 
-                <!-- DataTales Example -->
-                <div class="card shadow mb-4" style="padding: 80px 200px;">
-                    <h1 class="h4 text-gray-900 mb-4">Update the Question</h1>
-
-
-                    <form th:action="@{/employee/questions/{id}/edit(id=${questionsDto.id})}" th:object="${questionsDto}" method="POST">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Subject</label>
-
-                            <select id="inputState" class="form-control"
-                                    th:field="*{subject}">
-                                <option value="science">Science</option>
-                                <option value="maths">Maths</option>
-                                <option value="physics">Physics</option>
-                                <option value="english">English</option >
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Question Title</label>
-                            <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                   th:field="*{questionTitle}"
-                                   placeholder="">
-
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Option 1" th:field="*{optionOne}">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Option 2" th:field="*{optionTwo}">
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Option 3" th:field="*{optionThree}">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="Option 4" th:field="*{optionFour}">
-                            </div>
-                        </div>
-                        <br>
-
-                        <div class="form-group">
-                            <label for="exampleFormControlSelect1">Correct Option</label>
-                            <select class="form-control"
-
-                                    th:field="*{correctAnswer}"
-                                    id="exampleFormControlSelect1">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-
-                            </select>
-                        </div>
-
-                        <br>
-                        <button type="submit" class="btn btn-primary">Update this question</button>
-                    </form>
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Add a New Question</h1>
                 </div>
+
+                <!-- Content Col -->
+                <div class="col">
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Content Col -->
+                        <div class="col">
+
+                            <!-- Card border-left -->
+                            <div class="card border-left-primary shadow h100 py-1">
+
+                                <!-- card-body -->
+                                <div class="card-body">
+
+                                    <!-- row no-gutters -->
+                                    <div class="row no-gutters align-items-center">
+
+                                        <!-- Col containing -->
+                                        <div class="col">
+                                            <!-- TODO double-check questionsDto.id May have to pass into MAV in controller like edit-resource -->
+                                            <form th:action="@{/employee/questions/{id}/edit(id=${questionsDto.id})}" th:object="${questionsDto}"
+                                                  method="POST">
+
+                                                <div class="form-group">
+
+                                                    <div class="col">
+
+                                                        <div class="row">
+
+                                                            <div class="col">
+                                                                <label style="font-weight: bold">Question</label>
+
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{title}"
+                                                                       placeholder="Question"
+                                                                       required>
+                                                                <br>
+
+                                                                <label style="font-weight: bold">Options</label>
+
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{option1}"
+                                                                       required>
+                                                                <input type="hidden" th:field="*{options[0].optionTitle}"/>
+                                                                <br>
+                                                                <input type="number" step="1" min="-5.0" max="5.0"
+                                                                       class="form-control"
+                                                                       th:field="*{option1Value}"
+                                                                       placeholder="Option 1 Value"
+                                                                       required>
+                                                                <input type="hidden" th:field="*{options[0].value}"/>
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{option2}"
+                                                                       placeholder="Option 2">
+                                                                <br>
+                                                                <input type="number" step="1" min="-5.0" max="5.0"
+                                                                       class="form-control"
+                                                                       th:field="*{option2Value}"
+                                                                       placeholder="Option 2 Value">
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{option3}"
+                                                                       placeholder="Option 3">
+                                                                <br>
+                                                                <input type="number" step="1" min="-5.0" max="5.0"
+                                                                       class="form-control"
+                                                                       th:field="*{option3Value}"
+                                                                       placeholder="Option 3 Value">
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{option4}"
+                                                                       placeholder="Option 4">
+                                                                <br>
+                                                                <input type="number" step="1" min="-5.0" max="5.0"
+                                                                       class="form-control"
+                                                                       th:field="*{option4Value}"
+                                                                       placeholder="Option 4 Value">
+                                                                <br>
+                                                                <input type="text"
+                                                                       class="form-control"
+                                                                       th:field="*{option5}"
+                                                                       placeholder="Option 5">
+                                                                <br>
+                                                                <input type="number" step="1" min="-5.0" max="5.0"
+                                                                       class="form-control"
+                                                                       th:field="*{option5Value}"
+                                                                       placeholder="Option 5 Value">
+                                                                <br>
+
+
+                                                                <!-- Column for Resource Categories -->
+                                                                <div class="col">
+                                                                    <div class="row">
+                                                                        <label for="resourceTagCheckboxSelect1" style="font-weight: bold;">Resource Category</label>
+                                                                    </div>
+                                                                    <div class="row" id="resourceTagCheckboxSelect1">
+                                                                        <label style="align-items: center; display: flex; padding: 4px;">
+                                                                            <input type="checkbox"
+                                                                                   name="resourceCheckbox"
+                                                                                   style="margin-right: 4px;"
+                                                                                   th:value="${foodResource}"
+                                                                                   th:field="*{foodResource}"> Food
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <label style="align-items: center; display: flex; padding: 4px;">
+                                                                            <input type="checkbox"
+                                                                                   name="resourceCheckbox"
+                                                                                   style="margin-right: 4px;"
+                                                                                   th:value="${housingResource}"
+                                                                                   th:field="*{housingResource}"/> Housing
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <label style="align-items: center; display: flex; padding: 4px;">
+                                                                            <input type="checkbox"
+                                                                                   name="resourceCheckbox"
+                                                                                   style="margin-right: 4px;"
+                                                                                   th:value="${dependentResource}"
+                                                                                   th:field="*{dependentResource}"> Dependent
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <script>
+                                                                        function checkResourceCategorySelected() {
+                                                                            if (!$('input[name=resourceCheckbox]:checked').length > 0) {
+                                                                                document.getElementById("errMessage").innerHTML = "At least one resource category must be selected";
+                                                                                return false;
+                                                                            }
+                                                                            alert("Success");
+                                                                            return true;
+                                                                        }
+                                                                    </script>
+                                                                    <input type="hidden" th:field="*{id}"/>
+
+                                                                    <!-- Question Weight Multiplier Option -->
+                                                                    <!--                                                                    <div class="row">-->
+                                                                    <!--                                                                        <label for="resourceTagCheckboxSelect1" style="font-weight: bold;">Question Weight</label>-->
+                                                                    <!--                                                                    </div>-->
+                                                                    <!--                                                                    <select th:field="*{option3Value}">-->
+                                                                    <!--                                                                        <option th:each="i : ${#numbers.sequence(-2, 2)}" th:value="${i}" th:text="${i}">-->
+
+                                                                    <!--                                                                        </option>-->
+                                                                    <!--                                                                    </select>-->
+                                                                </div>
+                                                                <!-- End of Column for Resource Categories -->
+
+                                                                <button type="submit" class="btn btn-primary">Update Question</button>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </form>
+
+                                        </div>
+                                        <!-- End col mr-2 -->
+
+                                    </div>
+                                    <!-- End row no-gutters -->
+
+                                </div>
+                                <!-- End card-body -->
+
+                            </div>
+                            <!-- End card border-left -->
+
+                        </div>
+                        <!-- End Content Col -->
+
+                    </div>
+                    <!-- End Content Row -->
+
+                </div>
+                <!-- End Content Col -->
+
+                <!-- DataTales Example -->
+                <!--                <div class="card shadow mb-4" style="padding: 80px 200px;">-->
+                <!--                    <h1 class="h4 text-gray-900 mb-4">Add a New Question</h1>-->
+
+
+                <!--                </div>-->
 
             </div>
             <!-- /.container-fluid -->
