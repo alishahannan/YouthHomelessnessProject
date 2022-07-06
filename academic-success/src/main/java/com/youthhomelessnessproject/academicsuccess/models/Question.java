@@ -36,15 +36,15 @@ public class Question {
     private Boolean housingResource;
     private Boolean dependentResource;
 
-    private String option1;
-    private Double option1Value;
-    private String option2;
-    private Double option2Value;
-    private String option3;
-    private Double option3Value;
-    private String option4;
-    private Double option4Value;
-    private String option5;
-    private Double option5Value;
+//    private String option1;
+//    private Double option1Value;
+//    private String option2;
+//    private Double option2Value;
+//    private String option3;
+//    private Double option3Value;
+//    private String option4;
+//    private Double option4Value;
+//    private String option5;
+//    private Double option5Value;
 
 }

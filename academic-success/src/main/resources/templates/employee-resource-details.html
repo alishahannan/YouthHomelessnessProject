@@ -222,7 +222,7 @@
                                             <div th:if="${not #strings.isEmpty(resource.address.website)}">
                                                 <div class="text-s text-gray-900 mb-1">
                                                     <a th:href="@{${resource.address.website}}"
-                                                       th:text="${resource.address.website}"></a>
+                                                       th:text="${resource.address.website}" th:target="_blank"></a>
                                                 </div>
                                             </div>
                                             <div class="text-s text-gray-900 mb-3"
