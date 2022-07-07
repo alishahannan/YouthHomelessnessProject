@@ -241,16 +241,16 @@
                                 <tr th:each="question : ${questions}">
 
                                     <td th:text="${question.title}"></td>
-                                    <td th:text="${question.option1}"></td>
-                                    <td th:text="${question.option1Value}"></td>
-                                    <td th:text="${question.option2}"></td>
-                                    <td th:text="${question.option2Value}"></td>
-                                    <td th:text="${question.option3}"></td>
-                                    <td th:text="${question.option3Value}"></td>
-                                    <td th:text="${question.option4}"></td>
-                                    <td th:text="${question.option4Value}"></td>
-                                    <td th:text="${question.option5}"></td>
-                                    <td th:text="${question.option5Value}"></td>
+                                    <td th:text="${question.options[0].optionTitle}"></td>
+                                    <td th:text="${question.options[0].value}"></td>
+                                    <td th:text="${question.options[1].optionTitle}"></td>
+                                    <td th:text="${question.options[1].value}"></td>
+                                    <td th:text="${question.options[2].optionTitle}"></td>
+                                    <td th:text="${question.options[2].value}"></td>
+                                    <td th:text="${question.options[3].optionTitle}"></td>
+                                    <td th:text="${question.options[3].value}"></td>
+                                    <td th:text="${question.options[4].optionTitle}"></td>
+                                    <td th:text="${question.options[4].value}"></td>
                                     <td th:text="${question.foodResource}"></td>
                                     <td th:text="${question.housingResource}"></td>
                                     <td th:text="${question.dependentResource}"></td>

@@ -51,6 +51,13 @@ public class EmployeeController {
     public ModelAndView showAddQuestionForm() {
         ModelAndView mav = new ModelAndView("employee-add-question");
         QuestionsDTO questionsDto = new QuestionsDTO();
+        List<Option> options = new ArrayList<>();
+
+        for(int i = 0; i < 5; i++) {
+            Option option = new Option("", 0);
+            options.add(option);
+        }
+        questionsDto.setOptions(options);
         mav.addObject("questionsDto", questionsDto);
         mav.addObject("employee", employeeService.getEmployeeById(ContextController.getEmployee().getId()));
         return mav;
@@ -78,32 +85,6 @@ public class EmployeeController {
 
         // Set questions title and available options
         questionsDto.setTitle(existingQuestion.getTitle());
-
-        if(existingQuestion.getOption1() != null) {
-            questionsDto.setOption1(existingQuestion.getOption1());
-            questionsDto.setOption1Value(existingQuestion.getOption1Value());
-        }
-
-        if(existingQuestion.getOption2() != null) {
-            questionsDto.setOption2(existingQuestion.getOption2());
-            questionsDto.setOption2Value(existingQuestion.getOption2Value());
-        }
-
-        if(existingQuestion.getOption3() != null) {
-            questionsDto.setOption3(existingQuestion.getOption3());
-            questionsDto.setOption3Value(existingQuestion.getOption3Value());
-        }
-
-        if(existingQuestion.getOption4() != null) {
-            questionsDto.setOption4(existingQuestion.getOption4());
-            questionsDto.setOption4Value(existingQuestion.getOption4Value());
-        }
-
-        if(existingQuestion.getOption5() != null) {
-            questionsDto.setOption5(existingQuestion.getOption5());
-            questionsDto.setOption5Value(existingQuestion.getOption5Value());
-        }
-
         questionsDto.setQuestionOptions(existingQuestion.getOptions());
         questionsDto.setFoodResource(existingQuestion.getFoodResource());
         questionsDto.setHousingResource(existingQuestion.getHousingResource());
@@ -126,109 +107,33 @@ public class EmployeeController {
         return "redirect:/employee/questions";
     }
 
-    /* This method is used to set properties of new and existing questions
-     * If id == -1, we are creating a new question. Otherwise, existing
-     * question id is passed  */
     public void setQuestionProps(QuestionsDTO questionsDto, long id) {
         Question question;
-        List<Option> optionsList = new ArrayList<>();
-        Option option1;
-        Option option2;
-        Option option3;
-        Option option4;
-        Option option5;
+        List<Option> options;
 
         if(id == -1) {
+            // Creating a new question
             question = new Question();
+            options = questionsDto.getOptions();
+            System.out.println("Printing option titles from setQuestionPropsExp method: \n");
+            for(Option option : options) {
+                option.setQuestion(question);
+                System.out.println("Title: " + option.getOptionTitle());
+                System.out.println("Value: " + option.getValue());
+            }
+
         } else {
+            // Editing an existing question
             question = questionService.findQuestionById(id);
-            optionsList = optionService.getOptionsByQuestionId(question.getId());
-        }
-
-        List<Option> options = new ArrayList<>();
-        String optionText = "";
-        Double optionValue = 0.0;
-
-        if(!questionsDto.getOption1().isEmpty()) {
-            optionText = questionsDto.getOption1();
-            optionValue = questionsDto.getOption1Value();
-
-            if(optionsList.size() >= 1) {
-                option1 = optionsList.get(0);
-                option1.setOptionTitle(optionText);
-                option1.setValue(optionValue);
-            } else {
-                option1 = new Option(optionText, optionValue);
+            List<Option> prevOptions = optionService.getOptionsByQuestionId(question.getId());
+            int count = 0;
+            options = questionsDto.getOptions();
+            System.out.println("Printing options from setQuestionPropsExp Method: ");
+            for(Option o : options) {
+                o.setId(prevOptions.get(count++).getId());
+                o.setQuestion(question);
+                System.out.println("Option: ID = " + o.getId() + ": title = " + o.getOptionTitle() + ", value = " + o.getValue());
             }
-            option1.setQuestion(question);
-            options.add(option1);
-            question.setOption1(optionText);
-            question.setOption1Value(optionValue);
-        }
-        if(!questionsDto.getOption2().isEmpty()) {
-            optionText = questionsDto.getOption2();
-            optionValue = questionsDto.getOption2Value();
-
-            if(optionsList.size() >= 2) {
-                option2 = optionsList.get(1);
-                option2.setOptionTitle(optionText);
-                option2.setValue(optionValue);
-            } else {
-                option2 = new Option(optionText, optionValue);
-            }
-            option2.setQuestion(question);
-            options.add(option2);
-            question.setOption2(optionText);
-            question.setOption2Value(optionValue);
-        }
-
-        if(!questionsDto.getOption3().isEmpty()) {
-            optionText = questionsDto.getOption3();
-            optionValue = questionsDto.getOption3Value();
-
-            if(optionsList.size() >= 3) {
-                option3 = optionsList.get(2);
-                option3.setOptionTitle(optionText);
-                option3.setValue(optionValue);
-            } else {
-                option3 = new Option(optionText, optionValue);
-            }
-            option3.setQuestion(question);
-            options.add(option3);
-            question.setOption3(optionText);
-            question.setOption3Value(optionValue);
-        }
-        if(!questionsDto.getOption4().isEmpty()) {
-            optionText = questionsDto.getOption4();
-            optionValue = questionsDto.getOption4Value();
-
-            if(optionsList.size() >= 4) {
-                option4 = optionsList.get(3);
-                option4.setOptionTitle(optionText);
-                option4.setValue(optionValue);
-            } else {
-                option4 = new Option(optionText, optionValue);
-            }
-            option4.setQuestion(question);
-            options.add(option4);
-            question.setOption4(optionText);
-            question.setOption4Value(optionValue);
-        }
-        if(!questionsDto.getOption5().isEmpty()) {
-            optionText = questionsDto.getOption5();
-            optionValue = questionsDto.getOption5Value();
-
-            if(optionsList.size() >= 5) {
-                option5 = optionsList.get(4);
-                option5.setOptionTitle(optionText);
-                option5.setValue(optionValue);
-            } else {
-                option5 = new Option(optionText, optionValue);
-            }
-            option5.setQuestion(question);
-            options.add(option5);
-            question.setOption5(optionText);
-            question.setOption5Value(optionValue);
         }
         question.setTitle(questionsDto.getTitle());
         question.setFoodResource(questionsDto.getFoodResource());
