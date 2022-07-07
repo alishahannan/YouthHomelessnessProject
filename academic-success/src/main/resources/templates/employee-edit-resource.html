@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Add Resource</title>
+    <title>Edit Resource</title>
 
     <!-- Custom fonts for this template -->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -32,7 +32,7 @@
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/employee/dashboard">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fa-solid fa-pen-clip"></i>
             </div>
@@ -329,7 +329,7 @@
                                                                     Degree: (0 - 5.0 = low, 5.0 - 10.0 = medium, 15+ = high)
                                                                 </label>
                                                                 <br>
-                                                                <span th:text="|Current value: ${currentDegree}|"></span>
+
                                                                 <input type="number" step="0.1" min="0.0"
                                                                        class="form-control"
                                                                        th:field="*{degree}"

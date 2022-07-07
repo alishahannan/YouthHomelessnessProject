@@ -34,7 +34,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/employee/dashboard">
 
             <div class="sidebar-brand-text mx-3">Student Success</div>
         </a>
@@ -241,22 +241,23 @@
                                 <tr th:each="question : ${questions}">
 
                                     <td th:text="${question.title}"></td>
-                                    <td th:text="${question.option1}"></td>
-                                    <td th:text="${question.option1Value}"></td>
-                                    <td th:text="${question.option2}"></td>
-                                    <td th:text="${question.option2Value}"></td>
-                                    <td th:text="${question.option3}"></td>
-                                    <td th:text="${question.option3Value}"></td>
-                                    <td th:text="${question.option4}"></td>
-                                    <td th:text="${question.option4Value}"></td>
-                                    <td th:text="${question.option5}"></td>
-                                    <td th:text="${question.option5Value}"></td>
+                                    <td th:text="${question.options[0].optionTitle}"></td>
+                                    <td th:text="${question.options[0].value}"></td>
+                                    <td th:text="${question.options[1].optionTitle}"></td>
+                                    <td th:text="${question.options[1].value}"></td>
+                                    <td th:text="${question.options[2].optionTitle}"></td>
+                                    <td th:text="${question.options[2].value}"></td>
+                                    <td th:text="${question.options[3].optionTitle}"></td>
+                                    <td th:text="${question.options[3].value}"></td>
+                                    <td th:text="${question.options[4].optionTitle}"></td>
+                                    <td th:text="${question.options[4].value}"></td>
                                     <td th:text="${question.foodResource}"></td>
                                     <td th:text="${question.housingResource}"></td>
                                     <td th:text="${question.dependentResource}"></td>
                                     <td>
-                                        <!--                                        <a th:href="@{/employee/question/{id}(id=${questionH.id})}"-->
-                                        <!--                                           class="btn btn-primary" >Update</a>-->
+                                        <a th:href="@{/employee/questions/{id}/edit(id=${question.id})}"
+                                           class="btn btn-outline-primary"
+                                        >Edit</a>
                                         <a th:href="@{/employee/questions/{id}/delete(id=${question.id})}"
                                            class="btn btn-danger"
                                         >Delete</a>
@@ -267,7 +268,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- /.container-fluid -->
 

@@ -32,7 +32,7 @@
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/employee/dashboard">
 
             <div class="sidebar-brand-text mx-3">Student Success<sup></sup></div>
         </a>
@@ -242,54 +242,54 @@
                                                                 <br>
                                                                 <input type="text"
                                                                        class="form-control"
-                                                                       th:field="*{option1}"
+                                                                       th:field="*{options[0].optionTitle}"
                                                                        placeholder="Option 1"
                                                                        required>
                                                                 <br>
-                                                                <input type="number" step="1" min="-5.0" max="5.0"
+                                                                <input type="number" step="1" min="-5" max="5"
                                                                        class="form-control"
-                                                                       th:field="*{option1Value}"
+                                                                       th:field="*{options[0].value}"
                                                                        placeholder="Option 1 Value"
                                                                        required>
                                                                 <br>
                                                                 <input type="text"
                                                                        class="form-control"
-                                                                       th:field="*{option2}"
+                                                                       th:field="*{options[1].optionTitle}"
                                                                        placeholder="Option 2">
                                                                 <br>
-                                                                <input type="number" step="1" min="-5.0" max="5.0"
+                                                                <input type="number" step="1" min="-5" max="5"
                                                                        class="form-control"
-                                                                       th:field="*{option2Value}"
+                                                                       th:field="*{options[1].value}"
                                                                        placeholder="Option 2 Value">
                                                                 <br>
                                                                 <input type="text"
                                                                        class="form-control"
-                                                                       th:field="*{option3}"
+                                                                       th:field="*{options[2].optionTitle}"
                                                                        placeholder="Option 3">
                                                                 <br>
-                                                                <input type="number" step="1" min="-5.0" max="5.0"
+                                                                <input type="number" step="1" min="-5" max="5"
                                                                        class="form-control"
-                                                                       th:field="*{option3Value}"
+                                                                       th:field="*{options[2].value}"
                                                                        placeholder="Option 3 Value">
                                                                 <br>
                                                                 <input type="text"
                                                                        class="form-control"
-                                                                       th:field="*{option4}"
+                                                                       th:field="*{options[3].optionTitle}"
                                                                        placeholder="Option 4">
                                                                 <br>
-                                                                <input type="number" step="1" min="-5.0" max="5.0"
+                                                                <input type="number" step="1" min="-5" max="5"
                                                                        class="form-control"
-                                                                       th:field="*{option4Value}"
+                                                                       th:field="*{options[3].value}"
                                                                        placeholder="Option 4 Value">
                                                                 <br>
                                                                 <input type="text"
                                                                        class="form-control"
-                                                                       th:field="*{option5}"
+                                                                       th:field="*{options[4].optionTitle}"
                                                                        placeholder="Option 5">
                                                                 <br>
                                                                 <input type="number" step="1" min="-5.0" max="5.0"
                                                                        class="form-control"
-                                                                       th:field="*{option5Value}"
+                                                                       th:field="*{options[4].value}"
                                                                        placeholder="Option 5 Value">
                                                                 <br>
 
