@@ -109,12 +109,11 @@ public class EmployeeController {
 
     public void setQuestionProps(QuestionsDTO questionsDto, long id) {
         Question question;
-        List<Option> options;
+        List<Option> options = questionsDto.getOptions();
 
         if(id == -1) {
             // Creating a new question
             question = new Question();
-            options = questionsDto.getOptions();
             System.out.println("Printing option titles from setQuestionPropsExp method: \n");
             for(Option option : options) {
                 option.setQuestion(question);
@@ -127,7 +126,6 @@ public class EmployeeController {
             question = questionService.findQuestionById(id);
             List<Option> prevOptions = optionService.getOptionsByQuestionId(question.getId());
             int count = 0;
-            options = questionsDto.getOptions();
             System.out.println("Printing options from setQuestionPropsExp Method: ");
             for(Option o : options) {
                 o.setId(prevOptions.get(count++).getId());
