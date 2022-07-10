@@ -27,32 +27,49 @@ public class AdminController {
     private EmployeeService employeeService;
 
 
+    // If admin not found, NullPointerException (error 500) is thrown by
+    // admin.firstName on each page. This redirects to 403 instead of 500 page
+    public String checkIsAdmin(Model model, String page) {
+        try {
+            Admin admin = adminService.getAdminById(ContextController.getAdmin().getId());
+            model.addAttribute("admin", admin);
+            return page;
+        } catch (Exception e) {
+            return "/error/403";
+        }
+    }
+
+
     @GetMapping("/admin/dashboard")
     public String showAdminDashboard(Model model) {
         List<Student> students = studentService.getAllStudents();
         List<Admin> admins = adminService.getAllAdmins();
         List<Employee> employees = employeeService.getAllEmployees();
-        model.addAttribute("admin", ContextController.getAdmin());
         model.addAttribute("students", students);
         model.addAttribute("admins", admins);
         model.addAttribute("employees", employees);
-
-        return "admin-dashboard";
+        return checkIsAdmin(model, "admin-dashboard");
     }
 
     @GetMapping("/admin/users")
     public String showAddUsersPage(Model model) {
         UserDTO userDTO = new UserDTO();
-        model.addAttribute("admin", ContextController.getAdmin());
         model.addAttribute("userDto", userDTO);
-        return "admin-add-user";
+        return checkIsAdmin(model, "admin-add-user");
     }
 
     @GetMapping("/admin/edit/{id}")
     public String showAdminEditPage(@PathVariable Long id, Model model) {
         Admin admin = adminService.getAdminById(id);
         model.addAttribute("admin", admin);
-        return "admin-admin-edit";
+        try {
+            // Check if admin logged in
+            ContextController.getAdmin().getId();
+            return "admin-admin-edit";
+        } catch (Exception e) {
+            return "/error/403";
+        }
+
     }
 
     @PostMapping("/admin/edit/{id}")
