@@ -240,59 +240,95 @@
                                                                 <label style="font-weight: bold">Options</label>
 
                                                                 <br>
-                                                                <input type="text"
-                                                                       class="form-control"
-                                                                       th:field="*{options[0].optionTitle}"
-                                                                       placeholder="Option 1"
-                                                                       required>
-                                                                <br>
-                                                                <input type="number" step="1" min="-5" max="5"
-                                                                       class="form-control"
-                                                                       th:field="*{options[0].value}"
-                                                                       placeholder="Option 1 Value"
-                                                                       required>
-                                                                <br>
-                                                                <input type="text"
-                                                                       class="form-control"
-                                                                       th:field="*{options[1].optionTitle}"
-                                                                       placeholder="Option 2">
-                                                                <br>
-                                                                <input type="number" step="1" min="-5" max="5"
-                                                                       class="form-control"
-                                                                       th:field="*{options[1].value}"
-                                                                       placeholder="Option 2 Value">
-                                                                <br>
-                                                                <input type="text"
-                                                                       class="form-control"
-                                                                       th:field="*{options[2].optionTitle}"
-                                                                       placeholder="Option 3">
-                                                                <br>
-                                                                <input type="number" step="1" min="-5" max="5"
-                                                                       class="form-control"
-                                                                       th:field="*{options[2].value}"
-                                                                       placeholder="Option 3 Value">
-                                                                <br>
-                                                                <input type="text"
-                                                                       class="form-control"
-                                                                       th:field="*{options[3].optionTitle}"
-                                                                       placeholder="Option 4">
-                                                                <br>
-                                                                <input type="number" step="1" min="-5" max="5"
-                                                                       class="form-control"
-                                                                       th:field="*{options[3].value}"
-                                                                       placeholder="Option 4 Value">
-                                                                <br>
-                                                                <input type="text"
-                                                                       class="form-control"
-                                                                       th:field="*{options[4].optionTitle}"
-                                                                       placeholder="Option 5">
-                                                                <br>
-                                                                <input type="number" step="1" min="-5.0" max="5.0"
-                                                                       class="form-control"
-                                                                       th:field="*{options[4].value}"
-                                                                       placeholder="Option 5 Value">
-                                                                <br>
+                                                                <div th:each="option, i : ${questionsDto.options}" >
 
+                                                                    <!-- Require input for first optionTitle and value -->
+                                                                    <div th:if="${ i.index == 0 }">
+                                                                        <input type="text"
+                                                                               class="form-control"
+                                                                               th:name="optionTitle"
+                                                                               th:value="${option.optionTitle}"
+                                                                               th:field="*{options[__${i.index}__].optionTitle}"
+                                                                               th:placeholder="${'Option ' + (i.index + 1)}"
+                                                                               required >
+                                                                        <br>
+                                                                        <input type="number" step="1" min="-5.0" max="5.0"
+                                                                               class="form-control"
+                                                                               th:name="value"
+                                                                               th:value="${option.value}"
+                                                                               th:field="*{options[__${i.index}__].value}"
+                                                                               required >
+                                                                        <br>
+                                                                    </div>
+                                                                    <div th:if="${i.index != 0}">
+                                                                        <input type="text"
+                                                                               class="form-control"
+                                                                               th:name="optionTitle"
+                                                                               th:value="${option.optionTitle}"
+                                                                               th:field="*{options[__${i.index}__].optionTitle}"
+                                                                               th:placeholder="${'Option ' + (i.index + 1)}" >
+                                                                        <br>
+                                                                        <input type="number" step="1" min="-5.0" max="5.0"
+                                                                               class="form-control"
+                                                                               th:name="value"
+                                                                               th:value="${option.value}"
+                                                                               th:field="*{options[__${i.index}__].value}">
+                                                                        <br>
+                                                                    </div>
+                                                                </div>
+
+<!--                                                                <input type="text"-->
+<!--                                                                       class="form-control"-->
+<!--                                                                       th:field="*{options[0].optionTitle}"-->
+<!--                                                                       placeholder="Option 1"-->
+<!--                                                                       required>-->
+<!--                                                                <br>-->
+<!--                                                                <input type="number" step="1" min="-5" max="5"-->
+<!--                                                                       class="form-control"-->
+<!--                                                                       th:field="*{options[0].value}"-->
+<!--                                                                       placeholder="Option 1 Value"-->
+<!--                                                                       required>-->
+<!--                                                                <br>-->
+<!--                                                                <input type="text"-->
+<!--                                                                       class="form-control"-->
+<!--                                                                       th:field="*{options[1].optionTitle}"-->
+<!--                                                                       placeholder="Option 2">-->
+<!--                                                                <br>-->
+<!--                                                                <input type="number" step="1" min="-5" max="5"-->
+<!--                                                                       class="form-control"-->
+<!--                                                                       th:field="*{options[1].value}"-->
+<!--                                                                       placeholder="Option 2 Value">-->
+<!--                                                                <br>-->
+<!--                                                                <input type="text"-->
+<!--                                                                       class="form-control"-->
+<!--                                                                       th:field="*{options[2].optionTitle}"-->
+<!--                                                                       placeholder="Option 3">-->
+<!--                                                                <br>-->
+<!--                                                                <input type="number" step="1" min="-5" max="5"-->
+<!--                                                                       class="form-control"-->
+<!--                                                                       th:field="*{options[2].value}"-->
+<!--                                                                       placeholder="Option 3 Value">-->
+<!--                                                                <br>-->
+<!--                                                                <input type="text"-->
+<!--                                                                       class="form-control"-->
+<!--                                                                       th:field="*{options[3].optionTitle}"-->
+<!--                                                                       placeholder="Option 4">-->
+<!--                                                                <br>-->
+<!--                                                                <input type="number" step="1" min="-5" max="5"-->
+<!--                                                                       class="form-control"-->
+<!--                                                                       th:field="*{options[3].value}"-->
+<!--                                                                       placeholder="Option 4 Value">-->
+<!--                                                                <br>-->
+<!--                                                                <input type="text"-->
+<!--                                                                       class="form-control"-->
+<!--                                                                       th:field="*{options[4].optionTitle}"-->
+<!--                                                                       placeholder="Option 5">-->
+<!--                                                                <br>-->
+<!--                                                                <input type="number" step="1" min="-5.0" max="5.0"-->
+<!--                                                                       class="form-control"-->
+<!--                                                                       th:field="*{options[4].value}"-->
+<!--                                                                       placeholder="Option 5 Value">-->
+<!--                                                                <br>-->
 
                                                                 <!-- Column for Resource Categories -->
                                                                 <div class="col">
@@ -384,13 +420,6 @@
 
                 </div>
                 <!-- End Content Col -->
-
-                <!-- DataTales Example -->
-<!--                <div class="card shadow mb-4" style="padding: 80px 200px;">-->
-<!--                    <h1 class="h4 text-gray-900 mb-4">Add a New Question</h1>-->
-
-
-<!--                </div>-->
 
             </div>
             <!-- /.container-fluid -->
