@@ -38,18 +38,27 @@ public class EmployeeController {
     @Autowired
     private AddressService addressService;
 
+    // If employee not found, NullPointerException (error 500) is thrown by
+    // employee.firstName on each page. This redirects to 403 instead of 500 page
+    public String checkIsEmployee(Model model, String page) {
+        try {
+            Employee employee = employeeService.getEmployeeById(ContextController.getEmployee().getId());
+            model.addAttribute("employee", employee);
+            return page;
+        } catch (Exception e) {
+            return "/error/403";
+        }
+    }
 
     @GetMapping("/employee/dashboard")
     public String showEmployeeDashboard(Model model) {
         List<Resource> resources = resourceService.getAllResources();
         model.addAttribute("allResources", resources);
-        model.addAttribute("employee", employeeService.getEmployeeById(ContextController.getEmployee().getId()));
-        return "employee-dashboard";
+        return checkIsEmployee(model, "employee-dashboard");
     }
 
     @GetMapping("/employee/questions/new")
-    public ModelAndView showAddQuestionForm() {
-        ModelAndView mav = new ModelAndView("employee-add-question");
+    public String showAddQuestionForm(Model model) {
         QuestionsDTO questionsDto = new QuestionsDTO();
         List<Option> options = new ArrayList<>();
 
@@ -58,9 +67,9 @@ public class EmployeeController {
             options.add(option);
         }
         questionsDto.setOptions(options);
-        mav.addObject("questionsDto", questionsDto);
-        mav.addObject("employee", employeeService.getEmployeeById(ContextController.getEmployee().getId()));
-        return mav;
+        model.addAttribute("questionsDto", questionsDto);
+
+        return checkIsEmployee(model, "employee-add-question");
     }
 
     @PostMapping("/employee/questions/new")
@@ -70,16 +79,15 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/questions")
-    public ModelAndView showAllQuestionsPage() {
+    public String showAllQuestionsPage(Model model) {
         ModelAndView mav = new ModelAndView("employee-questions-list");
         List<Question> questions = questionService.getAllQuestions();
-        mav.addObject("questions", questions);
-        return mav;
+        model.addAttribute("questions", questions);
+        return checkIsEmployee(model, "employee-questions-list");
     }
 
     @GetMapping("/employee/questions/{id}/edit")
-    public ModelAndView showModifyQuestionForm(@PathVariable Long id) {
-        ModelAndView mav = new ModelAndView("employee-edit-question");
+    public String showModifyQuestionForm(@PathVariable Long id, Model model) {
         Question existingQuestion = questionService.findQuestionById(id);
         QuestionsDTO questionsDto = new QuestionsDTO();
 
@@ -90,9 +98,8 @@ public class EmployeeController {
         questionsDto.setHousingResource(existingQuestion.getHousingResource());
         questionsDto.setDependentResource(existingQuestion.getDependentResource());
         questionsDto.setId(existingQuestion.getId());
-        mav.addObject("questionsDto", questionsDto);
-        mav.addObject("employee", employeeService.getEmployeeById(ContextController.getEmployee().getId()));
-        return mav;
+        model.addAttribute("questionsDto", questionsDto);
+        return checkIsEmployee(model, "employee-edit-question");
     }
 
     @PostMapping("/employee/questions/{id}/edit")
@@ -151,9 +158,7 @@ public class EmployeeController {
     public String showAddResourceForm(Model model) {
         ResourcesDTO resourcesDto = new ResourcesDTO();
         model.addAttribute("resourcesDto", resourcesDto);
-        model.addAttribute("employee",
-                employeeService.getEmployeeById(ContextController.getEmployee().getId()));
-        return "employee-add-resource";
+        return checkIsEmployee(model, "employee-add-resource");
     }
 
     @PostMapping("/employee/resources/new")
@@ -172,17 +177,15 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/resources/{id}")
-    public ModelAndView showResourceDetails(@PathVariable Long id) {
+    public String showResourceDetails(@PathVariable Long id, Model model) {
         ModelAndView mav = new ModelAndView("employee-resource-details");
         Resource resource = resourceService.findResourceById(id);
-        mav.addObject("employee", ContextController.getEmployee());
-        mav.addObject("resource", resource);
-        return mav;
+        model.addAttribute("resource", resource);
+        return checkIsEmployee(model, "employee-resource-details");
     }
 
     @GetMapping("/employee/resources/{id}/edit")
-    public ModelAndView showModifyResourceForm(@PathVariable Long id) {
-        ModelAndView mav = new ModelAndView("employee-edit-resource");
+    public String showModifyResourceForm(@PathVariable Long id, Model model) {
         Resource existingResource = resourceService.findResourceById(id);
         ResourcesDTO resourcesDto = new ResourcesDTO();
         resourcesDto.setName(existingResource.getName());
@@ -192,12 +195,10 @@ public class EmployeeController {
         resourcesDto.setFoodResource(existingResource.getFoodResource());
         resourcesDto.setHousingResource(existingResource.getHousingResource());
         resourcesDto.setDependentResource(existingResource.getDependentResource());
-        mav.addObject("resourcesDto", resourcesDto);
-        mav.addObject("employee",
-                employeeService.getEmployeeById(ContextController.getEmployee().getId()));
-        mav.addObject("resource", existingResource);
-        mav.addObject("resourceId", existingResource.getId());
-        return mav;
+        model.addAttribute("resourcesDto", resourcesDto);
+        model.addAttribute("resource", existingResource);
+        model.addAttribute("resourceId", existingResource.getId());
+        return checkIsEmployee(model, "employee-edit-resource");
     }
 
     @PostMapping("/employee/resources/{id}/edit")
@@ -220,12 +221,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee/resources")
-    public ModelAndView showAllResourcesPage() {
-        ModelAndView mav = new ModelAndView("employee-resources-list");
+    public String showAllResourcesPage(Model model) {
         List<Resource> resources = resourceService.getAllResources();
-        mav.addObject("allResources", resources);
-        mav.addObject("employee", employeeService.getEmployeeById(ContextController.getEmployee().getId()));
-        return mav;
+        model.addAttribute("allResources", resources);
+        return checkIsEmployee(model, "employee-resources-list");
     }
 
     @GetMapping("/employee/resources/{id}/delete")
@@ -240,7 +239,13 @@ public class EmployeeController {
     public String showEmployeeEditPage(@PathVariable Long id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);
         model.addAttribute("employee", employee);
-        return "admin-employee-edit";
+        try {
+            // Check if admin logged in
+            ContextController.getAdmin().getId();
+            return "admin-employee-edit";
+        } catch (Exception e) {
+            return "/error/403";
+        }
     }
 
     @PostMapping("/employee/edit/{id}")

@@ -163,18 +163,9 @@
                     <!-- Nav Item - Alerts -->
                     <div class="topbar-divider d-none d-sm-block"></div>
 
-                    <!-- Nav Item - Messages -->
-<!--                    <li class="nav-item dropdown no-arrow mx-1">-->
-<!--                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"-->
-<!--                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-<!--                            <i class="fas fa-chalkboard-user"></i>-->
-<!--                        </a>-->
-<!--                    </li>-->
-
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
-
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"
@@ -182,7 +173,6 @@
                                 </span>
                             <img class="img-profile rounded-circle"
                                  src="/img/undraw_profile.svg">
-<!--                                 src="/static/js/img/undraw_profile.svg">-->
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -228,18 +218,12 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="resource : ${allResources}">
-
-<!--                                    <td th:text="${sess.studentName}"></td>-->
                                     <td th:text="${resource.name}"></td>
-<!--                                    <td th:text="${sess.quiz.subject}"></td>-->
-<!--                                    TODO create column for address details-->
                                     <td th:text="${resource.address.street}"></td>
                                     <td th:text="${resource.description}"></td>
-<!--                                    TODO iterate over all tags in list if this doesn't work-->
                                     <td th:text="${resource.foodResource}"></td>
                                     <td th:text="${resource.housingResource}"></td>
                                     <td th:text="${resource.dependentResource}"></td>
-
                                 </tr>
                                 </tbody>
                             </table>
