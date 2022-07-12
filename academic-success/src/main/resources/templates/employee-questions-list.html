@@ -160,30 +160,17 @@
                     </li>
 
                     <!-- Nav Item - Alerts -->
-
-
-                    <!-- Nav Item - Messages -->
-                    <li class="nav-item dropdown no-arrow mx-1">
-                        <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-chalkboard-user"></i>
-
-                        </a>
-
-                    </li>
-
                     <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!--  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                              th:text="${teacher.firstName}"
-                              ></span>-->
+                           <span class="mr-2 d-none d-lg-inline text-gray-600 small"
+                              th:text="${employee.firstName}">
+                           </span>
                             <img class="img-profile rounded-circle"
                                  src="/img/undraw_profile.svg">
-<!--                                 src="/static/js/img/undraw_profile.svg">-->
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -209,7 +196,7 @@
                     <h1 class="h3 mb-0 text-gray-800">Questions List</h1>
                 </div>
 
-<!--                Questions Table-->
+                <!-- Questions Table -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Questions</h6>
@@ -239,7 +226,7 @@
                                 </thead>
                                 <tbody>
                                 <tr th:each="question : ${questions}">
-
+                                    <!-- TODO use th:each to iterate over each of these -->
                                     <td th:text="${question.title}"></td>
                                     <td th:text="${question.options[0].optionTitle}"></td>
                                     <td th:text="${question.options[0].value}"></td>
@@ -332,18 +319,6 @@
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
-<!--<script src="/static/js/demo/datatables-demo.js"></script>-->
-<!--<script>-->
-<!--    $(document).ready(function() {-->
-<!--        $("#dataTable").DataTable({-->
-<!--            "aoColumnDefs": [{-->
-<!--                'bSortable': false,-->
-<!--                'aTargets': [-1]-->
-<!--            }]-->
-<!--        });-->
-<!--    })-->
-
-<!--</script>-->
 
 </body>
 
