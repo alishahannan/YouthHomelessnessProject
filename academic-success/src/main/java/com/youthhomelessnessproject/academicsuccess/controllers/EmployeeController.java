@@ -38,23 +38,13 @@ public class EmployeeController {
     @Autowired
     private AddressService addressService;
 
-    // If employee not found, NullPointerException (error 500) is thrown by
-    // employee.firstName on each page. This redirects to 403 instead of 500 page
-    public String checkIsEmployee(Model model, String page) {
-        try {
-            Employee employee = employeeService.getEmployeeById(ContextController.getEmployee().getId());
-            model.addAttribute("employee", employee);
-            return page;
-        } catch (Exception e) {
-            return "/error/403";
-        }
-    }
 
     @GetMapping("/employee/dashboard")
     public String showEmployeeDashboard(Model model) {
         List<Resource> resources = resourceService.getAllResources();
         model.addAttribute("allResources", resources);
-        return checkIsEmployee(model, "employee-dashboard");
+        model.addAttribute("employee", employeeService.getEmployeeById(ContextController.getEmployee().getId()));
+        return "employee-dashboard";
     }
 
     @GetMapping("/employee/questions/new")
@@ -68,8 +58,9 @@ public class EmployeeController {
         }
         questionsDto.setOptions(options);
         model.addAttribute("questionsDto", questionsDto);
-
-        return checkIsEmployee(model, "employee-add-question");
+        model.addAttribute("employee",
+                employeeService.getEmployeeById(ContextController.getEmployee().getId()));
+        return "employee-add-question";
     }
 
     @PostMapping("/employee/questions/new")
@@ -80,10 +71,10 @@ public class EmployeeController {
 
     @GetMapping("/employee/questions")
     public String showAllQuestionsPage(Model model) {
-        ModelAndView mav = new ModelAndView("employee-questions-list");
         List<Question> questions = questionService.getAllQuestions();
         model.addAttribute("questions", questions);
-        return checkIsEmployee(model, "employee-questions-list");
+        model.addAttribute("employee", employeeService.getEmployeeById(ContextController.getEmployee().getId()));
+        return "employee-questions-list";
     }
 
     @GetMapping("/employee/questions/{id}/edit")
@@ -99,7 +90,9 @@ public class EmployeeController {
         questionsDto.setDependentResource(existingQuestion.getDependentResource());
         questionsDto.setId(existingQuestion.getId());
         model.addAttribute("questionsDto", questionsDto);
-        return checkIsEmployee(model, "employee-edit-question");
+        model.addAttribute("employee",
+                employeeService.getEmployeeById(ContextController.getEmployee().getId()));
+        return "employee-edit-question";
     }
 
     @PostMapping("/employee/questions/{id}/edit")
@@ -158,7 +151,9 @@ public class EmployeeController {
     public String showAddResourceForm(Model model) {
         ResourcesDTO resourcesDto = new ResourcesDTO();
         model.addAttribute("resourcesDto", resourcesDto);
-        return checkIsEmployee(model, "employee-add-resource");
+        model.addAttribute("employee",
+                employeeService.getEmployeeById(ContextController.getEmployee().getId()));
+        return "employee-add-resource";
     }
 
     @PostMapping("/employee/resources/new")
@@ -181,7 +176,9 @@ public class EmployeeController {
         ModelAndView mav = new ModelAndView("employee-resource-details");
         Resource resource = resourceService.findResourceById(id);
         model.addAttribute("resource", resource);
-        return checkIsEmployee(model, "employee-resource-details");
+        model.addAttribute("employee",
+                employeeService.getEmployeeById(ContextController.getEmployee().getId()));
+        return "employee-resource-details";
     }
 
     @GetMapping("/employee/resources/{id}/edit")
@@ -198,7 +195,9 @@ public class EmployeeController {
         model.addAttribute("resourcesDto", resourcesDto);
         model.addAttribute("resource", existingResource);
         model.addAttribute("resourceId", existingResource.getId());
-        return checkIsEmployee(model, "employee-edit-resource");
+        model.addAttribute("employee",
+                employeeService.getEmployeeById(ContextController.getEmployee().getId()));
+        return "employee-edit-resource";
     }
 
     @PostMapping("/employee/resources/{id}/edit")
@@ -224,7 +223,9 @@ public class EmployeeController {
     public String showAllResourcesPage(Model model) {
         List<Resource> resources = resourceService.getAllResources();
         model.addAttribute("allResources", resources);
-        return checkIsEmployee(model, "employee-resources-list");
+        model.addAttribute("employee",
+                employeeService.getEmployeeById(ContextController.getEmployee().getId()));
+        return "employee-resources-list";
     }
 
     @GetMapping("/employee/resources/{id}/delete")
@@ -239,13 +240,8 @@ public class EmployeeController {
     public String showEmployeeEditPage(@PathVariable Long id, Model model) {
         Employee employee = employeeService.getEmployeeById(id);
         model.addAttribute("employee", employee);
-        try {
-            // Check if admin logged in
-            ContextController.getAdmin().getId();
-            return "admin-employee-edit";
-        } catch (Exception e) {
-            return "/error/403";
-        }
+        return "admin-employee-edit";
+
     }
 
     @PostMapping("/employee/edit/{id}")
