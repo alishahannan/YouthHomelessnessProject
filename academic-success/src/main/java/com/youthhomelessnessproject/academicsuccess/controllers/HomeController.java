@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
 
     @RequestMapping("/")
-    public String showHomePage() {
-        ContextController.setEmployee(null);
-        ContextController.setAdmin(null);
-        ContextController.setStudent(null);
-        return "homepage";
-    }
+    public String showHomePage() { return "homepage"; }
 
 }
