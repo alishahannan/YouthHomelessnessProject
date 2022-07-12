@@ -10,6 +10,7 @@ import com.youthhomelessnessproject.academicsuccess.repositories.StudentReposito
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.parameters.P;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import org.springframework.stereotype.Controller;
@@ -30,7 +31,7 @@ public class LoginController {
 	private EmployeeRepository employeeRepository;
 
 	@Autowired
-	private PasswordEncoder bcryptEncoder;
+	private PasswordEncoder bcryptEncoder = new BCryptPasswordEncoder();;
 
 	@GetMapping("/admin")
 	public String showAdminLoginForm(Model model) {
@@ -58,7 +59,7 @@ public class LoginController {
 		Admin savedAdmin = adminRepository.findAdminByUsername(admin.getUsername());
 		if (savedAdmin != null) {
 			ContextController.setAdmin(savedAdmin);
-			if (savedAdmin.getPassword().equals(admin.getPassword())) {
+			if (bcryptEncoder.matches(admin.getPassword(), savedAdmin.getPassword())) {
 				return "redirect:/admin/dashboard";
 			}
 		}
@@ -71,8 +72,8 @@ public class LoginController {
 		Student savedStudent = studentRepository.findStudentByUsername(student.getUsername());
 		if (savedStudent != null) {
 			ContextController.setStudent(savedStudent);
-
-			if (savedStudent.getPassword().equals(student.getPassword())) {
+			
+			if (bcryptEncoder.matches(student.getPassword(), savedStudent.getPassword())) {
 				return "redirect:/student/dashboard";
 			}
 		}
@@ -86,7 +87,7 @@ public class LoginController {
 		Employee savedEmployee = employeeRepository.findEmployeeByUsername(employee.getUsername());
 		if (savedEmployee != null) {
 			ContextController.setEmployee(savedEmployee);
-			if (savedEmployee.getPassword().equals(employee.getPassword())) {
+			if (bcryptEncoder.matches(employee.getPassword(), savedEmployee.getPassword())) {
 				return "redirect:/employee/dashboard";
 			}
 		}
@@ -110,7 +111,7 @@ public class LoginController {
 		Student student = studentRepository.findStudentByUsername(forgotPasswordDto.getUsername());
 		if (student == null)
 			return "redirect:/reset?errorusername";
-		student.setPassword(forgotPasswordDto.getNewPassword());
+		student.setPassword(bcryptEncoder.encode(forgotPasswordDto.getNewPassword()));
 		studentRepository.save(student);
 		return "redirect:/login/student";
 	}
