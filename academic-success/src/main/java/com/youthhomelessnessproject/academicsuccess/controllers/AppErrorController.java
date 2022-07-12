@@ -14,8 +14,7 @@ public class AppErrorController implements ErrorController {
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request) {
 
-        System.out.println("Inside handleError method within AppErrorController");
-
+        System.out.println("Inside handleError method within AppErrorController"); //Merge conflict Resolved
         // Get error status
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
 
@@ -24,8 +23,9 @@ public class AppErrorController implements ErrorController {
             int statusCode = Integer.parseInt(status.toString());
 
             if(statusCode == HttpStatus.NOT_FOUND.value()) {
-                System.out.println("==================================");
+                System.out.println("=================================="); //Merge conflict Resolved
                 System.out.println("Error 404: Page Not Found!!!");
+
                 return "/error/404";
             } else if (statusCode == HttpStatus.INTERNAL_SERVER_ERROR.value()) {
                 return "/error/500";
