@@ -29,10 +29,8 @@ Note: These settings are for local development and testing purposes only.
   - User: user
   - Password: paste from IDE console
 
-The application currently has four types of user: admin, survey admin*, employee, student.
+The application currently has three types of user: admin, employee, student.
 - Admins CRUD users
-- Survey Admins CRD survey questions (updates not configured)
-- Employees CRD resources (future functions will include updates, reviewing 'sanitized' survey data, and generating reports)
+- Employees CRD resources and survey questions (future functions will include updates, reviewing 'sanitized' survey data, and generating reports)
 - Students take surveys, view returned resources, review past surveys, view all resources
 
-Survey Admins may be removed in the future*
