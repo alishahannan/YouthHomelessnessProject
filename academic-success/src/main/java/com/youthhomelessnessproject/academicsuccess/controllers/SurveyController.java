@@ -30,6 +30,7 @@ public class SurveyController {
 
     @Autowired
     private ResourceService resourceService;
+    
 
     public SurveyController(QuestionService questionService) {
         super();
@@ -38,10 +39,11 @@ public class SurveyController {
 
     // TODO MAKE THIS HAPPEN!!!
     @GetMapping("/survey")
-    public ModelAndView showSurvey() {
-
+    @ResponseBody
+    public ModelAndView showSurvey(@RequestParam String zipcode) {
         AnswersDTO answersDto = new AnswersDTO();
 
+       
         ModelAndView mav = new ModelAndView("survey");
 
         List<Question> questions = questionService.getAllQuestions();
@@ -57,6 +59,7 @@ public class SurveyController {
         session.setFoodScore(0.0);
         session.setHousingScore(0.0);
         session.setDependentScore(0.0);
+        session.setZipCode(Integer.parseInt(zipcode));
         ContextController.getStudent().setSession(session);
         session.setStudentId(ContextController.getStudent().getId());
         session.setStudentName(ContextController.getStudent().getUsername());
@@ -69,6 +72,8 @@ public class SurveyController {
 
         return mav;
     }
+    
+    
 
     @PostMapping("/survey/submit")
     public String validateSurvey(@ModelAttribute AnswersDTO answersDto, Model model) {
@@ -145,6 +150,7 @@ public class SurveyController {
             }
 
         }
+        
 
         // Round scores up for better resource coverage
         foodScore = Math.ceil(foodScore);
