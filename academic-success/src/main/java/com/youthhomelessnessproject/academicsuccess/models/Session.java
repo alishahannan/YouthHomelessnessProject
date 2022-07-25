@@ -52,6 +52,9 @@ public class Session {
 
     @Column(name = "dependent_score")
     private double dependentScore = 0;
+    
+    @Column(name = "zipcode")
+    private String zipCode;
 
     // TODO figure out how to tally scores!
 
