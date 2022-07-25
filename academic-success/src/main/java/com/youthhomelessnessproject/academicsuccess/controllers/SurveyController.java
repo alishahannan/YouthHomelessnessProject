@@ -59,7 +59,7 @@ public class SurveyController {
         session.setFoodScore(0.0);
         session.setHousingScore(0.0);
         session.setDependentScore(0.0);
-        session.setZipCode(Integer.parseInt(zipcode));
+        session.setZipCode(zipcode);
         ContextController.getStudent().setSession(session);
         session.setStudentId(ContextController.getStudent().getId());
         session.setStudentName(ContextController.getStudent().getUsername());

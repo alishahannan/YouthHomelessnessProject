@@ -54,7 +54,7 @@ public class Session {
     private double dependentScore = 0;
     
     @Column(name = "zipcode")
-    private int zipCode = 0;
+    private String zipCode;
 
     // TODO figure out how to tally scores!
 
