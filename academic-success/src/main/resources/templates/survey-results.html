@@ -164,25 +164,26 @@
                     <h1 class="h3 mb-0 text-gray-800">Student Resource Dashboard</h1>
                 </div>
 
-<!--                            TODO create indicators for each score?? Change colors and add labels for each score-->
-                    <div>
-                        <div class="circle-bg-color-anim circular">
-                            <div class="circle-bg-color-anim inner"></div>
-                            <div class="circle-text-color-anim number" th:text="${foodScore}">
+                <div class="row">
+
+                    <div class="col-lg-6 mb-4">
+
+                        <!-- Approach -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">About Resources</h6>
                             </div>
-                            <div class="circle-text-color-anim text"
-                                 th:text="${totalPossibleFoodScore}">
-                            </div>
-                            <div class="circle-bg-color-anim circle">
-                                <div class="circle-bg-color-anim bar left">
-                                    <div class="progress"></div>
-                                </div>
-                                <div class="circle-bg-color-anim bar right">
-                                    <div class="progress"></div>
-                                </div>
+                            <div class="card-body">
+                                <ul>
+                                    <li>Resources are displayed based on survey responses.</li>
+                                    <li>Resources are kept up-to-date to the best of YHP’s ability.</li>
+                                </ul>
+
                             </div>
                         </div>
+
                     </div>
+                </div>
 
                 <!-- Content Row -->
                 <div class="col">
@@ -338,115 +339,8 @@
                         <br>
                     </div>
                 </div>
-                <div class="row">
-
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-primary shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                            10 Marks
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                            <!-- th:href="@{/quiz/{subject}(id=${category.idCategory})}"-->
-                                            <a th:href="@{/survey}">Start New Survey</a>
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-book fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-success shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                            12 marks
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">Maths</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-book fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Earnings (Monthly) Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-info shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">09 Marks
-                                        </div>
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col-auto">
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Physics</div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-book fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pending Requests Card Example -->
-                    <div class="col-xl-3 col-md-6 mb-4">
-                        <div class="card border-left-warning shadow h-100 py-2">
-                            <div class="card-body">
-                                <div class="row no-gutters align-items-center">
-                                    <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                            05 Marks
-                                        </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">English</div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <i class="fas fa-book fa-2x text-gray-300"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
 
-                <!-- Content Row -->
-                <div class="row">
-
-                    <div class="col-lg-6 mb-4">
-
-                        <!-- Approach -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Read Quiz Instructions</h6>
-                            </div>
-                            <div class="card-body">
-                                <ul>
-                                    <li>To pass the Quiz, you must secure a minimum of 70%</li>
-                                    <li>Use faster, reliable and continued internet connection</li>
-                                    <li>You can skip a tough question and come back to it later</li>
-                                    <li>The quiz will start as soon as you click the Start Quiz button</li>
-                                </ul>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
 
             </div>
             <!-- /.container-fluid -->
