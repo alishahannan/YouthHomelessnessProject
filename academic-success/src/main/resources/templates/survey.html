@@ -174,7 +174,8 @@
                                                    th:id="${'option' + (i.index + 1)}"
                                                    type="radio"
                                                    th:answer="${i.index}"
-                                                   th:field="*{answers[__${count.index}__]}"/>
+                                                   th:field="*{answers[__${count.index}__]}"
+                                                   required/>
                                             <!--                                        th:field ="*{answers[__${count.index}__]}" />-->
                                             <label th:text="${option.optionTitle}"
                                                    th:for="${'option' + (i.index + 1)}">
