@@ -78,12 +78,6 @@
                     <i class="fa fa-bars"></i>
                 </button>
 
-                <!-- You're being monitored -->
-<!--                <span class="mr-2 d-none d-lg-inline text-gray-600 large">You are being monitored</span>-->
-<!--                <p id="blink" style="color: black; font-size: 20px;">III</p>-->
-
-<!--                <div class="status-indicator bg-success"></div>-->
-
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
 
@@ -154,7 +148,6 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <form th:action="@{/survey/submit}" th:object="${answersDto}" method="POST">
-                    <!--                    <div th:object="${questions}">-->
                     <div class="card">
                         <div class="card-body ">
                             <br>
@@ -162,12 +155,8 @@
 
                                 <label> <strong th:text="${question.title}"></strong></label>
 
-<!--                                <ul style="list-style: none">-->
                                 <ul style="list-style-type: none">
-<!--                                    <li th:each="option, i : ${question.options}" style="text-decoration:none">-->
                                     <li th:each="option, i : ${question.options}" >
-<!--                                        <div th:if="${not #strings.equals(i.optionTitle, ' ')}">-->
-<!--                                        <div th:if="${option.optionTitle} != ''">-->
                                         <div th:if="${not #strings.isEmpty(option.optionTitle)}">
                                             <input th:name="${question.id}"
                                                    th:value="${i.index}"
@@ -176,7 +165,6 @@
                                                    th:answer="${i.index}"
                                                    th:field="*{answers[__${count.index}__]}"
                                                    required/>
-                                            <!--                                        th:field ="*{answers[__${count.index}__]}" />-->
                                             <label th:text="${option.optionTitle}"
                                                    th:for="${'option' + (i.index + 1)}">
                                             </label>
@@ -261,11 +249,8 @@
 <script src="/js/sb-admin-2.min.js"></script>
 
 <!-- Page level plugins -->
-<!--<script src="/vendor/chart.js/Chart.min.js"></script>-->
 
 <!-- Page level custom scripts -->
-<!--<script src="/js/demo/chart-area-demo.js"></script>-->
-<!--<script src="/js/demo/chart-pie-demo.js"></script>-->
 
 </body>
 

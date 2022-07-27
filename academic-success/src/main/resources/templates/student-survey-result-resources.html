@@ -43,7 +43,6 @@
 
             <div class="sidebar-brand-text mx-3 mt-4" style="font-size: 28px;">YHP<sup></sup></div>
         </a>
-<!--        <br>-->
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
@@ -162,13 +161,11 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<!--                            style="margin-right: 50px;">-->
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small"
                                   th:text="${student.username}">
                                 </span>
                             <img class="img-profile rounded-circle"
                                  src="/img/undraw_profile.svg">
-<!--                                 src="/static/js/img/undraw_profile.svg">-->
                         </a>
 
                         <!-- Dropdown - User Information -->
@@ -220,14 +217,11 @@
 
                                     <td th:text="${resource.name}"></td>
                                     <td th:text="${resource.description}"></td>
-                                    <!--                                    <td th:utext="${#strings.replace(#strings.escapeJava(resource.address.street + '\n' + resource.address.city + ', ' + resource.address.state + '\n' + resource.address.zip),'\n','&lt;br /&gt;')}" ></td>-->
                                     <td th:text="${resource.address.street + '  ' + resource.address.city + ', ' + resource.address.state + ' ' + resource.address.zip}" style="white-space: pre-line"></td>
                                     <td th:text="${resource.foodResource}"></td>
                                     <td th:text="${resource.housingResource}"></td>
                                     <td th:text="${resource.dependentResource}"></td>
                                     <td>
-                                        <!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceF.id})}"-->
-                                        <!--                                           class="btn btn-primary" >Update</a>-->
                                         <a th:href="@{/resource/{id}(id=${resource.id})}"
                                            class="btn btn-info"
                                         >Details</a>
@@ -295,7 +289,6 @@
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
-<!--<script src="/static/js/sb-admin-2.min.js"></script>-->
 
 
 <!---->
@@ -311,7 +304,6 @@ TODO: Add custom script to all dataTables to disable sorting of Modify column (w
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
-<!--<script src="/static/js/demo/datatables-demo.js"></script>-->
 
 </body>
 
