@@ -46,16 +46,15 @@
                                       method="POST">
                                     <div th:if="${param.error}">
                                         <div class="alert alert-danger">
-                                            Please enter a valid zip code!
-
+                                            Please enter a valid 5-digit zip code.
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <input type="text"
                                                name="zipcode"
-                                               
                                                class="form-control form-control-user"
-                                               placeholder="Please enter your zip code" required/>
+                                               placeholder="Please enter your zip code"
+                                               required/>
                                     </div>
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Start Survey
