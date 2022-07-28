@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!--<html lang="en">-->
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -165,9 +164,6 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <!--  <span class="mr-2 d-none d-lg-inline text-gray-600 small"
-                              th:text="${teacher.firstName}"
-                              ></span>-->
                             <img class="img-profile rounded-circle"
                                  src="/static/js/img/undraw_profile.svg">
                         </a>
@@ -217,8 +213,6 @@
                                     <td th:text="${resourceF.name}"></td>
                                     <td th:text="${resourceF.description}"></td>
                                     <td>
-                                        <!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceF.id})}"-->
-                                        <!--                                           class="btn btn-primary" >Update</a>-->
                                         <a th:href="@{/employee/resource/delete/{id}(id=${resourceF.id})}"
                                            class="btn btn-danger"
                                         >Delete</a>
@@ -251,8 +245,6 @@
                                     <td th:text="${resourceH.name}"></td>
                                     <td th:text="${resourceH.description}"></td>
                                     <td>
-                                        <!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceH.id})}"-->
-                                        <!--                                           class="btn btn-primary" >Update</a>-->
                                         <a th:href="@{/employee/resource/delete/{id}(id=${resourceH.id})}"
                                            class="btn btn-danger">Delete</a>
                                     </td>
@@ -284,8 +276,6 @@
                                     <td th:text="${resourceD.name}"></td>
                                     <td th:text="${resourceD.description}"></td>
                                     <td>
-                                        <!--                                        <a th:href="@{/employee/resource/{id}(id=${resourceD.id})}"-->
-                                        <!--                                           class="btn btn-primary" >Update</a>-->
                                         <a th:href="@{/employee/resource/delete/{id}(id=${resourceD.id})}"
                                            class="btn btn-danger">Delete</a>
                                     </td>
@@ -351,7 +341,6 @@
 
 <!-- Custom scripts for all pages-->
 <script src="/js/sb-admin-2.min.js"></script>
-<!--<script src="/static/js/sb-admin-2.min.js"></script>-->
 
 
 <!---->
@@ -367,7 +356,6 @@ TODO: Add custom script to all dataTables to disable sorting of Modify column (w
 
 <!-- Page level custom scripts -->
 <script src="/js/demo/datatables-demo.js"></script>
-<!--<script src="/static/js/demo/datatables-demo.js"></script>-->
 
 </body>
 
