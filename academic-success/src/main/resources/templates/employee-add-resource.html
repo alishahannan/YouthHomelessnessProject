@@ -23,9 +23,25 @@
     <!-- Custom styles for this page -->
     <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <!-- jQuery location for resource checkbox validation -->
+    <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+
 </head>
 
 <body id="page-top">
+
+<!-- Validate at least one resource checkbox selected -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#checkBtn').click(function() {
+            checked = $("input[type=checkbox]:checked").length;
+            if(!checked) {
+                alert("Please select at least one resource category.");
+                return false;
+            }
+        }) ;
+    });
+</script>
 
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -38,6 +54,7 @@
             </div>
             <div class="sidebar-brand-text mx-3 mt-4" style="font-size: 28px;">YHP<sup></sup></div>
         </a>
+
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
 
@@ -371,21 +388,10 @@
                                                                 </label>
                                                             </div>
 
-                                                            <script>
-                                                                function checkResourceCategorySelected() {
-                                                                    if (!$('input[name=resourceCheckbox]:checked').length > 0) {
-                                                                        document.getElementById("errMessage").innerHTML = "At least one resource category must be selected";
-                                                                        return false;
-                                                                    }
-                                                                    alert("Success");
-                                                                    return true;
-                                                                }
-                                                            </script>
-
                                                         </div>
                                                         <!-- End of Column for Resource Categories -->
 
-                                                        <button type="submit" class="btn btn-primary">Save Resource</button>
+                                                        <button type="submit" class="btn btn-primary" id="checkBtn">Save Resource</button>
 
                                                     </div>
                                                     <!-- End of Col inside form-group -->
@@ -464,7 +470,7 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="/vendor/jquery/jquery.min.js"></script>
+<!--<script src="/vendor/jquery/jquery.min.js"></script>-->
 <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
