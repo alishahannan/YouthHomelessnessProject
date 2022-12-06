@@ -1,0 +1,1 @@
+#this application-prod.properties file is also in the academic-success code in the resources folder
