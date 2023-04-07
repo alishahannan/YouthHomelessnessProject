@@ -45,8 +45,8 @@
 
         <!-- Nav Item - Dashboard -->
         <li class="nav-item">
-            <a class="nav-link"
-               th:href="@{/employee/dashboard}">
+            <a class="nav-link" href="/employee/dashboard">
+            <!--          th:href="@{/employee/dashboard}"> -->
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
         </li>
@@ -61,21 +61,19 @@
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link"
-               th:href="@{/employee/resources/new}"
-            >
-                <i class="fas fa-fw fa-plus"></i>
-                <span>Add New Resources</span></a>
-        </li>
-        <li class="nav-item active">
-            <a class="nav-link"
-               th:href="@{/employee/resources}"
-            >
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>List All Resources</span></a>
-        </li>
+            <a class="nav-link" href="/employee/resources/new">
+                <!--          th:href="@{/employee/resources/new}" > -->
+                           <i class="fas fa-fw fa-plus"></i>
+                           <span>Add New Resources</span></a>
+                   </li>
+                   <li class="nav-item active">
+                       <a class="nav-link" href="/employee/resources">
+                       <!--               th:href="@{/employee/resources}" -->
+                                       <i class="fas fa-fw fa-chart-area"></i>
+                                       <span>List All Resources</span></a>
+                               </li>
 
-        <!-- Divider -->
+                               <!-- Divider -->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
